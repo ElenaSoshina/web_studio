@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # Разработка
+  dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - VITE_BASE_PATH=/
+
+  # Production локально
+  prod:
+    build:
+      context: .
+      target: production
+      args:
+        BASE_PATH: /
+    ports:
+      - "8080:80"
+
+  # GitHub Pages симуляция
+  github:
+    build:
+      context: .
+      target: production
+      args:
+        BASE_PATH: /web_studio/
+    ports:
+      - "8081:80"
+
+  # Production с вашим Docker Hub репозиторием
+  production:
+    image: elenasoshina/web_studio:latest
+    build:
+      context: .
+      target: production
+      args:
+        BASE_PATH: /
+    ports:
+      - "80:80"
+    restart: unless-stopped
