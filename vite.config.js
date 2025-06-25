@@ -2,13 +2,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(() => {
   // Безопасное получение переменной окружения с проверкой на undefined
   let basePath = '/'
   
   try {
     basePath = process?.env?.VITE_BASE_PATH || '/'
-  } catch (error) {
+  } catch {
     console.warn('process.env недоступен, используется значение по умолчанию /')
     basePath = '/'
   }
