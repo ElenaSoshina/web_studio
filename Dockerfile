@@ -1,5 +1,5 @@
 # Этап 1: Сборка приложения
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 # Принимаем build argument
 ARG BASE_PATH=/
@@ -46,7 +46,7 @@ EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
 
 # Этап 3: Разработка
-FROM node:18-alpine AS development
+FROM node:20-alpine AS development
 
 WORKDIR /app
 
