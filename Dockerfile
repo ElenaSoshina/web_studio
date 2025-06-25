@@ -19,11 +19,6 @@ RUN npm install
 # Теперь копируем весь исходный код
 COPY . .
 
-# Проверяем переменные окружения
-RUN echo "BASE_PATH argument: $BASE_PATH"
-RUN echo "VITE_BASE_PATH environment: $VITE_BASE_PATH"
-RUN env | grep -i base || echo "No BASE variables found"
-
 # Собираем приложение для production
 RUN npm run build
 
