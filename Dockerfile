@@ -1,6 +1,9 @@
 # Этап 1: Сборка приложения
 FROM node:18-alpine AS builder
 
+# Принимаем build argument
+ARG BASE_PATH=/
+
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
@@ -12,6 +15,9 @@ RUN npm install
 
 # Теперь копируем весь исходный код
 COPY . .
+
+# Устанавливаем переменную окружения для Vite
+ENV VITE_BASE_PATH=${BASE_PATH}
 
 # Собираем приложение для production
 RUN npm run build
