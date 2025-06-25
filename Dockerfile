@@ -4,6 +4,9 @@ FROM node:18-alpine AS builder
 # Принимаем build argument
 ARG BASE_PATH=/
 
+# Устанавливаем переменную окружения для Vite сразу
+ENV VITE_BASE_PATH=${BASE_PATH}
+
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
@@ -16,8 +19,10 @@ RUN npm install
 # Теперь копируем весь исходный код
 COPY . .
 
-# Устанавливаем переменную окружения для Vite
-ENV VITE_BASE_PATH=${BASE_PATH}
+# Проверяем переменные окружения
+RUN echo "BASE_PATH argument: $BASE_PATH"
+RUN echo "VITE_BASE_PATH environment: $VITE_BASE_PATH"
+RUN env | grep -i base || echo "No BASE variables found"
 
 # Собираем приложение для production
 RUN npm run build
