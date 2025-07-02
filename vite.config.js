@@ -3,15 +3,22 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig(() => {
-  // Безопасное получение переменной окружения с проверкой на undefined
+  // Приоритет: VITE_BASE_PATH из окружения -> значение по умолчанию для GitHub Pages -> корень
   let basePath = '/'
   
   try {
-    basePath = process?.env?.VITE_BASE_PATH || '/'
+    if (process?.env?.VITE_BASE_PATH) {
+      basePath = process.env.VITE_BASE_PATH
+    } else if (process.env.NODE_ENV === 'production') {
+      // Для production без явно указанного пути используем GitHub Pages путь
+      basePath = '/web_studio/'
+    }
   } catch {
     console.warn('process.env недоступен, используется значение по умолчанию /')
     basePath = '/'
   }
+
+  console.log(`🔧 Vite base path: ${basePath}`)
   
   return {
     plugins: [react()],
