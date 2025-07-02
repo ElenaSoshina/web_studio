@@ -1,0 +1,1278 @@
+/* Основная секция */
+.heroSection {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  background: #000010;
+  overflow: hidden;
+  font-family: 'Courier New', monospace;
+}
+
+/* Футуристический фон */
+.futuristicBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Печатающийся код на заднем фоне */
+.typingCodeBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Сетка в стиле киберпанк */
+.gridPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+/* Светящиеся сферы */
+.glowingOrbs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: orbFloat 8s ease-in-out infinite;
+}
+
+.orb1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #00ffff 0%, transparent 70%);
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.orb2 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #ff00ff 0%, transparent 70%);
+  top: 60%;
+  right: 20%;
+  animation-delay: -3s;
+}
+
+.orb3 {
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, #ffff00 0%, transparent 70%);
+  bottom: 20%;
+  left: 60%;
+  animation-delay: -6s;
+}
+
+/* Плавающие элементы */
+.floatingElements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.element {
+  position: absolute;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.element1 {
+  width: 80px;
+  height: 80px;
+  top: 30%;
+  left: 15%;
+  transform: rotate(45deg);
+  animation: elementRotate 12s linear infinite;
+}
+
+.element2 {
+  width: 60px;
+  height: 60px;
+  top: 70%;
+  right: 30%;
+  border-radius: 50%;
+  animation: elementFloat 10s ease-in-out infinite;
+}
+
+.element3 {
+  width: 100px;
+  height: 20px;
+  bottom: 40%;
+  left: 70%;
+  animation: elementPulse 6s ease-in-out infinite;
+}
+
+/* Сканирующие линии */
+.scanLines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 255, 0.05) 4px
+  );
+}
+
+/* Основной контент */
+.heroContent {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* Текстовая часть */
+.heroText {
+  color: white;
+}
+
+.tagline {
+  font-size: 14px;
+  color: #00ffff;
+  margin-bottom: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideInUp 0.8s ease-out 0.1s forwards;
+}
+
+.bracket {
+  color: #ff00ff;
+  font-weight: bold;
+}
+
+.tagText {
+  color: #00ffff;
+  margin: 0 8px;
+}
+
+.heroTitle {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  margin-bottom: 30px;
+  letter-spacing: -0.02em;
+}
+
+.titleLine1,
+.titleLine2,
+.titleLine3 {
+  display: block;
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: slideInLeft 1s ease-out forwards;
+}
+
+.titleLine1 {
+  color: #ffffff;
+  animation-delay: 0.3s;
+}
+
+.titleLine2 {
+  animation-delay: 0.5s;
+}
+
+.titleLine3 {
+  color: #ffffff;
+  animation-delay: 0.7s;
+}
+
+.neonText {
+  color: #00c1ff;
+  text-shadow: 
+    0 0 10px #ffffff,
+    0 0 20px #ffffff,
+    0 0 30px #ffffff,
+    0 0 40px #ffffff;
+}
+
+.heroSubtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.6;
+  margin-bottom: 40px;
+  color: #a0a0a0;
+  max-width: 600px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideInUp 0.8s ease-out 0.9s forwards;
+}
+
+/* Статистика */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.stat {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(50px) scale(0.8);
+  animation: scaleInUp 0.8s ease-out forwards;
+  transition: all 0.3s ease;
+}
+
+.stat:nth-child(1) { animation-delay: 1.1s; }
+.stat:nth-child(2) { animation-delay: 1.3s; }
+.stat:nth-child(3) { animation-delay: 1.5s; }
+
+.stat:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 255, 255, 0.15);
+}
+
+.statIcon {
+  font-size: 24px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.statValue {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.statNumber {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+  font-family: 'Courier New', monospace;
+}
+
+.statPlus,
+.statPercent,
+.statUnit {
+  font-size: 1.5rem;
+  color: #ff00ff;
+  font-weight: 600;
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  color: #a0a0a0;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statTrend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+}
+
+.trendUp {
+  color: #00ff00;
+  font-weight: 600;
+}
+
+.trendLabel {
+  color: #808080;
+}
+
+.statChart {
+  margin-top: 8px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.miniChart {
+  width: 80%;
+  height: 3px;
+  background: rgba(0, 255, 255, 0.2);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.miniChart::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 85%;
+  height: 100%;
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  border-radius: 2px;
+  animation: chartFill 2s ease-out 2s forwards;
+  transform: translateX(-100%);
+}
+
+.responseTime {
+  margin-top: 4px;
+}
+
+.responseText {
+  font-size: 0.75rem;
+  color: #00ff00;
+  font-weight: 500;
+}
+
+/* Анимация для заполнения графика */
+@keyframes chartFill {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Кнопки */
+.heroButtons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  position: relative;
+  padding: 18px 35px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  overflow: hidden;
+  min-width: 200px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideInUp 0.8s ease-out forwards;
+}
+
+.btnText {
+  position: relative;
+  z-index: 2;
+}
+
+.btnPrimary {
+  background: linear-gradient(45deg, #00ffff, #0080ff);
+  color: #000;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  animation-delay: 1.7s;
+}
+
+.btnGlow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btnPrimary:hover .btnGlow {
+  left: 100%;
+}
+
+.btnSecondary {
+  background: transparent;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.1);
+  animation-delay: 1.9s;
+}
+
+.btnScanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #00ffff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.btnSecondary:hover .btnScanline {
+  transform: scaleX(1);
+}
+
+.btnSecondary:hover {
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+/* Визуальная часть */
+.heroVisual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.techDisplay {
+  position: relative;
+  opacity: 0;
+  transform: translateX(50px) rotateY(15deg);
+  animation: slideInRight 1.2s ease-out 0.6s forwards;
+}
+
+.hologram {
+  position: relative;
+  width: 400px;
+  height: 500px;
+  background: rgba(0, 20, 40, 0.3);
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  padding: 40px;
+  overflow: hidden;
+  transform: perspective(1000px) rotateY(-5deg);
+  transition: transform 0.5s ease;
+}
+
+.hologram:hover {
+  transform: perspective(1000px) rotateY(0deg) scale(1.02);
+}
+
+.hologramContent {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.codeBlock {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.codeLine {
+  margin-bottom: 10px;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.codeLine:nth-child(1) { animation-delay: 1.2s; }
+.codeLine:nth-child(2) { animation-delay: 1.4s; }
+.codeLine:nth-child(3) { animation-delay: 1.6s; }
+
+.codeKeyword { color: #ff00ff; }
+.codeVariable { color: #00ffff; }
+.codeOperator { color: #ffff00; }
+.codeString { color: #00ff00; }
+.codeFunction { color: #ff8800; }
+.codeBracket { color: #ffffff; }
+
+.techIcons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 40px;
+}
+
+.techIcon {
+  padding: 12px 20px;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 8px;
+  color: #00ffff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  animation: scaleInUp 0.6s ease-out forwards;
+}
+
+.techIcon:nth-child(1) { animation-delay: 1.8s; }
+.techIcon:nth-child(2) { animation-delay: 2.0s; }
+.techIcon:nth-child(3) { animation-delay: 2.2s; }
+
+.hologramGlow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+  animation: hologramRotate 10s linear infinite;
+}
+
+/* Анимации */
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-30px) scale(1.1); }
+}
+
+@keyframes elementRotate {
+  0% { transform: rotate(45deg); }
+  100% { transform: rotate(405deg); }
+}
+
+@keyframes elementFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes elementPulse {
+  0%, 100% { opacity: 0.3; transform: scaleX(1); }
+  50% { opacity: 1; transform: scaleX(1.2); }
+}
+
+@keyframes titleAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes codeType {
+  0%, 90% { opacity: 1; }
+  95% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+@keyframes techIconGlow {
+  0% { 
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    transform: scale(1);
+  }
+  100% { 
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes hologramRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    text-align: center;
+  }
+  
+  .hologram {
+    width: 300px;
+    height: 400px;
+    padding: 30px;
+  }
+  
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroContent {
+    padding: 0 20px;
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .heroButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .hologram {
+    width: 280px;
+    height: 350px;
+    padding: 20px;
+  }
+  
+  .orb {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContent {
+    padding: 0 16px;
+  }
+  
+  .gridPattern {
+    background-size: 30px 30px;
+  }
+  
+  .scanLines {
+    opacity: 0.5;
+  }
+}
+
+/* Новые анимации */
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px) rotateY(15deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotateY(-5deg);
+  }
+}
+
+@keyframes scaleInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes elementAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(45deg);
+  }
+}
+
+@keyframes orbAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+/* Добавляем постоянные анимации после появления */
+@keyframes elementFloat {
+  0%, 100% { transform: translateY(0px) rotate(45deg); }
+  50% { transform: translateY(-15px) rotate(225deg); }
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+
+/* Применяем постоянные анимации после появления */
+.element1 {
+  animation: elementAppear 1s ease-out 2.4s forwards, elementFloat 8s ease-in-out 3.4s infinite;
+}
+
+.element2 {
+  animation: elementAppear 1s ease-out 2.6s forwards, elementFloat 6s ease-in-out 3.6s infinite reverse;
+}
+
+.element3 {
+  animation: elementAppear 1s ease-out 2.8s forwards, elementFloat 10s ease-in-out 3.8s infinite;
+}
+
+.orb1 {
+  animation: orbAppear 2s ease-out 0.2s forwards, orbFloat 8s ease-in-out 2.2s infinite;
+}
+
+.orb2 {
+  animation: orbAppear 2s ease-out 0.8s forwards, orbFloat 6s ease-in-out 2.8s infinite;
+}
+
+.orb3 {
+  animation: orbAppear 2s ease-out 1.4s forwards, orbFloat 10s ease-in-out 3.4s infinite;
+}
+
+/* Код на заднем фоне */
+.codeSnippet {
+  position: absolute;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: rgba(0, 255, 255, 0.3);
+  opacity: 0;
+  animation: snippetAppear 1s ease-out forwards;
+}
+
+.snippet1 {
+  top: 15%;
+  left: 5%;
+  animation-delay: 1s;
+}
+
+.snippet2 {
+  top: 25%;
+  right: 10%;
+  animation-delay: 2s;
+}
+
+.snippet3 {
+  top: 45%;
+  left: 8%;
+  animation-delay: 3s;
+}
+
+.snippet4 {
+  bottom: 35%;
+  right: 15%;
+  animation-delay: 4s;
+}
+
+.snippet5 {
+  bottom: 20%;
+  left: 12%;
+  animation-delay: 5s;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.snippet6 {
+  top: 35%;
+  right: 5%;
+  animation-delay: 6s;
+}
+
+.typingText {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #00ffff;
+  animation: typeWriter 3s steps(40) forwards, blinkCursor 0.8s infinite;
+}
+
+/* Анимация появления сниппета */
+@keyframes snippetAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Эффект печатающегося текста */
+@keyframes typeWriter {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Мигающий курсор */
+@keyframes blinkCursor {
+  0%, 50% {
+    border-color: #00ffff;
+  }
+  51%, 100% {
+    border-color: transparent;
+  }
+}
+
+/* Добавляем разные цвета для разных типов кода */
+.snippet1 .typingText { color: rgba(255, 0, 255, 0.4); } /* Аннотации */
+.snippet2 .typingText { color: rgba(255, 255, 0, 0.4); } /* Классы */
+.snippet3 .typingText { color: rgba(0, 255, 255, 0.4); } /* Переменные */
+.snippet4 .typingText { color: rgba(0, 255, 0, 0.4); } /* Return */
+.snippet5 .typingText { color: rgba(150, 150, 150, 0.4); } /* Комментарии */
+.snippet6 .typingText { color: rgba(255, 128, 0, 0.4); } /* Маппинги */
+
+/* Адаптивность для печатающегося кода */
+@media (max-width: 768px) {
+  .codeSnippet {
+    font-size: 12px;
+  }
+  
+  .snippet1 { top: 10%; left: 2%; }
+  .snippet2 { top: 20%; right: 2%; }
+  .snippet3 { top: 40%; left: 2%; }
+  .snippet4 { bottom: 30%; right: 2%; }
+  .snippet5 { bottom: 15%; left: 2%; }
+  .snippet6 { top: 30%; right: 2%; }
+}
+
+@media (max-width: 480px) {
+  .typingCodeBackground {
+    display: none; /* Скрываем на очень маленьких экранах */
+  }
+}
+
+/* Дополнительный эффект - мерцание фона для создания эффекта "компиляции" */
+.futuristicBackground::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 255, 255, 0.02);
+  animation: codeCompiling 8s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes codeCompiling {
+  0%, 90% {
+    opacity: 0;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Анимированные карточки в правой части */
+.animatedCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+}
+
+/* Связующие линии между карточками */
+.animatedCards::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 2px;
+  background: rgba(0, 255, 255, 0.5);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.animatedCards:hover::before {
+  opacity: 1;
+  box-shadow: 
+    0 0 100px 50px rgba(0, 255, 255, 0.1),
+    0 0 200px 100px rgba(0, 255, 255, 0.05);
+}
+
+  .statCard {
+  background: rgba(0, 20, 40, 0.7);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 25px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(50px) scale(0.8);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: cardBreathe 4s ease-in-out infinite;
+}
+
+.cardVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.8s ease;
+}
+
+.statCard:hover::before {
+  left: 100%;
+}
+
+.statCard:hover {
+  border-color: rgba(0, 255, 255, 0.8);
+  box-shadow: 
+    0 0 40px rgba(0, 255, 255, 0.4),
+    inset 0 0 30px rgba(0, 255, 255, 0.1),
+    0 0 80px rgba(0, 255, 255, 0.2);
+  transform: translateY(-8px) scale(1.03);
+  animation: none; /* Останавливаем дыхание при hover */
+}
+
+.statCard:hover .cardIcon {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));
+}
+
+.statCard:hover .cardNumber {
+  text-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.8),
+    0 0 40px rgba(0, 255, 255, 0.4);
+}
+
+.cardIcon {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
+  transition: all 0.3s ease;
+}
+
+/* Анимированные иконки */
+.statCard:nth-child(1) .cardIcon {
+  animation: rocketSpin 3s linear infinite;
+}
+
+.statCard:nth-child(2) .cardIcon {
+  animation: heartPulse 2s ease-in-out infinite;
+}
+
+.statCard:nth-child(3) .cardIcon {
+  animation: usersBounce 2.5s ease-in-out infinite;
+}
+
+.statCard:nth-child(4) .cardIcon {
+  animation: briefcaseFloat 3s ease-in-out infinite;
+}
+
+.cardValue {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.cardNumber {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #00ffff;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  font-family: 'Courier New', monospace;
+}
+
+.cardPlus,
+.cardPercent,
+.cardUnit {
+  font-size: 1.2rem;
+  color: #ff00ff;
+  margin-left: 3px;
+  font-weight: bold;
+}
+
+.cardLabel {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 8px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.cardTrend {
+  font-size: 0.75rem;
+  color: #ffff00;
+  font-weight: 500;
+}
+
+.cardChart {
+  height: 15px;
+  position: relative;
+  margin-top: 8px;
+}
+
+.miniChart {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 255, 0.3) 0%,
+    rgba(255, 0, 255, 0.3) 50%,
+    rgba(255, 255, 0, 0.3) 100%
+  );
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.miniChart::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: chartShimmer 2s infinite;
+}
+
+.responseTime {
+  margin-top: 8px;
+}
+
+.responseText {
+  font-size: 0.75rem;
+  color: #00ff00;
+  background: rgba(0, 255, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  font-weight: 500;
+}
+
+@keyframes chartShimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Эффект дыхания карточек */
+@keyframes cardBreathe {
+  0%, 100% { 
+    border-color: rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  }
+  50% { 
+    border-color: rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+  }
+}
+
+/* Анимации иконок */
+@keyframes rocketSpin {
+  0% { transform: rotate(0deg) translateY(0px); }
+  25% { transform: rotate(5deg) translateY(-2px); }
+  50% { transform: rotate(0deg) translateY(0px); }
+  75% { transform: rotate(-5deg) translateY(-2px); }
+  100% { transform: rotate(0deg) translateY(0px); }
+}
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes usersBounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes briefcaseFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-2px) rotate(1deg); }
+  66% { transform: translateY(-1px) rotate(-1deg); }
+}
+
+/* Эффект замедления времени */
+.animatedCards:hover .statCard {
+  animation-play-state: paused;
+}
+
+.animatedCards:hover .statCard .cardIcon {
+  animation-duration: 6s; /* Замедляем анимации иконок */
+}
+
+/* Дополнительный glow эффект */
+@keyframes cardGlow {
+  0%, 100% { 
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
+  }
+  50% { 
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.6));
+  }
+}
+
+.statCard:hover {
+  animation: cardGlow 2s ease-in-out infinite;
+}
+
+/* Эффект частиц при hover */
+.statCard::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: rgba(0, 255, 255, 0.8);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.statCard:hover::after {
+  animation: particleExplosion 1s ease-out;
+}
+
+@keyframes particleExplosion {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 
+      0 0 0 0 rgba(0, 255, 255, 0.8),
+      10px 0 0 0 rgba(255, 0, 255, 0.6),
+      -10px 0 0 0 rgba(255, 255, 0, 0.6),
+      0 10px 0 0 rgba(0, 255, 0, 0.6),
+      0 -10px 0 0 rgba(255, 128, 0, 0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    box-shadow: 
+      0 0 0 20px rgba(0, 255, 255, 0),
+      40px 0 0 20px rgba(255, 0, 255, 0),
+      -40px 0 0 20px rgba(255, 255, 0, 0),
+      0 40px 0 20px rgba(0, 255, 0, 0),
+      0 -40px 0 20px rgba(255, 128, 0, 0);
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .animatedCards {
+    max-width: 400px;
+    gap: 20px;
+  }
+  
+  .statCard {
+    padding: 20px;
+  }
+  
+  .cardNumber {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .animatedCards {
+    grid-template-columns: 1fr;
+    max-width: 300px;
+    gap: 15px;
+  }
+  
+  .statCard {
+    padding: 15px;
+  }
+  
+  .cardNumber {
+    font-size: 1.5rem;
+  }
+  
+  .cardIcon {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .animatedCards {
+    max-width: 250px;
+  }
+  
+  .statCard {
+    padding: 12px;
+  }
+}

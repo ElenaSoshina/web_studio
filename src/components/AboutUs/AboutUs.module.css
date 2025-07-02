@@ -1,0 +1,429 @@
+/* Основная секция в едином стиле */
+.aboutSection {
+  background: linear-gradient(135deg, #000010 0%, #0a0a2e 50%, #000010 100%);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Courier New', monospace;
+}
+
+/* Анимированный фон */
+.aboutSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: gridMove 20s linear infinite;
+}
+
+.futuristicBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.gridPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: gridMove 20s linear infinite;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Заголовок секции */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 80px;
+  opacity: 1;
+}
+
+.sectionTitle {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  margin-bottom: 20px;
+  font-family: 'Courier New', monospace;
+}
+
+.bracket {
+  color: #ff00ff;
+  font-weight: bold;
+}
+
+.titleText {
+  color: #ffffff;
+  margin: 0 20px;
+}
+
+.sectionSubtitle {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: #a0a0a0;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.subsectionTitle {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: #fff;
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+}
+
+/* Секции */
+.servicesSection,
+.processSection {
+  margin-bottom: 100px;
+}
+
+/* Табы услуг */
+.serviceTabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.serviceTab {
+  padding: 12px 30px;
+  background: rgba(0, 255, 255, 0.1);
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 25px;
+  color: #00ffff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.serviceTab:hover {
+  background: rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.serviceTab.active {
+  background: linear-gradient(45deg, #00ffff, #0080ff);
+  color: #000;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+}
+
+.tabIcon {
+  font-size: 1.2rem;
+}
+
+/* Контент услуги */
+.serviceContent {
+  animation: serviceAppear 0.5s ease-out;
+}
+
+.serviceMain {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 50px;
+  align-items: stretch;
+}
+
+.serviceInfo {
+  background: rgba(0, 20, 40, 0.3);
+  border: 2px solid rgba(0, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+
+.serviceDescription {
+  margin-bottom: 30px;
+}
+
+.serviceDescription h4 {
+  font-size: 1.3rem;
+  color: #fff;
+  margin-bottom: 0;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.serviceFeatures {
+  flex: 1;
+}
+
+.serviceFeatures h5 {
+  color: #00ffff;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.featuresList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #a0a0a0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.featureIcon {
+  color: #00ffff;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* Процесс услуги - выравнивание по высоте */
+.serviceProcess {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.processSteps {
+  background: rgba(0, 20, 40, 0.3);
+  border: 2px solid rgba(255, 0, 255, 0.2);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(20px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+
+.processSteps h5 {
+  color: #ff00ff;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.processList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.processStep {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #a0a0a0;
+  font-size: 0.9rem;
+}
+
+.stepNumber {
+  background: linear-gradient(45deg, #ff00ff, #cc0088);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Процесс работы - все карточки в один ряд */
+.processFlow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.workStep {
+  background: rgba(0, 20, 40, 0.3);
+  border: 2px solid rgba(255, 0, 255, 0.2);
+  border-radius: 20px;
+  padding: 25px 20px;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+  text-align: center;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.workStep:hover {
+  border-color: rgba(255, 0, 255, 0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 0, 255, 0.1);
+}
+
+.stepHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.workStep .stepNumber {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(45deg, #ff00ff, #cc0088);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.stepIcon {
+  font-size: 2.5rem;
+}
+
+.stepContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stepTitle {
+  color: #ff00ff;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+}
+
+.stepDescription {
+  color: #a0a0a0;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+/* Анимации */
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(30px, 30px); }
+}
+
+@keyframes serviceAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 20px;
+  }
+  
+  .serviceMain {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: stretch;
+  }
+  
+  .serviceInfo,
+  .processSteps {
+    min-height: auto;
+  }
+  
+  .processFlow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutSection {
+    padding: 80px 0;
+  }
+  
+  .serviceTabs {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .processFlow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .featuresList {
+    grid-template-columns: 1fr;
+  }
+  
+  .servicesSection,
+  .processSection {
+    margin-bottom: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionHeader {
+    margin-bottom: 60px;
+  }
+  
+  .serviceInfo,
+  .processSteps,
+  .workStep {
+    padding: 25px 20px;
+  }
+  
+  .processFlow {
+    grid-template-columns: 1fr;
+  }
+  
+  .workStep {
+    min-height: 200px;
+  }
+} 

@@ -1,0 +1,332 @@
+/* Основной футер */
+.footer {
+  background: linear-gradient(135deg, #000010 0%, #0a0a2e 50%, #000010 100%);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Courier New', monospace;
+  border-top: 2px solid rgba(0, 255, 255, 0.2);
+  margin-top: auto;
+}
+
+/* Анимированный фон */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: gridMove 20s linear infinite;
+}
+
+.futuristicBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.gridPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: gridMove 20s linear infinite;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 40px 30px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Основное содержимое */
+.footerContent {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 60px;
+  margin-bottom: 50px;
+}
+
+/* Секция компании */
+.companySection {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+}
+
+.bracket {
+  color: #ff00ff;
+  font-weight: bold;
+}
+
+.logoText {
+  color: #00ffff;
+  margin: 0 8px;
+}
+
+.companyDescription {
+  color: #a0a0a0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  max-width: 300px;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 15px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: rgba(0, 255, 255, 0.1);
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  border-radius: 12px;
+  color: #00ffff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.socialLink:hover {
+  background: rgba(0, 255, 255, 0.2);
+  border-color: #00ffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 255, 255, 0.3);
+}
+
+/* Колонки футера */
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.columnTitle {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.titleIcon {
+  font-size: 1.2rem;
+}
+
+/* Списки ссылок */
+.linksList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerLink {
+  background: none;
+  border: none;
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  padding: 0;
+  font-family: 'Courier New', monospace;
+}
+
+.footerLink:hover {
+  color: #00ffff;
+  transform: translateX(5px);
+}
+
+/* Контакты */
+.contactsList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.contactIcon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contactInfo {
+  flex: 1;
+}
+
+.contactLabel {
+  color: #00ffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contactValue {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contactValue:hover {
+  color: #fff;
+}
+
+/* Разделительная линия */
+.footerDivider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+  margin: 40px 0 30px;
+}
+
+/* Нижняя часть футера */
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.copyright {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.bottomLinks {
+  display: flex;
+  gap: 30px;
+}
+
+.bottomLink {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-family: 'Courier New', monospace;
+}
+
+.bottomLink:hover {
+  color: #00ffff;
+}
+
+/* Анимации */
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(30px, 30px); }
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .container {
+    padding: 50px 20px 25px;
+  }
+  
+  .footerContent {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  
+  .companySection {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerContent {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  
+  .companySection {
+    grid-column: auto;
+    text-align: center;
+  }
+  
+  .companyDescription {
+    max-width: none;
+  }
+  
+  .socialLinks {
+    justify-content: center;
+  }
+  
+  .footerBottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .bottomLinks {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 40px 15px 20px;
+  }
+  
+  .footerContent {
+    gap: 30px;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .socialLinks {
+    gap: 12px;
+  }
+  
+  .socialLink {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+  
+  .bottomLinks {
+    flex-direction: column;
+    gap: 10px;
+  }
+} 

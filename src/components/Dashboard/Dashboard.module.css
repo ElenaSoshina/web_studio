@@ -1,0 +1,606 @@
+/* Основной контейнер дашборда */
+.dashboard {
+  position: relative;
+  background: linear-gradient(135deg, 
+    rgba(0, 16, 32, 0.9) 0%, 
+    rgba(0, 8, 24, 0.95) 100%);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 24px;
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  font-family: 'Courier New', monospace;
+  max-width: 500px;
+  min-height: 600px;
+  animation: dashboardAppear 1s ease-out;
+}
+
+.dashboard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    #00ffff, 
+    transparent);
+  animation: scanlineTop 3s linear infinite;
+}
+
+/* Заголовок дашборда */
+.dashboardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dashboardTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  opacity: 0;
+  animation: titleSlideIn 0.8s ease-out 0.2s forwards;
+}
+
+.bracket {
+  color: #00ffff;
+  animation: bracketPulse 2s ease-in-out infinite;
+}
+
+.statusIndicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: statusFadeIn 1s ease-out 0.5s forwards;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  background: #00ff00;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.statusText {
+  font-size: 11px;
+  color: #00ff00;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.headerRight {
+  opacity: 0;
+  animation: timeSlideIn 1s ease-out 0.3s forwards;
+}
+
+.timeDisplay {
+  font-size: 14px;
+  color: #00ffff;
+  font-weight: 600;
+  background: rgba(0, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+/* Сетка метрик */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.metricCard {
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardSlideUp 0.6s ease-out forwards;
+}
+
+.metricCard:nth-child(1) { animation-delay: 0.6s; }
+.metricCard:nth-child(2) { animation-delay: 0.8s; }
+.metricCard:nth-child(3) { animation-delay: 1.0s; }
+
+.metricCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 255, 255, 0.15);
+}
+
+.metricIcon {
+  font-size: 20px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.metricValue {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.number {
+  font-family: 'Courier New', monospace;
+  font-size: 24px;
+  font-weight: bold;
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.plus,
+.percent,
+.unit {
+  font-size: 18px;
+  color: #ff00ff;
+  font-weight: 600;
+}
+
+.metricLabel {
+  font-size: 12px;
+  color: #a0a0a0;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metricTrend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.trendUp {
+  color: #00ff00;
+  font-weight: 600;
+}
+
+.trendLabel {
+  color: #808080;
+}
+
+.metricChart {
+  margin-top: 8px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.miniChart {
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 255, 255, 0.2);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.miniChart::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 85%;
+  height: 100%;
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  border-radius: 2px;
+  animation: chartFill 2s ease-out 1.5s forwards;
+  transform: translateX(-100%);
+}
+
+.responseTime {
+  margin-top: 4px;
+}
+
+.responseText {
+  font-size: 11px;
+  color: #00ff00;
+  font-weight: 500;
+}
+
+/* Активные проекты */
+.activeProjects {
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.sectionLabel {
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.projectsCount {
+  background: rgba(0, 255, 255, 0.2);
+  color: #00ffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.projectsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.projectItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 255, 255, 0.1);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: projectSlideIn 0.5s ease-out forwards;
+}
+
+.projectItem:hover {
+  border-color: rgba(0, 255, 255, 0.3);
+  background: rgba(0, 255, 255, 0.05);
+  transform: translateX(4px);
+}
+
+.projectStatus {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.projectInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.projectName {
+  font-size: 13px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.projectType {
+  font-size: 11px;
+  color: #808080;
+}
+
+.projectMetric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.projectMetric .metricValue {
+  font-size: 14px;
+  color: #00ffff;
+  font-weight: 600;
+  margin: 0;
+}
+
+.projectMetric .metricLabel {
+  font-size: 10px;
+  color: #606060;
+  margin: 0;
+}
+
+/* Технологическая статистика */
+.techStats {
+  margin-bottom: 16px;
+}
+
+.techBars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.techBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: techBarSlideUp 0.5s ease-out forwards;
+}
+
+.techName {
+  font-size: 12px;
+  color: #ffffff;
+  font-weight: 500;
+  min-width: 100px;
+}
+
+.techProgress {
+  flex: 1;
+  height: 6px;
+  background: rgba(0, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressBar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 2s ease-out;
+  position: relative;
+  transform: translateX(-100%);
+  animation: progressFill 1.5s ease-out forwards;
+}
+
+.progressBar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+  animation: progressShine 2s ease-out infinite;
+}
+
+.techPercent {
+  font-size: 12px;
+  color: #00ffff;
+  font-weight: 600;
+  min-width: 35px;
+  text-align: right;
+}
+
+/* Сканирующий луч */
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(0, 255, 255, 0.8), 
+    transparent);
+  animation: scanlineMove 4s linear infinite;
+}
+
+/* Анимации */
+@keyframes dashboardAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes titleSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes statusFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes timeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes projectSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes techBarSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progressFill {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes chartFill {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes progressShine {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes scanlineMove {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+@keyframes scanlineTop {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes bracketPulse {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 5px #00ffff;
+  }
+  50% {
+    opacity: 0.7;
+    text-shadow: 0 0 10px #00ffff;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 5px #00ff00;
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 10px #00ff00;
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 16px;
+    max-width: 100%;
+  }
+
+  .dashboardHeader {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .metricsGrid {
+    gap: 12px;
+  }
+
+  .metricCard {
+    padding: 12px;
+  }
+
+  .number {
+    font-size: 20px;
+  }
+
+  .projectItem {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .techName {
+    min-width: 80px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard {
+    padding: 12px;
+  }
+
+  .dashboardTitle {
+    font-size: 14px;
+  }
+
+  .number {
+    font-size: 18px;
+  }
+
+  .projectItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .projectMetric {
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 8px;
+  }
+} 
