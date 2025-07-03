@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './HeroSection.module.css';
 
 const HeroSection: React.FC = () => {
+  const { t } = useTranslation('hero');
+  
   const [animatedStats, setAnimatedStats] = useState({
     projects: 0,
     satisfaction: 0,
@@ -85,7 +88,7 @@ const HeroSection: React.FC = () => {
             <span className={styles.typingText} data-text="return ResponseEntity.ok();"></span>
           </div>
           <div className={`${styles.codeSnippet} ${styles.snippet5}`}>
-            <span className={styles.typingText} data-text="// Создаем будущее веба"></span>
+            <span className={styles.typingText} data-text={t('codeComments.createFuture')}></span>
           </div>
           <div className={`${styles.codeSnippet} ${styles.snippet6}`}>
             <span className={styles.typingText} data-text='@PostMapping("/api/webapp")'></span>
@@ -110,39 +113,35 @@ const HeroSection: React.FC = () => {
         <div className={styles.heroText}>
           <div className={styles.tagline}>
             <span className={styles.bracket}>{'<'}</span>
-            <span className={styles.tagText}>WEB STUDIO</span>
+            <span className={styles.tagText}>{t('tagline')}</span>
             <span className={styles.bracket}>{'/>'}</span>
           </div>
           
           <h1 className={styles.heroTitle}>
-            <span className={styles.titleLine1}>СОЗДАЕМ</span>
+            <span className={styles.titleLine1}>{t('title.line1')}</span>
             <span className={styles.titleLine2}>
-              <span className={styles.neonText}>ЦИФРОВЫЕ</span>
+              <span className={styles.neonText}>{t('title.line2')}</span>
             </span>
-            <span className={styles.titleLine3}>РЕШЕНИЯ</span>
+            <span className={styles.titleLine3}>{t('title.line3')}</span>
           </h1>
           
           <p className={styles.heroSubtitle}>
-            Разрабатываем современные веб-сайты и Telegram WebApp. 
-            Создаем решения, которые автоматизируют процессы, привлекают клиентов 
-            и увеличивают продажи вашего бизнеса.
+            {t('subtitle')}
           </p>
-          
-
           
           <div className={styles.heroButtons}>
             <button 
               className={`${styles.btn} ${styles.btnPrimary}`}
               onClick={() => scrollToSection('contacts')}
             >
-              <span className={styles.btnText}>🚀 Заказать проект</span>
+              <span className={styles.btnText}>{t('buttons.orderProject')}</span>
               <div className={styles.btnGlow}></div>
             </button>
             <button 
               className={`${styles.btn} ${styles.btnSecondary}`}
               onClick={() => scrollToSection('portfolio')}
             >
-              <span className={styles.btnText}>ПОРТФОЛИО</span>
+              <span className={styles.btnText}>{t('buttons.portfolio')}</span>
               <div className={styles.btnScanline}></div>
             </button>
           </div>
@@ -156,9 +155,9 @@ const HeroSection: React.FC = () => {
                 <span className={styles.cardNumber}>{animatedStats.projects}</span>
                 <span className={styles.cardPlus}>+</span>
               </div>
-              <div className={styles.cardLabel}>Проектов запущено</div>
+              <div className={styles.cardLabel}>{t('stats.projects.label')}</div>
               <div className={styles.cardTrend}>
-                <span className={styles.trendUp}>+12% этот месяц</span>
+                <span className={styles.trendUp}>{t('stats.projects.trend')}</span>
               </div>
             </div>
 
@@ -168,10 +167,7 @@ const HeroSection: React.FC = () => {
                 <span className={styles.cardNumber}>{animatedStats.satisfaction}</span>
                 <span className={styles.cardPercent}>%</span>
               </div>
-              <div className={styles.cardLabel}>Довольных клиентов</div>
-              {/* <div className={styles.cardChart}>
-                <div className={styles.miniChart}></div>
-              </div> */}
+              <div className={styles.cardLabel}>{t('stats.satisfaction.label')}</div>
             </div>
 
             <div className={`${styles.statCard} ${isCardVisible ? styles.cardVisible : ''}`} style={{animationDelay: '0.6s'}}>
@@ -180,8 +176,7 @@ const HeroSection: React.FC = () => {
                 <span className={styles.cardNumber}>{animatedStats.supportHours}</span>
                 <span className={styles.cardUnit}>h</span>
               </div>
-              <div className={styles.cardLabel}>Поддержка 24/7</div>
-              
+              <div className={styles.cardLabel}>{t('stats.support.label')}</div>
             </div>
 
             <div className={`${styles.statCard} ${isCardVisible ? styles.cardVisible : ''}`} style={{animationDelay: '0.8s'}}>
@@ -190,9 +185,9 @@ const HeroSection: React.FC = () => {
                 <span className={styles.cardNumber}>{animatedStats.clients}</span>
                 <span className={styles.cardPlus}>+</span>
               </div>
-              <div className={styles.cardLabel}>Клиентов обслужено</div>
+              <div className={styles.cardLabel}>{t('stats.clients.label')}</div>
               <div className={styles.cardTrend}>
-                <span className={styles.trendUp}>за все время</span>
+                <span className={styles.trendUp}>{t('stats.clients.trend')}</span>
               </div>
             </div>
           </div>

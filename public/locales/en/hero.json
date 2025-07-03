@@ -1,0 +1,32 @@
+{
+  "tagline": "WEB STUDIO",
+  "title": {
+    "line1": "CREATING",
+    "line2": "DIGITAL",
+    "line3": "SOLUTIONS"
+  },
+  "subtitle": "We develop modern websites and Telegram WebApps. We create solutions that automate processes, attract customers and increase your business sales.",
+  "buttons": {
+    "orderProject": "🚀 ORDER PROJECT",
+    "portfolio": "PORTFOLIO"
+  },
+  "stats": {
+    "projects": {
+      "label": "Projects Launched",
+      "trend": "+12% this month"
+    },
+    "satisfaction": {
+      "label": "Satisfied Clients"
+    },
+    "support": {
+      "label": "24/7 Support"
+    },
+    "clients": {
+      "label": "Clients Served",
+      "trend": "all time"
+    }
+  },
+  "codeComments": {
+    "createFuture": "// Creating the future of web"
+  }
+}

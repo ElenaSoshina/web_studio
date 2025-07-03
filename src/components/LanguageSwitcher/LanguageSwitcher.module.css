@@ -1,0 +1,64 @@
+
+.languageSwitcher {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  
+  .langBtn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 6px;
+    color: #a0a0a0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .langBtn:hover {
+    background: rgba(0, 255, 255, 0.2);
+    color: #00ffff;
+    border-color: rgba(0, 255, 255, 0.4);
+    transform: translateY(-1px);
+  }
+  
+  .langBtn.active {
+    background: rgba(0, 255, 255, 0.25);
+    color: #00ffff;
+    border-color: rgba(0, 255, 255, 0.6);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  }
+  
+  .flag {
+    font-size: 14px;
+  }
+  
+  .code {
+    font-size: 11px;
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .languageSwitcher {
+      gap: 2px;
+    }
+    
+    .langBtn {
+      padding: 4px 6px;
+    }
+    
+    .code {
+      display: none;
+    }
+    
+    .flag {
+      font-size: 16px;
+    }
+  }

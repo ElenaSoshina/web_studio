@@ -252,11 +252,12 @@
 
 .mobileActions {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  gap: 10px;
   margin-top: 20px;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 255, 255, 0.2);
+  flex-wrap: wrap;
 }
 
 .mobileTelegramBtn {
@@ -342,5 +343,19 @@
   
   .mobileMenu {
     padding: 15px;
+  }
+  
+  .headerActions {
+    gap: 8px;
+  }
+  
+  .mobileActions {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .mobileActions > * {
+    width: 100%;
+    text-align: center;
   }
 }

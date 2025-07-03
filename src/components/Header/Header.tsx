@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import styles from './Header.module.css';
 
 const Header: React.FC = () => {
+  const { t } = useTranslation('common');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -46,30 +49,33 @@ const Header: React.FC = () => {
             className={styles.navLink}
             onClick={() => scrollToSection('portfolio')}
           >
-            Портфолио
+            {t('navigation.portfolio')}
           </button>
           <button 
             className={styles.navLink}
             onClick={() => scrollToSection('about')}
           >
-            О нас
+            {t('navigation.about')}
           </button>
           <button 
             className={styles.navLink}
             onClick={() => scrollToSection('blog')}
           >
-            Блог
+            {t('navigation.blog')}
           </button>
           <button 
             className={styles.navLink}
             onClick={() => scrollToSection('contacts')}
           >
-            Контакты
+            {t('navigation.contacts')}
           </button>
         </nav>
 
         {/* Контакты и CTA */}
         <div className={styles.headerActions}>
+          {/* Переключатель языка */}
+          <LanguageSwitcher />
+          
           <a 
             href="https://t.me/your_username" 
             target="_blank" 
@@ -77,7 +83,7 @@ const Header: React.FC = () => {
             className={styles.telegramBtn}
           >
             <span>📱</span>
-            Telegram
+            {t('buttons.telegram')}
           </a>
           
           <button 
@@ -85,7 +91,7 @@ const Header: React.FC = () => {
             onClick={() => scrollToSection('contacts')}
           >
             <span>🚀</span>
-            Заказать проект
+            {t('buttons.orderProject')}
           </button>
         </div>
 
@@ -106,41 +112,44 @@ const Header: React.FC = () => {
           className={styles.mobileNavLink}
           onClick={() => scrollToSection('portfolio')}
         >
-          💼 Портфолио
+          💼 {t('navigation.portfolio')}
         </button>
         <button 
           className={styles.mobileNavLink}
           onClick={() => scrollToSection('about')}
         >
-          👥 О нас
+          👥 {t('navigation.about')}
         </button>
         <button 
           className={styles.mobileNavLink}
           onClick={() => scrollToSection('blog')}
         >
-          📚 Блог
+          📚 {t('navigation.blog')}
         </button>
         <button 
           className={styles.mobileNavLink}
           onClick={() => scrollToSection('contacts')}
         >
-          📞 Контакты
+          📞 {t('navigation.contacts')}
         </button>
         
         <div className={styles.mobileActions}>
+          {/* Переключатель языка для мобильной версии */}
+          <LanguageSwitcher />
+          
           <a 
             href="https://t.me/your_username" 
             target="_blank" 
             rel="noopener noreferrer"
             className={styles.mobileTelegramBtn}
           >
-            📱 Telegram
+            📱 {t('buttons.telegram')}
           </a>
           <button 
             className={styles.mobileCtaBtn}
             onClick={() => scrollToSection('contacts')}
           >
-            🚀 Заказать проект
+            🚀 {t('buttons.orderProject')}
           </button>
         </div>
       </div>

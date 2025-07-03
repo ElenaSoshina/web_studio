@@ -1,0 +1,16 @@
+{
+  "navigation": {
+    "portfolio": "Портфолио",
+    "about": "О нас",
+    "blog": "Блог",
+    "contacts": "Контакты"
+  },
+  "buttons": {
+    "orderProject": "Заказать проект",
+    "telegram": "Telegram"
+  },
+  "language": {
+    "current": "Русский",
+    "switch": "Переключить язык"
+  }
+}
