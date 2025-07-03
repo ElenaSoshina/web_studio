@@ -1,0 +1,31 @@
+{
+    "title": "CONTACT US",
+    "subtitle": "Ready to discuss your project? Fill out the form and we'll get in touch with you",
+    "form": {
+      "title": "Tell us about your project",
+      "fields": {
+        "name": {
+          "label": "Your name *",
+          "placeholder": "Enter your name"
+        },
+        "phone": {
+          "label": "Phone *",
+          "placeholder": "+1 (555) 123-4567"
+        },
+        "telegram": {
+          "label": "Telegram",
+          "placeholder": "@your_username"
+        },
+        "message": {
+          "label": "Project description",
+          "placeholder": "Describe your tasks, goals and requirements..."
+        }
+      },
+      "submit": "Send request",
+      "submitting": "Sending...",
+      "messages": {
+        "success": "Request sent! We will contact you soon.",
+        "error": "An error occurred. Please try again later or contact us another way."
+      }
+    }
+  }

@@ -1,7 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './Footer.module.css';
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation('footer');
+  
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -11,25 +14,16 @@ const Footer: React.FC = () => {
 
   const currentYear = new Date().getFullYear();
 
-  const services = [
-    { name: 'Веб-сайты', id: 'about' },
-    { name: 'Telegram WebApp', id: 'about' },
-    { name: 'Готовые решения', id: 'quick-start' },
-    { name: 'Индивидуальные сервисы', id: 'about' }
-  ];
+  const services = t('sections.services.items', { returnObjects: true }) as string[];
+  const navigation = t('sections.navigation.items', { returnObjects: true }) as string[];
+  const contacts = t('sections.contacts.items', { returnObjects: true }) as Array<{label: string, value: string}>;
 
-  const navigation = [
-    { name: 'Главная', id: 'home' },
-    { name: 'Портфолио', id: 'portfolio' },
-    { name: 'О нас', id: 'about' },
-    { name: 'Блог', id: 'blog' },
-    { name: 'Контакты', id: 'contacts' }
-  ];
-
-  const contacts = [
-    { icon: '📱', label: 'Telegram', value: '@your_username', link: 'https://t.me/your_username' },
-    { icon: '📧', label: 'Email', value: 'hello@webstudio.ru', link: 'mailto:hello@webstudio.ru' },
-    { icon: '📞', label: 'Телефон', value: '+7 (999) 123-45-67', link: 'tel:+79991234567' }
+  const serviceIds = ['about', 'about', 'quick-start', 'about'];
+  const navigationIds = ['home', 'portfolio', 'about', 'blog', 'contacts'];
+  const contactLinks = [
+    'https://t.me/your_username',
+    'mailto:hello@webstudio.ru', 
+    'tel:+79991234567'
   ];
 
   return (
@@ -50,7 +44,7 @@ const Footer: React.FC = () => {
               <span className={styles.bracket}>{'/>'}</span>
             </div>
             <p className={styles.companyDescription}>
-              Создаем современные цифровые решения: веб-сайты, Telegram приложения и индивидуальные сервисы для развития вашего бизнеса.
+              {t('company.description')}
             </p>
             <div className={styles.socialLinks}>
               <a href="https://t.me/your_username" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
@@ -69,16 +63,16 @@ const Footer: React.FC = () => {
           <div className={styles.footerColumn}>
             <h3 className={styles.columnTitle}>
               <span className={styles.titleIcon}>⚙️</span>
-              Услуги
+              {t('sections.services.title')}
             </h3>
             <ul className={styles.linksList}>
               {services.map((service, index) => (
                 <li key={index}>
                   <button 
                     className={styles.footerLink}
-                    onClick={() => scrollToSection(service.id)}
+                    onClick={() => scrollToSection(serviceIds[index])}
                   >
-                    {service.name}
+                    {service}
                   </button>
                 </li>
               ))}
@@ -89,16 +83,16 @@ const Footer: React.FC = () => {
           <div className={styles.footerColumn}>
             <h3 className={styles.columnTitle}>
               <span className={styles.titleIcon}>🧭</span>
-              Навигация
+              {t('sections.navigation.title')}
             </h3>
             <ul className={styles.linksList}>
               {navigation.map((item, index) => (
                 <li key={index}>
                   <button 
                     className={styles.footerLink}
-                    onClick={() => scrollToSection(item.id)}
+                    onClick={() => scrollToSection(navigationIds[index])}
                   >
-                    {item.name}
+                    {item}
                   </button>
                 </li>
               ))}
@@ -109,19 +103,21 @@ const Footer: React.FC = () => {
           <div className={styles.footerColumn}>
             <h3 className={styles.columnTitle}>
               <span className={styles.titleIcon}>📞</span>
-              Контакты
+              {t('sections.contacts.title')}
             </h3>
             <div className={styles.contactsList}>
               {contacts.map((contact, index) => (
                 <div key={index} className={styles.contactItem}>
-                  <span className={styles.contactIcon}>{contact.icon}</span>
+                  <span className={styles.contactIcon}>
+                    {index === 0 ? '📱' : index === 1 ? '📧' : '📞'}
+                  </span>
                   <div className={styles.contactInfo}>
                     <div className={styles.contactLabel}>{contact.label}</div>
                     <a 
-                      href={contact.link} 
+                      href={contactLinks[index]} 
                       className={styles.contactValue}
-                      target={contact.link.startsWith('http') ? '_blank' : undefined}
-                      rel={contact.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      target={contactLinks[index].startsWith('http') ? '_blank' : undefined}
+                      rel={contactLinks[index].startsWith('http') ? 'noopener noreferrer' : undefined}
                     >
                       {contact.value}
                     </a>
@@ -138,15 +134,18 @@ const Footer: React.FC = () => {
         {/* Нижняя часть футера */}
         <div className={styles.footerBottom}>
           <div className={styles.copyright}>
-            <span>© {currentYear} WebStudio.</span>
+            <span>© {currentYear} {t('bottom.copyright')}</span>
           </div>
           <div className={styles.bottomLinks}>
-            <button className={styles.bottomLink} onClick={() => scrollToSection('contacts')}>
-              Политика конфиденциальности
-            </button>
-            <button className={styles.bottomLink} onClick={() => scrollToSection('contacts')}>
-              Пользовательское соглашение
-            </button>
+            {(t('bottom.links', { returnObjects: true }) as string[]).map((link, index) => (
+              <button 
+                key={index}
+                className={styles.bottomLink} 
+                onClick={() => scrollToSection('contacts')}
+              >
+                {link}
+              </button>
+            ))}
           </div>
         </div>
       </div>

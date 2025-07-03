@@ -1,0 +1,49 @@
+{
+  "title": "PORTFOLIO",
+  "subtitle": "Our projects with demo preview",
+  "filters": {
+    "all": "All Projects",
+    "websites": "Websites",
+    "telegram": "Telegram Apps"
+  },
+  "buttons": {
+    "demo": "Demo",
+    "openTelegram": "Open in Telegram",
+    "openWebsite": "Open Website",
+    "sourceCode": "Source Code"
+  },
+  "categories": {
+    "website": "🌐 Website",
+    "telegram": "🤖 Telegram App"
+  },
+  "modal": {
+    "demoVersion": "Demo Version",
+    "close": "×",
+    "howToTest": "How to test:",
+    "steps": {
+      "telegram": [
+        "Open link in Telegram",
+        "Start dialog with bot",
+        "Try main features"
+      ]
+    }
+  },
+  "projects": {
+    "celebrityStrike": {
+      "title": "Celebrity Strike Shop",
+      "description": "Telegram web application for selling gaming services with subscription system and gift cards"
+    },
+    "selfDetail": {
+      "title": "Self Detail Bot",
+      "description": "Application for booking equipped detailing box time with Google Calendar integration and payment"
+    },
+    "zagranpasport": {
+      "title": "Zagranpasport24.ru",
+      "description": "Online service for urgent passport processing with automatic request forwarding to Telegram administrator"
+    },
+    "visaland": {
+      "title": "VisaLand.ru",
+      "description": "Document processing service with Telegram integration for instant request delivery to administrator"
+    }
+  }
+}

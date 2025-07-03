@@ -1,0 +1,82 @@
+{
+  "title": "READY SOLUTIONS",
+  "subtitle": "Available internet solutions for quick start of your business",
+  "badge": {
+    "text": "Website ready in 7 days",
+    "price": "from $400"
+  },
+  "tabs": {
+    "packages": "💼 Ready Packages",
+    "process": "🔄 Work Process"
+  },
+  "clientTypes": {
+    "subtitle": "Our solutions are perfect for:",
+    "beginner": {
+      "title": "Beginners",
+      "subtitle": "First Website",
+      "description": "If you have no experience with websites but need results today. We'll select the optimal solution and do everything for you."
+    },
+    "developing": {
+      "title": "Developing",
+      "subtitle": "Modernization",
+      "description": "Is your website outdated? Need modern design without long waiting? Ready solutions will help you launch in a week."
+    },
+    "growing": {
+      "title": "Growing",
+      "subtitle": "Scaling",
+      "description": "New directions, regional websites, separate projects? We'll select a solution on the day you contact us."
+    }
+  },
+  "packages": {
+    "popular": "⭐ Popular",
+    "orderButton": "Order",
+    "quickStart": {
+      "title": "Quick Start",
+      "price": "from $400",
+      "features": [
+        "Hosting installation",
+        "SSL certificate installation",
+        "Analytics connection",
+        "Chat connection",
+        "Initial content filling"
+      ]
+    },
+    "telegramBot": {
+      "title": "Telegram Bot + WebApp",
+      "price": "from $1,000",
+      "features": [
+        "Telegram bot development",
+        "Web application integration",
+        "Notification system",
+        "Admin panel",
+        "Database integration",
+        "Testing and launch"
+      ]
+    }
+  },
+  "process": {
+    "subtitle": "What will be required from you?",
+    "steps": [
+      {
+        "title": "Solution Selection",
+        "description": "You choose ready design and functionality for your tasks"
+      },
+      {
+        "title": "Setup",
+        "description": "We select domain, hosting and configure technical part"
+      },
+      {
+        "title": "Content",
+        "description": "You provide texts, images and descriptions"
+      },
+      {
+        "title": "Launch",
+        "description": "We do the rest! Website is ready and working"
+      }
+    ],
+    "guarantee": {
+      "title": "We'll do the rest!",
+      "description": "Technical setup, deployment, testing and launch"
+    }
+  }
+}

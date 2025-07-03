@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './AboutUs.module.css';
 
 interface Service {
@@ -17,77 +18,33 @@ interface Advantage {
 }
 
 const AboutUs: React.FC = () => {
+  const { t } = useTranslation('about');
   const [activeService, setActiveService] = useState<string>('websites');
 
   const services: Service[] = [
     {
       id: 'websites',
-      title: 'Веб-сайты',
+      title: t('services.websites.title'),
       icon: '🌐',
-      description: 'Создаем современные, быстрые и адаптивные веб-сайты для любых целей бизнеса',
-      features: [
-        'Адаптивный дизайн под все устройства',
-        'Высокая скорость загрузки',
-        'SEO-оптимизация',
-        'Интеграция с аналитикой',
-        'Система управления контентом',
-        'Форма обратной связи',
-        'Интеграция с социальными сетями',
-        'SSL-сертификат и безопасность'
-      ],
-      process: [
-        'Анализ требований и целей',
-        'Создание дизайн-макета',
-        'Разработка и программирование',
-        'Тестирование на всех устройствах',
-        'Запуск и настройка хостинга'
-      ]
+      description: t('services.websites.description'),
+      features: t('services.websites.features', { returnObjects: true }) as string[],
+      process: t('services.websites.process', { returnObjects: true }) as string[]
     },
     {
       id: 'telegram',
-      title: 'Telegram WebApp + Бот',
+      title: t('services.telegram.title'),
       icon: '🤖',
-      description: 'Разрабатываем полнофункциональные Telegram приложения с интегрированными ботами',
-      features: [
-        'Telegram Mini App интерфейс',
-        'Автоматизированный бот-помощник',
-        'Система уведомлений',
-        'Интеграция с платежами',
-        'База данных клиентов',
-        'Администраторская панель',
-        'Аналитика и отчеты',
-        'API для внешних интеграций'
-      ],
-      process: [
-        'Проектирование архитектуры',
-        'Создание бота и WebApp',
-        'Интеграция с внешними сервисами',
-        'Тестирование функционала',
-        'Публикация и мониторинг'
-      ]
+      description: t('services.telegram.description'),
+      features: t('services.telegram.features', { returnObjects: true }) as string[],
+      process: t('services.telegram.process', { returnObjects: true }) as string[]
     },
     {
       id: 'services',
-      title: 'Индивидуальные сервисы',
+      title: t('services.services.title'),
       icon: '⚙️',
-      description: 'Создаем уникальные решения и автоматизируем бизнес-процессы под ваши задачи',
-      features: [
-        'Интеграция с внешними API',
-        'Автоматизация рабочих процессов',
-        'Системы управления данными',
-        'Микросервисная архитектура',
-        'Облачные решения',
-        'Системы аналитики',
-        'Интеграция с внешними системами',
-        'Масштабируемая архитектура'
-      ],
-      process: [
-        'Глубокий анализ бизнес-процессов',
-        'Архитектурное проектирование',
-        'Поэтапная разработка',
-        'Интеграционное тестирование',
-        'Развертывание и поддержка'
-      ]
+      description: t('services.services.description'),
+      features: t('services.services.features', { returnObjects: true }) as string[],
+      process: t('services.services.process', { returnObjects: true }) as string[]
     }
   ];
 
@@ -117,32 +74,32 @@ const AboutUs: React.FC = () => {
   const workProcess = [
     {
       step: '01',
-      title: 'Анализ и планирование',
-      description: 'Изучаем ваш бизнес, анализируем требования и составляем техническое задание',
+      title: t('workProcess.0.title'),
+      description: t('workProcess.0.description'),
       icon: '🔍'
     },
     {
       step: '02',
-      title: 'Проектирование',
-      description: 'Создаем архитектуру решения, дизайн-макеты и план разработки',
+      title: t('workProcess.1.title'),
+      description: t('workProcess.1.description'),
       icon: '📐'
     },
     {
       step: '03',
-      title: 'Разработка',
-      description: 'Пишем код, интегрируем сервисы и создаем функциональный продукт',
+      title: t('workProcess.2.title'),
+      description: t('workProcess.2.description'),
       icon: '⌨️'
     },
     {
       step: '04',
-      title: 'Тестирование',
-      description: 'Тщательно тестируем все функции, проверяем безопасность и производительность',
+      title: t('workProcess.3.title'),
+      description: t('workProcess.3.description'),
       icon: '🧪'
     },
     {
       step: '05',
-      title: 'Запуск и поддержка',
-      description: 'Запускаем проект, обучаем команду и обеспечиваем техническую поддержку',
+      title: t('workProcess.4.title'),
+      description: t('workProcess.4.description'),
       icon: '🚀'
     }
   ];
@@ -159,17 +116,17 @@ const AboutUs: React.FC = () => {
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
             <span className={styles.bracket}>{'<'}</span>
-            <span className={styles.titleText}>НАШИ УСЛУГИ</span>
+            <span className={styles.titleText}>{t('title')}</span>
             <span className={styles.bracket}>{'/>'}</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            Мы создаем цифровые решения, которые помогают бизнесу расти и развиваться
+            {t('subtitle')}
           </p>
         </div>
 
         {/* Наши услуги */}
         <div className={styles.servicesSection}>
-          <h3 className={styles.subsectionTitle}>Что мы создаем</h3>
+          <h3 className={styles.subsectionTitle}>{t('whatWeCreate')}</h3>
           
           {/* Табы услуг */}
           <div className={styles.serviceTabs}>
@@ -196,7 +153,7 @@ const AboutUs: React.FC = () => {
                     </div>
                     
                     <div className={styles.serviceFeatures}>
-                      <h5>Возможности:</h5>
+                      <h5>{t('features')}</h5>
                       <div className={styles.featuresList}>
                         {service.features.map((feature, index) => (
                           <div key={index} className={styles.feature}>
@@ -210,7 +167,7 @@ const AboutUs: React.FC = () => {
 
                   <div className={styles.serviceProcess}>
                     <div className={styles.processSteps}>
-                      <h5>Этапы:</h5>
+                      <h5>{t('stages')}</h5>
                       <div className={styles.processList}>
                         {service.process.map((step, index) => (
                           <div key={index} className={styles.processStep}>
@@ -229,7 +186,7 @@ const AboutUs: React.FC = () => {
 
         {/* Как мы работаем */}
         <div className={styles.processSection}>
-          <h3 className={styles.subsectionTitle}>Как мы работаем</h3>
+          <h3 className={styles.subsectionTitle}>{t('howWeWork')}</h3>
           <div className={styles.processFlow}>
             {workProcess.map((step, index) => (
               <div key={index} className={styles.workStep}>

@@ -1,0 +1,94 @@
+{
+  "title": "OUR SERVICES",
+  "subtitle": "We create digital solutions that help businesses grow and develop",
+  "whatWeCreate": "What we create",
+  "howWeWork": "How we work",
+  "features": "Features:",
+  "stages": "Stages:",
+  "services": {
+    "websites": {
+      "title": "Websites",
+      "description": "We create modern, fast and responsive websites for any business purposes",
+      "features": [
+        "Responsive design for all devices",
+        "High loading speed",
+        "SEO optimization",
+        "Analytics integration",
+        "Content management system",
+        "Contact form",
+        "Social media integration",
+        "SSL certificate and security"
+      ],
+      "process": [
+        "Requirements and goals analysis",
+        "Design mockup creation",
+        "Development and programming",
+        "Testing on all devices",
+        "Launch and hosting setup"
+      ]
+    },
+    "telegram": {
+      "title": "Telegram Applications",
+      "description": "We develop bots and WebApps for business automation in Telegram",
+      "features": [
+        "Interactive WebApp interfaces",
+        "Notification system",
+        "Payment integration",
+        "Customer database",
+        "Admin panel",
+        "Analytics and reports",
+        "API for external integrations"
+      ],
+      "process": [
+        "Architecture design",
+        "Bot and WebApp creation",
+        "External services integration",
+        "Functionality testing",
+        "Publishing and monitoring"
+      ]
+    },
+    "services": {
+      "title": "Custom Services",
+      "description": "We create unique solutions and automate business processes for your tasks",
+      "features": [
+        "External API integration",
+        "Workflow automation",
+        "Data management systems",
+        "Microservice architecture",
+        "Cloud solutions",
+        "Analytics systems",
+        "External systems integration",
+        "Scalable architecture"
+      ],
+      "process": [
+        "Deep business process analysis",
+        "Architectural design",
+        "Phased development",
+        "Integration testing",
+        "Deployment and support"
+      ]
+    }
+  },
+  "workProcess": [
+    {
+      "title": "Analysis and Planning",
+      "description": "We study your business, analyze requirements and create technical specifications"
+    },
+    {
+      "title": "Design",
+      "description": "We create solution architecture, design mockups and development plan"
+    },
+    {
+      "title": "Development",
+      "description": "We write code, integrate services and create functional product"
+    },
+    {
+      "title": "Testing",
+      "description": "We thoroughly test all functions, check security and performance"
+    },
+    {
+      "title": "Launch and Support",
+      "description": "We launch the project, train the team and provide technical support"
+    }
+  ]
+}

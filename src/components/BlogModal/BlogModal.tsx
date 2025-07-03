@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './BlogModal.module.css';
 
 interface BlogPost {
@@ -25,6 +26,8 @@ interface BlogModalProps {
 }
 
 const BlogModal: React.FC<BlogModalProps> = ({ post, isOpen, onClose }) => {
+  const { t } = useTranslation('blog');
+
   if (!isOpen || !post) return null;
 
   const handleOverlayClick = (e: React.MouseEvent) => {
@@ -34,10 +37,10 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, isOpen, onClose }) => {
   };
 
   const categories = {
-    website: { name: 'Веб-сайты', color: '#00ffff' },
-    telegram: { name: 'Telegram', color: '#ff00ff' },
-    business: { name: 'Бизнес', color: '#ffff00' },
-    tech: { name: 'Технологии', color: '#00ff00' }
+    website: { name: t('categories.website'), color: '#00ffff' },
+    telegram: { name: t('categories.telegram'), color: '#ff00ff' },
+    business: { name: t('categories.business'), color: '#ffff00' },
+    tech: { name: t('categories.tech'), color: '#00ff00' }
   };
 
   return (
@@ -75,7 +78,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, isOpen, onClose }) => {
           </div>
 
           <div className={styles.articleConclusion}>
-            <h2 className={styles.conclusionTitle}>Заключение</h2>
+            <h2 className={styles.conclusionTitle}>{t('conclusion')}</h2>
             <p className={styles.conclusionText}>{post.content.conclusion}</p>
           </div>
         </div>
@@ -83,7 +86,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, isOpen, onClose }) => {
         <div className={styles.modalFooter}>
           <button className={styles.contactBtn} onClick={onClose}>
             <span>💬</span>
-            Обсудить проект
+            {t('discussProject')}
           </button>
         </div>
       </div>

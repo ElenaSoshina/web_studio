@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './Portfolio.module.css';
 
 interface Project {
@@ -16,51 +17,51 @@ interface Project {
 }
 
 const Portfolio: React.FC = () => {
+  const { t } = useTranslation('portfolio');
   const [activeFilter, setActiveFilter] = useState<'all' | 'website' | 'telegram'>('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const projects: Project[] = [
     {
       id: 1,
-      title: 'Celebrity Strike Shop',
+      title: t('projects.celebrityStrike.title'),
       category: 'telegram',
-      description: 'Telegram веб-приложение для продажи услуг в играх с системой подписок и подарочных карт',
+      description: t('projects.celebrityStrike.description'),
       technologies: ['Java Spring Boot', 'Telegram WebApp', 'PostgreSQL', 'React'],
-      image: `${import.meta.env.BASE_URL}group-3.png`,
+      image: `${import.meta.env.BASE_URL}images/group-3.png`,
       demoUrl: 'https://frontend.celebrity-miniapp.duckdns.org/',
       liveUrl: 'https://t.me/CelebrityStrike_bot',
       isDemo: true
     },
     {
       id: 2,
-      title: 'Self Detail Bot',
+      title: t('projects.selfDetail.title'),
       category: 'telegram',
-      description: 'Приложение для бронирования времени оборудованного бокса для детейлинга с интеграцией Google Calendar и оплатой',
+      description: t('projects.selfDetail.description'),
       technologies: ['Java Spring', 'Telegram Bot API', 'Google Calendar API', 'Payment Gateway', 'PostgreSQL'],
-      image: `${import.meta.env.BASE_URL}group-2-3.png`,
+      image: `${import.meta.env.BASE_URL}images/group-2-3.png`,
       demoUrl: 'http://frontend.self-detailing.duckdns.org/',
       liveUrl: 'https://t.me/self_detail_bot',
       isDemo: true
     },
-
     {
       id: 4,
-      title: 'Zagranpasport24.ru',
+      title: t('projects.zagranpasport.title'),
       category: 'website',
-      description: 'Онлайн-сервис для срочного оформления загранпаспортов с автоматической отправкой заявок администратору в Telegram',
+      description: t('projects.zagranpasport.description'),
       technologies: ['Node.js', 'HTML5', 'CSS3', 'JavaScript', 'UI Components', 'Telegram Bot API'],
-      image: `${import.meta.env.BASE_URL}group-1.png`,
+      image: `${import.meta.env.BASE_URL}images/group-1.png`,
       demoUrl: 'https://zagranpasport24.ru',
       liveUrl: 'https://zagranpasport24.ru',
       isDemo: false
     },
     {
       id: 5,
-      title: 'VisaLand.ru',
+      title: t('projects.visaland.title'),
       category: 'website',
-      description: 'Сервис оформления документов с интеграцией Telegram для мгновенного получения заявок администратором',
+      description: t('projects.visaland.description'),
       technologies: ['Node.js', 'HTML5', 'CSS3', 'JavaScript', 'UI Components', 'Telegram Bot API'],
-      image: `${import.meta.env.BASE_URL}group-1-2.png`,
+      image: `${import.meta.env.BASE_URL}images/group-1-2.png`,
       demoUrl: 'https://visaland.ru',
       liveUrl: 'https://visaland.ru',
       isDemo: false
@@ -86,11 +87,11 @@ const Portfolio: React.FC = () => {
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
             <span className={styles.bracket}>{'<'}</span>
-            <span className={styles.titleText}>ПОРТФОЛИО</span>
+            <span className={styles.titleText}>{t('title')}</span>
             <span className={styles.bracket}>{'/>'}</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            Наши проекты с возможностью демо просмотра
+            {t('subtitle')}
           </p>
         </div>
 
@@ -100,19 +101,19 @@ const Portfolio: React.FC = () => {
             className={`${styles.filterBtn} ${activeFilter === 'all' ? styles.active : ''}`}
             onClick={() => setActiveFilter('all')}
           >
-            Все проекты
+            {t('filters.all')}
           </button>
           <button 
             className={`${styles.filterBtn} ${activeFilter === 'website' ? styles.active : ''}`}
             onClick={() => setActiveFilter('website')}
           >
-            Сайты
+            {t('filters.websites')}
           </button>
           <button 
             className={`${styles.filterBtn} ${activeFilter === 'telegram' ? styles.active : ''}`}
             onClick={() => setActiveFilter('telegram')}
           >
-            Telegram Apps
+            {t('filters.telegram')}
           </button>
         </div>
 
@@ -128,12 +129,12 @@ const Portfolio: React.FC = () => {
                     onClick={() => openDemo(project)}
                   >
                     <span>🚀</span>
-                    Демо
+                    {t('buttons.demo')}
                   </button>
                   {project.liveUrl && (
                     <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.liveBtn}>
                       <span>{project.category === 'telegram' ? '📱' : '🌐'}</span>
-                      {project.category === 'telegram' ? 'Открыть в Telegram' : 'Открыть сайт'}
+                      {project.category === 'telegram' ? t('buttons.openTelegram') : t('buttons.openWebsite')}
                     </a>
                   )}
                 </div>
@@ -141,7 +142,7 @@ const Portfolio: React.FC = () => {
               
               <div className={styles.projectContent}>
                 <div className={styles.projectCategory}>
-                  {project.category === 'website' ? '🌐 Website' : '🤖 Telegram App'}
+                  {project.category === 'website' ? t('categories.website') : t('categories.telegram')}
                 </div>
                 <h3 className={styles.projectTitle}>{project.title}</h3>
                 <p className={styles.projectDescription}>{project.description}</p>
@@ -162,8 +163,8 @@ const Portfolio: React.FC = () => {
         <div className={styles.modal} onClick={closeDemo}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHeader}>
-              <h3>{selectedProject.title} - Демо версия</h3>
-              <button className={styles.closeBtn} onClick={closeDemo}>×</button>
+              <h3>{selectedProject.title} - {t('modal.demoVersion')}</h3>
+              <button className={styles.closeBtn} onClick={closeDemo}>{t('modal.close')}</button>
             </div>
             
             <div className={styles.modalBody}>
@@ -179,14 +180,14 @@ const Portfolio: React.FC = () => {
                     </div>
                   </div>
                   <div className={styles.demoInfo}>
-                    <h4>Как протестировать:</h4>
+                    <h4>{t('modal.howToTest')}</h4>
                     <ol>
-                      <li>Откройте ссылку в Telegram</li>
-                      <li>Начните диалог с ботом</li>
-                      <li>Попробуйте основные функции</li>
+                      {t('modal.steps.telegram', { returnObjects: true }).map((step: string, index: number) => (
+                        <li key={index}>{step}</li>
+                      ))}
                     </ol>
                     <a href={selectedProject.demoUrl} target="_blank" rel="noopener noreferrer" className={styles.openTelegramBtn}>
-                      Открыть в Telegram
+                      {t('buttons.openTelegram')}
                     </a>
                   </div>
                 </div>
@@ -205,12 +206,12 @@ const Portfolio: React.FC = () => {
               <div className={styles.projectLinks}>
                 {selectedProject.liveUrl && (
                   <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.linkBtn}>
-                    {selectedProject.category === 'telegram' ? '📱 Открыть в Telegram' : '🌐 Открыть сайт'}
+                    {selectedProject.category === 'telegram' ? `📱 ${t('buttons.openTelegram')}` : `🌐 ${t('buttons.openWebsite')}`}
                   </a>
                 )}
                 {selectedProject.codeUrl && (
                   <a href={selectedProject.codeUrl} target="_blank" rel="noopener noreferrer" className={styles.linkBtn}>
-                    📂 Исходный код
+                    📂 {t('buttons.sourceCode')}
                   </a>
                 )}
               </div>

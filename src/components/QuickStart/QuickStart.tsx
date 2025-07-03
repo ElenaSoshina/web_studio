@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './QuickStart.module.css';
 
 interface Package {
@@ -18,83 +19,71 @@ interface ClientType {
 }
 
 const QuickStart: React.FC = () => {
+  const { t } = useTranslation('quickstart');
   const [activeTab, setActiveTab] = useState<'packages' | 'process'>('packages');
 
   const packages: Package[] = [
     {
       id: 1,
-      title: 'Быстрый старт',
-      price: 'от 30 000 ₽',
+      title: t('packages.quickStart.title'),
+      price: t('packages.quickStart.price'),
       category: 'starter',
-      features: [
-        'Установка на хостинг',
-        'Установка SSL сертификата',
-        'Подключение аналитики',
-        'Подключение чата',
-        'Первичное наполнение контентом'
-      ]
+      features: t('packages.quickStart.features', { returnObjects: true }) as string[]
     },
     {
       id: 2,
-      title: 'Telegram Bot + WebApp',
-      price: 'от 75 000 ₽',
+      title: t('packages.telegramBot.title'),
+      price: t('packages.telegramBot.price'),
       category: 'business',
       highlighted: true,
-      features: [
-        'Разработка Telegram бота',
-        'Интеграция с веб-приложением',
-        'Система уведомлений',
-        'Админ-панель',
-        'Интеграция с базой данных',
-        'Тестирование и запуск'
-      ]
+      features: t('packages.telegramBot.features', { returnObjects: true }) as string[]
     }
   ];
 
   const clientTypes: ClientType[] = [
     {
       icon: '🚀',
-      title: 'Начинающим',
-      subtitle: 'Первый сайт',
-      description: 'Если у вас нет опыта с сайтами, но нужен результат уже сегодня. Мы подберем оптимальное решение и сделаем все за вас.'
+      title: t('clientTypes.beginner.title'),
+      subtitle: t('clientTypes.beginner.subtitle'),
+      description: t('clientTypes.beginner.description')
     },
     {
       icon: '📈',
-      title: 'Развивающимся', 
-      subtitle: 'Модернизация',
-      description: 'Ваш сайт устарел? Нужен современный дизайн без долгого ожидания? Готовые решения помогут запуститься за неделю.'
+      title: t('clientTypes.developing.title'), 
+      subtitle: t('clientTypes.developing.subtitle'),
+      description: t('clientTypes.developing.description')
     },
     {
       icon: '🏢',
-      title: 'Растущим',
-      subtitle: 'Масштабирование',
-      description: 'Новые направления, региональные сайты, отдельные проекты? Подберем решение в день обращения.'
+      title: t('clientTypes.growing.title'),
+      subtitle: t('clientTypes.growing.subtitle'),
+      description: t('clientTypes.growing.description')
     }
   ];
 
   const processSteps = [
     {
       step: '01',
-      title: 'Выбор решения',
-      description: 'Выбираете готовый дизайн и функционал под ваши задачи',
+      title: t('process.steps.0.title'),
+      description: t('process.steps.0.description'),
       icon: '🎨'
     },
     {
       step: '02', 
-      title: 'Настройка',
-      description: 'Выбираем домен, хостинг и настраиваем техническую часть',
+      title: t('process.steps.1.title'),
+      description: t('process.steps.1.description'),
       icon: '⚙️'
     },
     {
       step: '03',
-      title: 'Контент',
-      description: 'Предоставляете тексты, изображения и описания',
+      title: t('process.steps.2.title'),
+      description: t('process.steps.2.description'),
       icon: '📝'
     },
     {
       step: '04',
-      title: 'Запуск',
-      description: 'Остальное делаем мы! Сайт готов и работает',
+      title: t('process.steps.3.title'),
+      description: t('process.steps.3.description'),
       icon: '🚀'
     }
   ];
@@ -111,15 +100,15 @@ const QuickStart: React.FC = () => {
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
             <span className={styles.bracket}>{'<'}</span>
-            <span className={styles.titleText}>ГОТОВЫЕ РЕШЕНИЯ</span>
+            <span className={styles.titleText}>{t('title')}</span>
             <span className={styles.bracket}>{'/>'}</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            Доступные интернет-решения для быстрого старта Вашего бизнеса
+            {t('subtitle')}
           </p>
           <div className={styles.highlightBadge}>
-            <span className={styles.badgeText}>Сайт работает через 7 дней</span>
-            <span className={styles.badgePrice}>от 30 000₽</span>
+            <span className={styles.badgeText}>{t('badge.text')}</span>
+            <span className={styles.badgePrice}>{t('badge.price')}</span>
           </div>
         </div>
 
@@ -129,13 +118,13 @@ const QuickStart: React.FC = () => {
             className={`${styles.tab} ${activeTab === 'packages' ? styles.active : ''}`}
             onClick={() => setActiveTab('packages')}
           >
-            💼 Готовые пакеты
+            {t('tabs.packages')}
           </button>
           <button 
             className={`${styles.tab} ${activeTab === 'process' ? styles.active : ''}`}
             onClick={() => setActiveTab('process')}
           >
-            🔄 Процесс работы
+            {t('tabs.process')}
           </button>
         </div>
 
@@ -144,7 +133,7 @@ const QuickStart: React.FC = () => {
           <div className={styles.packagesContent}>
             {/* Типы клиентов */}
             <div className={styles.clientTypes}>
-              <h3 className={styles.subsectionTitle}>Наши решения подойдут:</h3>
+              <h3 className={styles.subsectionTitle}>{t('clientTypes.subtitle')}</h3>
               <div className={styles.clientGrid}>
                 {clientTypes.map((client, index) => (
                   <div key={index} className={styles.clientCard}>
@@ -168,7 +157,7 @@ const QuickStart: React.FC = () => {
                 >
                   {pkg.highlighted && (
                     <div className={styles.popularBadge}>
-                      ⭐ Популярный
+                      {t('packages.popular')}
                     </div>
                   )}
                   
@@ -188,7 +177,7 @@ const QuickStart: React.FC = () => {
                   
                   <button className={styles.packageBtn}>
                     <span>🚀</span>
-                    Заказать
+                    {t('packages.orderButton')}
                   </button>
                 </div>
               ))}
@@ -198,7 +187,7 @@ const QuickStart: React.FC = () => {
 
         {activeTab === 'process' && (
           <div className={styles.processContent}>
-            <h3 className={styles.subsectionTitle}>Что потребуется от вас?</h3>
+            <h3 className={styles.subsectionTitle}>{t('process.subtitle')}</h3>
             <div className={styles.processSteps}>
               {processSteps.map((step, index) => (
                 <div key={index} className={styles.processStep}>
@@ -219,8 +208,8 @@ const QuickStart: React.FC = () => {
               <div className={styles.guaranteeBox}>
                 <div className={styles.guaranteeIcon}>⚡</div>
                 <div className={styles.guaranteeText}>
-                  <h4>Остальное сделаем мы!</h4>
-                  <p>Техническая настройка, развертывание, тестирование и запуск</p>
+                  <h4>{t('process.guarantee.title')}</h4>
+                  <p>{t('process.guarantee.description')}</p>
                 </div>
               </div>
             </div>

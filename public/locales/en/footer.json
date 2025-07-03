@@ -1,0 +1,50 @@
+{
+  "company": {
+    "description": "We create modern digital solutions: websites, Telegram applications and custom services for your business development."
+  },
+  "sections": {
+    "services": {
+      "title": "Services",
+      "items": [
+        "Websites",
+        "Telegram WebApp",
+        "Ready Solutions",
+        "Custom Services"
+      ]
+    },
+    "navigation": {
+      "title": "Navigation",
+      "items": [
+        "Home",
+        "Portfolio",
+        "About",
+        "Blog",
+        "Contacts"
+      ]
+    },
+    "contacts": {
+      "title": "Contacts",
+      "items": [
+        {
+          "label": "Telegram",
+          "value": "@your_username"
+        },
+        {
+          "label": "Email",
+          "value": "hello@webstudio.com"
+        },
+        {
+          "label": "Phone",
+          "value": "+1 (555) 123-4567"
+        }
+      ]
+    }
+  },
+  "bottom": {
+    "copyright": "WebStudio.",
+    "links": [
+      "Privacy Policy",
+      "Terms of Service"
+    ]
+  }
+}

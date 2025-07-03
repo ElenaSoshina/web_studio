@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './ContactForm.module.css';
 
 interface FormData {
@@ -9,6 +10,8 @@ interface FormData {
 }
 
 const ContactForm: React.FC = () => {
+  const { t } = useTranslation('contact');
+  
   const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
@@ -61,11 +64,11 @@ const ContactForm: React.FC = () => {
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>
             <span className={styles.bracket}>{'<'}</span>
-            <span className={styles.titleText}>СВЯЗАТЬСЯ С НАМИ</span>
+            <span className={styles.titleText}>{t('title')}</span>
             <span className={styles.bracket}>{'/>'}</span>
           </h2>
           <p className={styles.sectionSubtitle}>
-            Готовы обсудить ваш проект? Заполните форму и мы свяжемся с вами
+            {t('subtitle')}
           </p>
         </div>
 
@@ -74,7 +77,7 @@ const ContactForm: React.FC = () => {
           <div className={styles.formCard}>
             <h3 className={styles.formTitle}>
               <span className={styles.formIcon}>🚀</span>
-              Расскажите о вашем проекте
+              {t('form.title')}
             </h3>
             
             <form onSubmit={handleSubmit} className={styles.contactForm}>
@@ -82,7 +85,7 @@ const ContactForm: React.FC = () => {
                 <div className={styles.inputGroup}>
                   <label className={styles.inputLabel}>
                     <span className={styles.labelIcon}>👤</span>
-                    Ваше имя *
+                    {t('form.fields.name.label')}
                   </label>
                   <input
                     type="text"
@@ -90,7 +93,7 @@ const ContactForm: React.FC = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     className={styles.formInput}
-                    placeholder="Введите ваше имя"
+                    placeholder={t('form.fields.name.placeholder')}
                     required
                   />
                 </div>
@@ -98,7 +101,7 @@ const ContactForm: React.FC = () => {
                 <div className={styles.inputGroup}>
                   <label className={styles.inputLabel}>
                     <span className={styles.labelIcon}>📱</span>
-                    Телефон *
+                    {t('form.fields.phone.label')}
                   </label>
                   <input
                     type="tel"
@@ -106,7 +109,7 @@ const ContactForm: React.FC = () => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     className={styles.formInput}
-                    placeholder="+7 (999) 123-45-67"
+                    placeholder={t('form.fields.phone.placeholder')}
                     required
                   />
                 </div>
@@ -115,7 +118,7 @@ const ContactForm: React.FC = () => {
               <div className={styles.inputGroup}>
                 <label className={styles.inputLabel}>
                   <span className={styles.labelIcon}>💬</span>
-                  Telegram
+                  {t('form.fields.telegram.label')}
                 </label>
                 <input
                   type="text"
@@ -123,21 +126,21 @@ const ContactForm: React.FC = () => {
                   value={formData.telegram}
                   onChange={handleInputChange}
                   className={styles.formInput}
-                  placeholder="@your_username"
+                  placeholder={t('form.fields.telegram.placeholder')}
                 />
               </div>
 
               <div className={styles.inputGroup}>
                 <label className={styles.inputLabel}>
                   <span className={styles.labelIcon}>💭</span>
-                  Описание проекта
+                  {t('form.fields.message.label')}
                 </label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
                   className={styles.formTextarea}
-                  placeholder="Опишите ваши задачи, цели и пожелания..."
+                  placeholder={t('form.fields.message.placeholder')}
                   rows={5}
                 />
               </div>
@@ -150,12 +153,12 @@ const ContactForm: React.FC = () => {
                 {isSubmitting ? (
                   <>
                     <span className={styles.spinner}></span>
-                    Отправляем...
+                    {t('form.submitting')}
                   </>
                 ) : (
                   <>
                     <span>🚀</span>
-                    Отправить заявку
+                    {t('form.submit')}
                   </>
                 )}
               </button>
@@ -163,14 +166,14 @@ const ContactForm: React.FC = () => {
               {submitStatus === 'success' && (
                 <div className={styles.successMessage}>
                   <span>✅</span>
-                  Заявка отправлена! Мы свяжемся с вами в ближайшее время.
+                  {t('form.messages.success')}
                 </div>
               )}
 
               {submitStatus === 'error' && (
                 <div className={styles.errorMessage}>
                   <span>❌</span>
-                  Произошла ошибка. Попробуйте позже или свяжитесь другим способом.
+                  {t('form.messages.error')}
                 </div>
               )}
             </form>
