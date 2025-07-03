@@ -92,8 +92,8 @@ const Blog: React.FC = () => {
     id: index + 1,
     title: post.title,
     excerpt: post.excerpt,
-    category: ['business', 'website', 'tech', 'tech', 'tech', 'tech'][index] as 'website' | 'telegram' | 'business' | 'tech',
-    icon: ['⚖️', '🚀', '⚙️', '🛡️', '🧠', '⚡'][index],
+    category: ['telegram', 'telegram', 'telegram', 'telegram', 'business', 'business'][index] as 'website' | 'telegram' | 'business' | 'tech',
+    icon: ['🚀', '🛒', '📅', '🤖', '⚖️', '💼'][index],
     slug: `post-${index + 1}`,
     content: {
       intro: post.intro,
@@ -104,8 +104,8 @@ const Blog: React.FC = () => {
 
   const categories = {
     website: { name: t('categories.website'), color: '#00ffff' },
-    telegram: { name: t('categories.telegram'), color: '#ff00ff' },
-    business: { name: t('categories.business'), color: '#ffff00' },
+    telegram: { name: t('categories.telegram'), color: '#0088cc' },
+    business: { name: t('categories.business'), color: '#ff6b35' },
     tech: { name: t('categories.tech'), color: '#00ff00' }
   };
 
