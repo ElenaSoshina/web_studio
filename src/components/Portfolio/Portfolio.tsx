@@ -26,7 +26,7 @@ const Portfolio: React.FC = () => {
       category: 'telegram',
       description: 'Telegram веб-приложение для продажи услуг в играх с системой подписок и подарочных карт',
       technologies: ['Java Spring Boot', 'Telegram WebApp', 'PostgreSQL', 'React'],
-      image: '/group-3.png',
+      image: `${import.meta.env.BASE_URL}group-3.png`,
       demoUrl: 'https://frontend.celebrity-miniapp.duckdns.org/',
       liveUrl: 'https://t.me/CelebrityStrike_bot',
       isDemo: true
@@ -37,7 +37,7 @@ const Portfolio: React.FC = () => {
       category: 'telegram',
       description: 'Приложение для бронирования времени оборудованного бокса для детейлинга с интеграцией Google Calendar и оплатой',
       technologies: ['Java Spring', 'Telegram Bot API', 'Google Calendar API', 'Payment Gateway', 'PostgreSQL'],
-      image: '/group-2-3.png',
+      image: `${import.meta.env.BASE_URL}group-2-3.png`,
       demoUrl: 'http://frontend.self-detailing.duckdns.org/',
       liveUrl: 'https://t.me/self_detail_bot',
       isDemo: true
@@ -49,7 +49,7 @@ const Portfolio: React.FC = () => {
       category: 'website',
       description: 'Онлайн-сервис для срочного оформления загранпаспортов с автоматической отправкой заявок администратору в Telegram',
       technologies: ['Node.js', 'HTML5', 'CSS3', 'JavaScript', 'UI Components', 'Telegram Bot API'],
-      image: '/group-1.png',
+      image: `${import.meta.env.BASE_URL}group-1.png`,
       demoUrl: 'https://zagranpasport24.ru',
       liveUrl: 'https://zagranpasport24.ru',
       isDemo: false
@@ -60,7 +60,7 @@ const Portfolio: React.FC = () => {
       category: 'website',
       description: 'Сервис оформления документов с интеграцией Telegram для мгновенного получения заявок администратором',
       technologies: ['Node.js', 'HTML5', 'CSS3', 'JavaScript', 'UI Components', 'Telegram Bot API'],
-      image: '/group-1-2.png',
+      image: `${import.meta.env.BASE_URL}group-1-2.png`,
       demoUrl: 'https://visaland.ru',
       liveUrl: 'https://visaland.ru',
       isDemo: false
