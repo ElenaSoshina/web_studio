@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import BlogModal from '../BlogModal/BlogModal';
 import styles from './Blog.module.css';
@@ -24,6 +24,66 @@ const Blog: React.FC = () => {
   const { t } = useTranslation('blog');
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // States для управления анимациями
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+  const [isGridVisible, setIsGridVisible] = useState(false);
+  
+  // Refs для отслеживания видимости
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // Intersection Observer для заголовка секции
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsHeaderVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (headerRef.current) {
+      observer.observe(headerRef.current);
+    }
+
+    return () => {
+      if (headerRef.current) {
+        observer.unobserve(headerRef.current);
+      }
+    };
+  }, []);
+
+  // Intersection Observer для сетки статей
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsGridVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (gridRef.current) {
+      observer.observe(gridRef.current);
+    }
+
+    return () => {
+      if (gridRef.current) {
+        observer.unobserve(gridRef.current);
+      }
+    };
+  }, []);
 
   // Получаем переводы статей
   const postsData = t('posts', { returnObjects: true }) as any[];
@@ -69,7 +129,10 @@ const Blog: React.FC = () => {
 
         <div className={styles.container}>
           {/* Заголовок секции */}
-          <div className={styles.sectionHeader}>
+          <div 
+            ref={headerRef}
+            className={`${styles.sectionHeader} ${isHeaderVisible ? styles.headerVisible : styles.headerHidden}`}
+          >
             <h2 className={styles.sectionTitle}>
               <span className={styles.bracket}>{'<'}</span>
               <span className={styles.titleText}>{t('title')}</span>
@@ -81,12 +144,18 @@ const Blog: React.FC = () => {
           </div>
 
           {/* Сетка статей */}
-          <div className={styles.postsGrid}>
-            {blogPosts.map((post) => (
+          <div 
+            ref={gridRef}
+            className={`${styles.postsGrid} ${isGridVisible ? styles.gridVisible : styles.gridHidden}`}
+          >
+            {blogPosts.map((post, index) => (
               <article 
                 key={post.id} 
-                className={styles.postCard}
+                className={`${styles.postCard} ${isGridVisible ? styles.postCardVisible : styles.postCardHidden}`}
                 onClick={() => handlePostClick(post)}
+                style={{
+                  animationDelay: isGridVisible ? `${0.1 + index * 0.1}s` : '0s'
+                }}
               >
                 <div className={styles.postHeader}>
                   <div className={styles.postIcon}>{post.icon}</div>

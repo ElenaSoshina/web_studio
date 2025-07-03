@@ -11,6 +11,15 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
+}
+
+.overlayHidden {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.overlayVisible {
+  opacity: 1;
   animation: overlayAppear 0.3s ease-out;
 }
 
@@ -24,10 +33,21 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  animation: modalAppear 0.3s ease-out;
   backdrop-filter: blur(20px);
   font-family: 'Courier New', monospace;
   position: relative;
+}
+
+.contentHidden {
+  opacity: 0;
+  transform: scale(0.8) translateY(50px);
+  transition: all 0.3s ease-out;
+}
+
+.contentVisible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  animation: modalAppear 0.3s ease-out;
 }
 
 .modalHeader {
@@ -105,6 +125,17 @@
   font-family: 'Courier New', monospace;
 }
 
+.titleHidden {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.titleVisible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s both;
+}
+
 .articleIntro {
   font-size: 1.2rem;
   color: #00ffff;
@@ -116,12 +147,34 @@
   border-radius: 0 10px 10px 0;
 }
 
+.introHidden {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.introVisible {
+  opacity: 1;
+  transform: translateX(0);
+  animation: slideInLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+}
+
 .articleContent {
   margin-bottom: 40px;
 }
 
 .articleSection {
   margin-bottom: 35px;
+}
+
+.sectionHidden {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.sectionVisible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .sectionTitle {
@@ -184,6 +237,17 @@
   margin-bottom: 20px;
 }
 
+.conclusionHidden {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+}
+
+.conclusionVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: conclusionAppear 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s both;
+}
+
 .conclusionTitle {
   font-size: 1.3rem;
   color: #ff00ff;
@@ -203,6 +267,17 @@
   border-top: 1px solid rgba(0, 255, 255, 0.2);
   flex-shrink: 0;
   text-align: center;
+}
+
+.footerHidden {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.footerVisible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s both;
 }
 
 .contactBtn {
@@ -244,6 +319,50 @@
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes conclusionAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './BlogModal.module.css';
 
@@ -27,8 +27,28 @@ interface BlogModalProps {
 
 const BlogModal: React.FC<BlogModalProps> = ({ post, isOpen, onClose }) => {
   const { t } = useTranslation('blog');
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
 
-  if (!isOpen || !post) return null;
+  useEffect(() => {
+    if (isOpen) {
+      setShouldRender(true);
+      // Небольшая задержка для корректной анимации появления
+      const showTimer = setTimeout(() => {
+        setIsAnimating(true);
+      }, 10);
+      return () => clearTimeout(showTimer);
+    } else {
+      setIsAnimating(false);
+      // Ждем завершения анимации исчезновения перед удалением из DOM
+      const hideTimer = setTimeout(() => {
+        setShouldRender(false);
+      }, 300);
+      return () => clearTimeout(hideTimer);
+    }
+  }, [isOpen]);
+
+  if (!shouldRender || !post) return null;
 
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -44,8 +64,11 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, isOpen, onClose }) => {
   };
 
   return (
-    <div className={styles.modalOverlay} onClick={handleOverlayClick}>
-      <div className={styles.modalContent}>
+    <div 
+      className={`${styles.modalOverlay} ${isAnimating ? styles.overlayVisible : styles.overlayHidden}`} 
+      onClick={handleOverlayClick}
+    >
+      <div className={`${styles.modalContent} ${isAnimating ? styles.contentVisible : styles.contentHidden}`}>
         <div className={styles.modalHeader}>
           <div className={styles.articleMeta}>
             <div className={styles.articleIcon}>{post.icon}</div>
@@ -62,12 +85,22 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, isOpen, onClose }) => {
         </div>
 
         <div className={styles.modalBody}>
-          <h1 className={styles.articleTitle}>{post.title}</h1>
-          <p className={styles.articleIntro}>{post.content.intro}</p>
+          <h1 className={`${styles.articleTitle} ${isAnimating ? styles.titleVisible : styles.titleHidden}`}>
+            {post.title}
+          </h1>
+          <p className={`${styles.articleIntro} ${isAnimating ? styles.introVisible : styles.introHidden}`}>
+            {post.content.intro}
+          </p>
 
           <div className={styles.articleContent}>
             {post.content.sections.map((section, index) => (
-              <div key={index} className={styles.articleSection}>
+              <div 
+                key={index} 
+                className={`${styles.articleSection} ${isAnimating ? styles.sectionVisible : styles.sectionHidden}`}
+                style={{
+                  animationDelay: isAnimating ? `${0.3 + index * 0.1}s` : '0s'
+                }}
+              >
                 <h2 className={styles.sectionTitle}>{section.title}</h2>
                 <div 
                   className={styles.sectionContent}
@@ -77,13 +110,13 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, isOpen, onClose }) => {
             ))}
           </div>
 
-          <div className={styles.articleConclusion}>
+          <div className={`${styles.articleConclusion} ${isAnimating ? styles.conclusionVisible : styles.conclusionHidden}`}>
             <h2 className={styles.conclusionTitle}>{t('conclusion')}</h2>
             <p className={styles.conclusionText}>{post.content.conclusion}</p>
           </div>
         </div>
 
-        <div className={styles.modalFooter}>
+        <div className={`${styles.modalFooter} ${isAnimating ? styles.footerVisible : styles.footerHidden}`}>
           <button className={styles.contactBtn} onClick={onClose}>
             <span>💬</span>
             {t('discussProject')}

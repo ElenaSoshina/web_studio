@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './AboutUs.module.css';
 
@@ -20,6 +20,94 @@ interface Advantage {
 const AboutUs: React.FC = () => {
   const { t } = useTranslation('about');
   const [activeService, setActiveService] = useState<string>('websites');
+  
+  // States для управления анимациями
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+  const [isServicesVisible, setIsServicesVisible] = useState(false);
+  const [isProcessVisible, setIsProcessVisible] = useState(false);
+  
+  // Refs для отслеживания видимости
+  const headerRef = useRef<HTMLDivElement>(null);
+  const servicesRef = useRef<HTMLDivElement>(null);
+  const processRef = useRef<HTMLDivElement>(null);
+
+  // Intersection Observer для заголовка секции
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsHeaderVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (headerRef.current) {
+      observer.observe(headerRef.current);
+    }
+
+    return () => {
+      if (headerRef.current) {
+        observer.unobserve(headerRef.current);
+      }
+    };
+  }, []);
+
+  // Intersection Observer для секции услуг
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsServicesVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (servicesRef.current) {
+      observer.observe(servicesRef.current);
+    }
+
+    return () => {
+      if (servicesRef.current) {
+        observer.unobserve(servicesRef.current);
+      }
+    };
+  }, []);
+
+  // Intersection Observer для секции процессов
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsProcessVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (processRef.current) {
+      observer.observe(processRef.current);
+    }
+
+    return () => {
+      if (processRef.current) {
+        observer.unobserve(processRef.current);
+      }
+    };
+  }, []);
 
   const services: Service[] = [
     {
@@ -113,7 +201,10 @@ const AboutUs: React.FC = () => {
 
       <div className={styles.container}>
         {/* Заголовок секции */}
-        <div className={styles.sectionHeader}>
+        <div 
+          ref={headerRef}
+          className={`${styles.sectionHeader} ${isHeaderVisible ? styles.headerVisible : styles.headerHidden}`}
+        >
           <h2 className={styles.sectionTitle}>
             <span className={styles.bracket}>{'<'}</span>
             <span className={styles.titleText}>{t('title')}</span>
@@ -125,16 +216,22 @@ const AboutUs: React.FC = () => {
         </div>
 
         {/* Наши услуги */}
-        <div className={styles.servicesSection}>
+        <div 
+          ref={servicesRef}
+          className={`${styles.servicesSection} ${isServicesVisible ? styles.servicesVisible : styles.servicesHidden}`}
+        >
           <h3 className={styles.subsectionTitle}>{t('whatWeCreate')}</h3>
           
           {/* Табы услуг */}
           <div className={styles.serviceTabs}>
-            {services.map((service) => (
+            {services.map((service, index) => (
               <button
                 key={service.id}
-                className={`${styles.serviceTab} ${activeService === service.id ? styles.active : ''}`}
+                className={`${styles.serviceTab} ${activeService === service.id ? styles.active : ''} ${isServicesVisible ? styles.tabVisible : styles.tabHidden}`}
                 onClick={() => setActiveService(service.id)}
+                style={{
+                  animationDelay: isServicesVisible ? `${0.3 + index * 0.1}s` : '0s'
+                }}
               >
                 <span className={styles.tabIcon}>{service.icon}</span>
                 {service.title}
@@ -145,7 +242,7 @@ const AboutUs: React.FC = () => {
           {/* Контент активной услуги */}
           {services.map((service) => (
             activeService === service.id && (
-              <div key={service.id} className={styles.serviceContent}>
+              <div key={service.id} className={`${styles.serviceContent} ${isServicesVisible ? styles.contentVisible : styles.contentHidden}`}>
                 <div className={styles.serviceMain}>
                   <div className={styles.serviceInfo}>
                     <div className={styles.serviceDescription}>
@@ -156,7 +253,13 @@ const AboutUs: React.FC = () => {
                       <h5>{t('features')}</h5>
                       <div className={styles.featuresList}>
                         {service.features.map((feature, index) => (
-                          <div key={index} className={styles.feature}>
+                          <div 
+                            key={index} 
+                            className={`${styles.feature} ${isServicesVisible ? styles.featureVisible : styles.featureHidden}`}
+                            style={{
+                              animationDelay: isServicesVisible ? `${0.8 + index * 0.05}s` : '0s'
+                            }}
+                          >
                             <span className={styles.featureIcon}>✅</span>
                             {feature}
                           </div>
@@ -170,7 +273,13 @@ const AboutUs: React.FC = () => {
                       <h5>{t('stages')}</h5>
                       <div className={styles.processList}>
                         {service.process.map((step, index) => (
-                          <div key={index} className={styles.processStep}>
+                          <div 
+                            key={index} 
+                            className={`${styles.processStep} ${isServicesVisible ? styles.stepVisible : styles.stepHidden}`}
+                            style={{
+                              animationDelay: isServicesVisible ? `${1.0 + index * 0.1}s` : '0s'
+                            }}
+                          >
                             <span className={styles.stepNumber}>{index + 1}</span>
                             {step}
                           </div>
@@ -185,11 +294,20 @@ const AboutUs: React.FC = () => {
         </div>
 
         {/* Как мы работаем */}
-        <div className={styles.processSection}>
+        <div 
+          ref={processRef}
+          className={`${styles.processSection} ${isProcessVisible ? styles.processSectionVisible : styles.processSectionHidden}`}
+        >
           <h3 className={styles.subsectionTitle}>{t('howWeWork')}</h3>
           <div className={styles.processFlow}>
             {workProcess.map((step, index) => (
-              <div key={index} className={styles.workStep}>
+              <div 
+                key={index} 
+                className={`${styles.workStep} ${isProcessVisible ? styles.workStepVisible : styles.workStepHidden}`}
+                style={{
+                  animationDelay: isProcessVisible ? `${0.2 + index * 0.15}s` : '0s'
+                }}
+              >
                 <div className={styles.stepHeader}>
                   <div className={styles.stepNumber}>{step.step}</div>
                   <div className={styles.stepIcon}>{step.icon}</div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './Portfolio.module.css';
 
@@ -20,6 +20,8 @@ const Portfolio: React.FC = () => {
   const { t } = useTranslation('portfolio');
   const [activeFilter, setActiveFilter] = useState<'all' | 'website' | 'telegram'>('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const projects: Project[] = [
     {
@@ -80,11 +82,42 @@ const Portfolio: React.FC = () => {
     setSelectedProject(null);
   };
 
+  // Intersection Observer для отслеживания видимости секции
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          // Отключаем observer после первого срабатывания
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1, // Анимация запустится когда 10% секции будет видно
+        rootMargin: '0px 0px -50px 0px' // Добавляем небольшой отступ снизу
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section className={styles.portfolioSection} id="portfolio">
+    <section 
+      ref={sectionRef}
+      className={styles.portfolioSection} 
+      id="portfolio"
+    >
       <div className={styles.container}>
         {/* Заголовок секции */}
-        <div className={styles.sectionHeader}>
+        <div className={`${styles.sectionHeader} ${isVisible ? styles.headerVisible : styles.headerHidden}`}>
           <h2 className={styles.sectionTitle}>
             <span className={styles.bracket}>{'<'}</span>
             <span className={styles.titleText}>{t('title')}</span>
@@ -96,7 +129,7 @@ const Portfolio: React.FC = () => {
         </div>
 
         {/* Фильтры */}
-        <div className={styles.filters}>
+        <div className={`${styles.filters} ${isVisible ? styles.filtersVisible : styles.filtersHidden}`}>
           <button 
             className={`${styles.filterBtn} ${activeFilter === 'all' ? styles.active : ''}`}
             onClick={() => setActiveFilter('all')}
@@ -118,9 +151,16 @@ const Portfolio: React.FC = () => {
         </div>
 
         {/* Сетка проектов */}
-        <div className={styles.projectsGrid}>
-          {filteredProjects.map((project) => (
-            <div key={project.id} className={styles.projectCard} data-category={project.category}>
+        <div className={`${styles.projectsGrid} ${isVisible ? styles.gridVisible : styles.gridHidden}`}>
+          {filteredProjects.map((project, index) => (
+            <div 
+              key={project.id} 
+              className={`${styles.projectCard} ${isVisible ? styles.cardVisible : styles.cardHidden}`}
+              data-category={project.category}
+              style={{
+                animationDelay: isVisible ? `${0.2 + index * 0.1}s` : '0s'
+              }}
+            >
               <div className={styles.projectImage}>
                 <img src={project.image} alt={project.title} />
                 <div className={styles.projectOverlay}>

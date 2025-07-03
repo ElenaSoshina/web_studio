@@ -24,7 +24,7 @@ const HeroSection: React.FC = () => {
   // Анимация цифр в статистике
   useEffect(() => {
     const animateNumbers = () => {
-      const duration = 2000; // 2 секунды
+      const duration = 1500; // 1.5 секунды
       const steps = 60;
       const stepDuration = duration / steps;
 
@@ -55,16 +55,14 @@ const HeroSection: React.FC = () => {
     };
 
     // Запускаем анимацию через задержку
-    const timeout = setTimeout(animateNumbers, 1500);
+    const timeout = setTimeout(animateNumbers, 300);
     return () => clearTimeout(timeout);
   }, []);
 
   // Анимация появления карточек
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsCardVisible(true);
-    }, 2000);
-    return () => clearTimeout(timer);
+    // Убираем задержку - карточки будут появляться сразу с индивидуальными задержками из CSS
+    setIsCardVisible(true);
   }, []);
 
   return (
@@ -149,7 +147,7 @@ const HeroSection: React.FC = () => {
         
         <div className={styles.heroVisual}>
           <div className={styles.animatedCards}>
-            <div className={`${styles.statCard} ${isCardVisible ? styles.cardVisible : ''}`} style={{animationDelay: '0.2s'}}>
+            <div className={`${styles.statCard} ${isCardVisible ? styles.cardVisible : ''}`} style={{animationDelay: '0.3s'}}>
               <div className={styles.cardIcon}>🚀</div>
               <div className={styles.cardValue}>
                 <span className={styles.cardNumber}>{animatedStats.projects}</span>
@@ -161,7 +159,7 @@ const HeroSection: React.FC = () => {
               </div>
             </div>
 
-            <div className={`${styles.statCard} ${isCardVisible ? styles.cardVisible : ''}`} style={{animationDelay: '0.4s'}}>
+            <div className={`${styles.statCard} ${isCardVisible ? styles.cardVisible : ''}`} style={{animationDelay: '0.5s'}}>
               <div className={styles.cardIcon}>😊</div>
               <div className={styles.cardValue}>
                 <span className={styles.cardNumber}>{animatedStats.satisfaction}</span>
@@ -170,7 +168,7 @@ const HeroSection: React.FC = () => {
               <div className={styles.cardLabel}>{t('stats.satisfaction.label')}</div>
             </div>
 
-            <div className={`${styles.statCard} ${isCardVisible ? styles.cardVisible : ''}`} style={{animationDelay: '0.6s'}}>
+            <div className={`${styles.statCard} ${isCardVisible ? styles.cardVisible : ''}`} style={{animationDelay: '0.7s'}}>
               <div className={styles.cardIcon}>👥</div>
               <div className={styles.cardValue}>
                 <span className={styles.cardNumber}>{animatedStats.supportHours}</span>
@@ -179,7 +177,7 @@ const HeroSection: React.FC = () => {
               <div className={styles.cardLabel}>{t('stats.support.label')}</div>
             </div>
 
-            <div className={`${styles.statCard} ${isCardVisible ? styles.cardVisible : ''}`} style={{animationDelay: '0.8s'}}>
+            <div className={`${styles.statCard} ${isCardVisible ? styles.cardVisible : ''}`} style={{animationDelay: '0.9s'}}>
               <div className={styles.cardIcon}>💼</div>
               <div className={styles.cardValue}>
                 <span className={styles.cardNumber}>{animatedStats.clients}</span>

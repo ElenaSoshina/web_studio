@@ -54,7 +54,18 @@
 .sectionHeader {
   text-align: center;
   margin-bottom: 80px;
+}
+
+.headerHidden {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.headerVisible {
   opacity: 1;
+  transform: translateY(0);
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .sectionTitle {
@@ -80,6 +91,12 @@
   max-width: 600px;
   margin: 0 auto 30px auto;
   line-height: 1.6;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.headerVisible .sectionSubtitle {
+  animation: fadeInScale 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s both;
 }
 
 .highlightBadge {
@@ -91,6 +108,12 @@
   border-radius: 25px;
   padding: 12px 30px;
   backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: scale(0.9) translateY(20px);
+}
+
+.headerVisible .highlightBadge {
+  animation: badgeBounce 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;
 }
 
 .badgeText {
@@ -113,7 +136,17 @@
   justify-content: center;
   gap: 20px;
   margin-bottom: 60px;
+}
+
+.tabsHidden {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.tabsVisible {
   opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .tab {
@@ -131,6 +164,17 @@
   letter-spacing: 1px;
 }
 
+.tabHidden {
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+}
+
+.tabVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: fadeInBounce 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
 .tab:hover {
   background: rgba(0, 255, 255, 0.2);
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
@@ -144,10 +188,22 @@
 }
 
 /* Контент пакетов */
-.packagesContent {
+.packagesContent,
+.processContent {
   display: flex;
   flex-direction: column;
   gap: 80px;
+}
+
+.contentHidden {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.contentVisible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
 }
 
 .subsectionTitle {
@@ -157,6 +213,12 @@
   margin-bottom: 40px;
   font-weight: 700;
   font-family: 'Courier New', monospace;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.contentVisible .subsectionTitle {
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s both;
 }
 
 /* Типы клиентов */
@@ -176,6 +238,17 @@
   gap: 20px;
   transition: all 0.3s ease;
   backdrop-filter: blur(20px);
+}
+
+.clientCardHidden {
+  opacity: 0;
+  transform: translateY(60px) scale(0.9);
+}
+
+.clientCardVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: clientCardAppear 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .clientCard:hover {
@@ -240,6 +313,17 @@
   min-height: 500px;
 }
 
+.packageCardHidden {
+  opacity: 0;
+  transform: translateY(80px) scale(0.9);
+}
+
+.packageCardVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: packageCardAppear 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
 .packageCard:hover {
   border-color: rgba(0, 255, 255, 0.5);
   transform: translateY(-10px);
@@ -301,6 +385,17 @@
   margin-bottom: 15px;
 }
 
+.featureHidden {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.featureVisible {
+  opacity: 1;
+  transform: translateX(0);
+  animation: slideInLeft 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
 .featureIcon {
   color: #00ffff;
   font-size: 1rem;
@@ -359,6 +454,17 @@
   position: relative;
 }
 
+.processStepHidden {
+  opacity: 0;
+  transform: translateY(60px) scale(0.9);
+}
+
+.processStepVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: processStepAppear 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
 .stepNumber {
   width: 60px;
   height: 60px;
@@ -410,6 +516,17 @@
   text-align: center;
 }
 
+.footerHidden {
+  opacity: 0;
+  transform: translateY(40px) scale(0.9);
+}
+
+.footerVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: footerAppear 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
 .guaranteeBox {
   background: rgba(0, 20, 40, 0.3);
   border: 2px solid rgba(0, 255, 255, 0.3);
@@ -444,6 +561,145 @@
 @keyframes gridMove {
   0% { transform: translate(0, 0); }
   100% { transform: translate(30px, 30px); }
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes badgeBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateY(20px);
+  }
+  60% {
+    opacity: 0.8;
+    transform: scale(1.1) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeInBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateY(-5px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes clientCardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.8) rotateX(-10deg);
+    filter: blur(5px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(30px) scale(0.9) rotateX(-5deg);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+    filter: blur(0px);
+  }
+}
+
+@keyframes packageCardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(80px) scale(0.8) rotateY(-15deg);
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(40px) scale(0.9) rotateY(-5deg);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateY(0deg);
+    filter: blur(0px);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes processStepAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.8);
+    filter: blur(5px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(30px) scale(0.9);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes footerAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.8);
+    filter: blur(5px);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translateY(10px) scale(1.05);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
 }
 
 /* Адаптивность */

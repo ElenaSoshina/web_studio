@@ -56,7 +56,18 @@
 .sectionHeader {
   text-align: center;
   margin-bottom: 80px;
+}
+
+.headerHidden {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.headerVisible {
   opacity: 1;
+  transform: translateY(0);
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .sectionTitle {
@@ -82,6 +93,12 @@
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.headerVisible .sectionSubtitle {
+  animation: fadeInScale 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s both;
 }
 
 /* Сетка статей */
@@ -90,6 +107,17 @@
   grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 30px;
   margin-bottom: 60px;
+}
+
+.gridHidden {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.gridVisible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
 }
 
 /* Карточка статьи */
@@ -104,6 +132,17 @@
   flex-direction: column;
   min-height: 320px;
   padding: 30px;
+}
+
+.postCardHidden {
+  opacity: 0;
+  transform: translateY(80px) scale(0.9) rotateX(-10deg);
+}
+
+.postCardVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotateX(0deg);
+  animation: blogCardAppear 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .postCard:hover {
@@ -273,6 +312,55 @@
 @keyframes gridMove {
   0% { transform: translate(0, 0); }
   100% { transform: translate(30px, 30px); }
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes blogCardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(80px) scale(0.8) rotateX(-15deg);
+    filter: blur(10px);
+  }
+  30% {
+    opacity: 0.3;
+    transform: translateY(50px) scale(0.85) rotateX(-10deg);
+    filter: blur(5px);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translateY(20px) scale(0.95) rotateX(-5deg);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+    filter: blur(0px);
+  }
 }
 
 /* Адаптивность */

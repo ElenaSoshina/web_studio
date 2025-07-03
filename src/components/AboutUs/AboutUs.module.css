@@ -56,7 +56,18 @@
 .sectionHeader {
   text-align: center;
   margin-bottom: 80px;
+}
+
+.headerHidden {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.headerVisible {
   opacity: 1;
+  transform: translateY(0);
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .sectionTitle {
@@ -82,6 +93,12 @@
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.headerVisible .sectionSubtitle {
+  animation: fadeInScale 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s both;
 }
 
 .subsectionTitle {
@@ -91,12 +108,44 @@
   margin-bottom: 50px;
   font-weight: 700;
   font-family: 'Courier New', monospace;
+  opacity: 0;
+  transform: translateY(30px);
 }
 
-/* Секции */
+/* Анимация секций */
 .servicesSection,
 .processSection {
   margin-bottom: 100px;
+}
+
+.servicesHidden {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.servicesVisible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.servicesVisible .subsectionTitle {
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+}
+
+.processSectionHidden {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.processSectionVisible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.processSectionVisible .subsectionTitle {
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
 }
 
 /* Табы услуг */
@@ -126,6 +175,17 @@
   gap: 8px;
 }
 
+.tabHidden {
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+}
+
+.tabVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: fadeInBounce 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
 .serviceTab:hover {
   background: rgba(0, 255, 255, 0.2);
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
@@ -145,6 +205,17 @@
 /* Контент услуги */
 .serviceContent {
   animation: serviceAppear 0.5s ease-out;
+}
+
+.contentHidden {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.contentVisible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;
 }
 
 .serviceMain {
@@ -205,6 +276,17 @@
   line-height: 1.4;
 }
 
+.featureHidden {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.featureVisible {
+  opacity: 1;
+  transform: translateX(0);
+  animation: slideInLeft 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
 .featureIcon {
   color: #00ffff;
   font-size: 0.9rem;
@@ -255,6 +337,17 @@
   font-size: 0.9rem;
 }
 
+.stepHidden {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.stepVisible {
+  opacity: 1;
+  transform: translateX(0);
+  animation: slideInRight 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
 .stepNumber {
   background: linear-gradient(45deg, #ff00ff, #cc0088);
   color: white;
@@ -290,6 +383,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.workStepHidden {
+  opacity: 0;
+  transform: translateY(60px) scale(0.9);
+}
+
+.workStepVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: workStepAppear 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .workStep:hover {
@@ -359,6 +463,87 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeInBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateY(-5px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes workStepAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.8) rotateX(-15deg);
+    filter: blur(5px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(30px) scale(0.9) rotateX(-5deg);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+    filter: blur(0px);
   }
 }
 

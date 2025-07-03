@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './ContactForm.module.css';
 
@@ -21,6 +21,66 @@ const ContactForm: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  // States для управления анимациями
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  
+  // Refs для отслеживания видимости
+  const headerRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  // Intersection Observer для заголовка секции
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsHeaderVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (headerRef.current) {
+      observer.observe(headerRef.current);
+    }
+
+    return () => {
+      if (headerRef.current) {
+        observer.unobserve(headerRef.current);
+      }
+    };
+  }, []);
+
+  // Intersection Observer для формы
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsFormVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (formRef.current) {
+      observer.observe(formRef.current);
+    }
+
+    return () => {
+      if (formRef.current) {
+        observer.unobserve(formRef.current);
+      }
+    };
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -61,7 +121,10 @@ const ContactForm: React.FC = () => {
 
       <div className={styles.container}>
         {/* Заголовок секции */}
-        <div className={styles.sectionHeader}>
+        <div 
+          ref={headerRef}
+          className={`${styles.sectionHeader} ${isHeaderVisible ? styles.headerVisible : styles.headerHidden}`}
+        >
           <h2 className={styles.sectionTitle}>
             <span className={styles.bracket}>{'<'}</span>
             <span className={styles.titleText}>{t('title')}</span>
@@ -74,14 +137,17 @@ const ContactForm: React.FC = () => {
 
         {/* Центрированная форма */}
         <div className={styles.formContainer}>
-          <div className={styles.formCard}>
-            <h3 className={styles.formTitle}>
+          <div 
+            ref={formRef}
+            className={`${styles.formCard} ${isFormVisible ? styles.formCardVisible : styles.formCardHidden}`}
+          >
+            <h3 className={`${styles.formTitle} ${isFormVisible ? styles.formTitleVisible : styles.formTitleHidden}`}>
               <span className={styles.formIcon}>🚀</span>
               {t('form.title')}
             </h3>
             
             <form onSubmit={handleSubmit} className={styles.contactForm}>
-              <div className={styles.formRow}>
+              <div className={`${styles.formRow} ${isFormVisible ? styles.formRowVisible : styles.formRowHidden}`}>
                 <div className={styles.inputGroup}>
                   <label className={styles.inputLabel}>
                     <span className={styles.labelIcon}>👤</span>
@@ -115,7 +181,12 @@ const ContactForm: React.FC = () => {
                 </div>
               </div>
 
-              <div className={styles.inputGroup}>
+              <div 
+                className={`${styles.inputGroup} ${isFormVisible ? styles.inputGroupVisible : styles.inputGroupHidden}`}
+                style={{
+                  animationDelay: isFormVisible ? '0.9s' : '0s'
+                }}
+              >
                 <label className={styles.inputLabel}>
                   <span className={styles.labelIcon}>💬</span>
                   {t('form.fields.telegram.label')}
@@ -130,7 +201,12 @@ const ContactForm: React.FC = () => {
                 />
               </div>
 
-              <div className={styles.inputGroup}>
+              <div 
+                className={`${styles.inputGroup} ${isFormVisible ? styles.inputGroupVisible : styles.inputGroupHidden}`}
+                style={{
+                  animationDelay: isFormVisible ? '1.1s' : '0s'
+                }}
+              >
                 <label className={styles.inputLabel}>
                   <span className={styles.labelIcon}>💭</span>
                   {t('form.fields.message.label')}
@@ -148,7 +224,7 @@ const ContactForm: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`${styles.submitBtn} ${isSubmitting ? styles.submitting : ''}`}
+                className={`${styles.submitBtn} ${isSubmitting ? styles.submitting : ''} ${isFormVisible ? styles.submitBtnVisible : styles.submitBtnHidden}`}
               >
                 {isSubmitting ? (
                   <>
@@ -164,14 +240,14 @@ const ContactForm: React.FC = () => {
               </button>
 
               {submitStatus === 'success' && (
-                <div className={styles.successMessage}>
+                <div className={`${styles.successMessage} ${styles.messageVisible}`}>
                   <span>✅</span>
                   {t('form.messages.success')}
                 </div>
               )}
 
               {submitStatus === 'error' && (
-                <div className={styles.errorMessage}>
+                <div className={`${styles.errorMessage} ${styles.messageVisible}`}>
                   <span>❌</span>
                   {t('form.messages.error')}
                 </div>
