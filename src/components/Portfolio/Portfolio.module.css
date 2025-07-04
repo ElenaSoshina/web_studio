@@ -295,7 +295,7 @@
   color: #a0a0a0;
   line-height: 1.5;
   margin-bottom: 12px;
-  font-size: 18px;
+  font-size: 1rem;
 }
 
 .projectTech {
@@ -559,6 +559,10 @@
     padding: 0 20px;
   }
   
+  .projectImage {
+    height: 350px;
+  }
+  
   .projectsGrid {
     grid-template-columns: 1fr;
     gap: 50px;
@@ -581,9 +585,26 @@
     padding: 60px 0;
   }
   
+  .container {
+    padding: 0 15px;
+  }
+  
+  .sectionHeader {
+    margin-bottom: 50px;
+  }
+  
+  .sectionTitle {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+  
+  .sectionSubtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+  
   .filters {
     flex-wrap: wrap;
     gap: 15px;
+    margin-bottom: 50px;
   }
   
   .filterBtn {
@@ -594,6 +615,14 @@
   .projectsGrid {
     grid-template-columns: 1fr;
     gap: 30px;
+  }
+  
+  .projectImage {
+    height: 280px;
+  }
+  
+  .projectCard[data-category="telegram"] .projectImage {
+    height: 320px;
   }
   
   .modalContent {
@@ -613,21 +642,160 @@
 }
 
 @media (max-width: 480px) {
+  .portfolioSection {
+    padding: 40px 0;
+  }
+  
   .sectionHeader {
     margin-bottom: 40px;
   }
   
+  .sectionTitle {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  }
+  
+  .sectionSubtitle {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  }
+  
   .filters {
     margin-bottom: 40px;
+    gap: 12px;
+  }
+  
+  .filterBtn {
+    padding: 8px 16px;
+    font-size: 11px;
+  }
+  
+  .projectsGrid {
+    gap: 25px;
+  }
+  
+  .projectImage {
+    height: 220px;
+  }
+  
+  .projectCard[data-category="telegram"] .projectImage {
+    height: 260px;
   }
   
   .projectContent {
-    padding: 20px;
+    padding: 16px;
+  }
+  
+  .projectTitle {
+    font-size: 1.2rem;
+  }
+  
+  .projectDescription {
+    font-size: 0.9rem;
   }
   
   .phoneFrame {
     width: 280px;
     height: 480px;
+  }
+}
+
+@media (max-width: 375px) {
+  .portfolioSection {
+    padding: 40px 0;
+  }
+  
+  .container {
+    padding: 0 12px;
+  }
+  
+  .projectImage {
+    height: 180px;
+  }
+  
+  .projectCard[data-category="telegram"] .projectImage {
+    height: 220px;
+  }
+  
+  .projectContent {
+    padding: 12px;
+  }
+  
+  .projectTitle {
+    font-size: 1.3rem;
+  }
+  
+  .projectDescription {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  .projectsGrid {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .portfolioSection {
+    padding: 30px 0;
+  }
+  
+  .container {
+    padding: 0 10px;
+  }
+  
+  .sectionHeader {
+    margin-bottom: 30px;
+  }
+  
+  .sectionTitle {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+  
+  .sectionSubtitle {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+  }
+  
+  .filters {
+    margin-bottom: 30px;
+    gap: 10px;
+  }
+  
+  .filterBtn {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+  
+  .projectsGrid {
+    gap: 18px;
+  }
+  
+  .projectImage {
+    height: 160px;
+  }
+  
+  .projectCard[data-category="telegram"] .projectImage {
+    height: 200px;
+  }
+  
+  .projectContent {
+    padding: 12px;
+  }
+  
+  .projectTitle {
+    font-size: 1.1rem;
+  }
+  
+  .projectDescription {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+  
+  .projectCategory {
+    font-size: 9px;
+  }
+  
+  .techTag {
+    font-size: 10px;
+    padding: 3px 8px;
   }
 }
 
@@ -656,7 +824,7 @@
 }
 
 .projectCard[data-category="telegram"] .projectDescription {
-  font-size: 18px;
+  font-size: 1rem;
   line-height: 1.4;
   margin-bottom: 10px;
 } 

@@ -175,6 +175,17 @@
   background: linear-gradient(45deg, #00ffff, #00aaff);
 }
 
+/* Мобильные элементы справа */
+.mobileHeaderRight {
+  display: none;
+  align-items: center;
+  gap: 15px;
+}
+
+.mobileLangSwitcher {
+  display: flex;
+}
+
 /* Мобильное меню кнопка */
 .mobileMenuBtn {
   display: none;
@@ -318,7 +329,16 @@
   .headerActions {
     display: none;
   }
-  
+
+  .mobileHeaderRight {
+    display: flex;
+  }
+
+  .mobileLangSwitcher {
+    /* Делаем переключатель языка более компактным на мобильных */
+    margin-right: 5px;
+  }
+
   .mobileMenuBtn {
     display: flex;
   }
@@ -339,6 +359,14 @@
   
   .logo {
     font-size: 1.2rem;
+  }
+  
+  .mobileHeaderRight {
+    gap: 10px;
+  }
+  
+  .mobileLangSwitcher {
+    margin-right: 3px;
   }
   
   .mobileMenu {

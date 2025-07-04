@@ -256,6 +256,31 @@
   100% { transform: translate(30px, 30px); }
 }
 
+/* Выпадающие списки для мобильных устройств */
+.collapsibleTitle {
+  cursor: default;
+  user-select: none;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.chevron {
+  display: none;
+  margin-left: auto;
+  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+  color: #00ffff;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.collapsibleContent {
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+}
+
 /* Адаптивность */
 @media (max-width: 1024px) {
   .container {
@@ -300,6 +325,81 @@
   .bottomLinks {
     gap: 20px;
   }
+  
+  /* Активация выпадающих списков на мобильных */
+  .collapsibleTitle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+  }
+  
+  .chevron {
+    display: block;
+  }
+  
+  .collapsibleContent {
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .contentOpen {
+    max-height: 500px;
+    opacity: 1;
+    padding: 15px 0 0 0;
+  }
+  
+  .contentOpen .footerLink,
+  .contentOpen .contactItem {
+    animation: slideInUp 0.3s ease forwards;
+  }
+  
+  .contentOpen .footerLink:nth-child(1),
+  .contentOpen .contactItem:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  
+  .contentOpen .footerLink:nth-child(2),
+  .contentOpen .contactItem:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  
+  .contentOpen .footerLink:nth-child(3),
+  .contentOpen .contactItem:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  
+  .contentOpen .footerLink:nth-child(4),
+  .contentOpen .contactItem:nth-child(4) {
+    animation-delay: 0.25s;
+  }
+  
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .collapsibleTitle:hover {
+    background: rgba(0, 255, 255, 0.05);
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 4px;
+  }
+  
+  .collapsibleTitle:active {
+    background: rgba(0, 255, 255, 0.1);
+    transform: scale(0.98);
+  }
 }
 
 @media (max-width: 480px) {
@@ -329,4 +429,66 @@
     flex-direction: column;
     gap: 10px;
   }
-} 
+  
+  /* Улучшенные стили для маленьких экранов */
+  .collapsibleTitle {
+    font-size: 0.95rem;
+    padding: 12px 0;
+  }
+  
+  .chevron {
+    font-size: 0.7rem;
+  }
+  
+  .contentOpen {
+    padding: 12px 0 0 0;
+  }
+  
+  .footerLink {
+    font-size: 0.85rem;
+    padding: 8px 0;
+  }
+  
+  .contactItem {
+    padding: 6px 0;
+  }
+}
+
+/* Медиа-запрос для очень маленьких экранов */
+@media (max-width: 360px) {
+  .container {
+    padding: 30px 10px 15px;
+  }
+  
+  .footerContent {
+    gap: 25px;
+  }
+  
+  .collapsibleTitle {
+    font-size: 0.9rem;
+    padding: 10px 0;
+  }
+  
+  .chevron {
+    font-size: 0.65rem;
+  }
+  
+  .contentOpen {
+    padding: 10px 0 0 0;
+  }
+  
+  .footerLink {
+    font-size: 0.8rem;
+    padding: 6px 0;
+  }
+  
+  .contactLabel {
+    font-size: 0.75rem;
+  }
+  
+  .contactValue {
+    font-size: 0.8rem;
+  }
+}
+
+ 

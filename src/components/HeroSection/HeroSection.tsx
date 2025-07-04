@@ -77,7 +77,7 @@ const HeroSection: React.FC = () => {
             <span className={styles.typingText} data-text="@RestController"></span>
           </div>
           <div className={`${styles.codeSnippet} ${styles.snippet2}`}>
-            <span className={styles.typingText} data-text="public class WebStudio {"></span>
+            <span className={styles.typingText} data-text="public class WebVision {"></span>
           </div>
           <div className={`${styles.codeSnippet} ${styles.snippet3}`}>
             <span className={styles.typingText} data-text="@Autowired TelegramBot bot;"></span>

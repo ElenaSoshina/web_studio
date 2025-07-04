@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './ContactForm.module.css';
+import { emailService, ContactFormData } from '../../services/emailService';
 
 interface FormData {
   name: string;
@@ -21,6 +22,7 @@ const ContactForm: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
   // States для управления анимациями
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
@@ -29,6 +31,11 @@ const ContactForm: React.FC = () => {
   // Refs для отслеживания видимости
   const headerRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
+
+  // Инициализация EmailJS при загрузке компонента
+  useEffect(() => {
+    emailService.init();
+  }, []);
 
   // Intersection Observer для заголовка секции
   useEffect(() => {
@@ -93,22 +100,41 @@ const ContactForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setValidationErrors([]);
     
     try {
-      // Здесь будет логика отправки формы
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Имитация отправки
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        phone: '',
-        telegram: '',
-        message: ''
-      });
+      // Валидация данных формы
+      const validation = emailService.validateFormData(formData);
+      if (!validation.isValid) {
+        setValidationErrors(validation.errors);
+        setSubmitStatus('error');
+        return;
+      }
+
+      // Отправка email через EmailJS
+      const result = await emailService.sendContactForm(formData);
+      
+      if (result.success) {
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          phone: '',
+          telegram: '',
+          message: ''
+        });
+      } else {
+        console.error('Ошибка отправки:', result.error);
+        setSubmitStatus('error');
+      }
     } catch (error) {
+      console.error('Неожиданная ошибка:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus('idle'), 3000);
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setValidationErrors([]);
+      }, 5000);
     }
   };
 
@@ -249,7 +275,18 @@ const ContactForm: React.FC = () => {
               {submitStatus === 'error' && (
                 <div className={`${styles.errorMessage} ${styles.messageVisible}`}>
                   <span>❌</span>
-                  {t('form.messages.error')}
+                  {validationErrors.length > 0 ? (
+                    <div>
+                      <div>Ошибки валидации:</div>
+                      {validationErrors.map((error, index) => (
+                        <div key={index} style={{ fontSize: '0.9em', marginTop: '5px' }}>
+                          • {error}
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    t('form.messages.error')
+                  )}
                 </div>
               )}
             </form>

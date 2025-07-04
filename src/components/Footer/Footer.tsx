@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './Footer.module.css';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation('footer');
+  const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
+    services: false,
+    navigation: false,
+    contacts: false
+  });
+
+  const toggleSection = (section: string) => {
+    setOpenSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
   
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -22,7 +34,7 @@ const Footer: React.FC = () => {
   const navigationIds = ['home', 'portfolio', 'about', 'blog', 'contacts'];
   const contactLinks = [
     'https://t.me/your_username',
-    'mailto:hello@webstudio.ru', 
+    'mailto:hello@webvision.ru', 
     'tel:+79991234567'
   ];
 
@@ -40,7 +52,7 @@ const Footer: React.FC = () => {
           <div className={styles.companySection}>
             <div className={styles.logo}>
               <span className={styles.bracket}>{'<'}</span>
-              <span className={styles.logoText}>WebStudio</span>
+              <span className={styles.logoText}>WebVision</span>
               <span className={styles.bracket}>{'/>'}</span>
             </div>
             <p className={styles.companyDescription}>
@@ -50,7 +62,7 @@ const Footer: React.FC = () => {
               <a href="https://t.me/your_username" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
                 <span>📱</span>
               </a>
-              <a href="mailto:hello@webstudio.ru" className={styles.socialLink}>
+              <a href="mailto:hello@webvision.ru" className={styles.socialLink}>
                 <span>📧</span>
               </a>
               <a href="https://github.com/your_username" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
@@ -61,69 +73,93 @@ const Footer: React.FC = () => {
 
           {/* Услуги */}
           <div className={styles.footerColumn}>
-            <h3 className={styles.columnTitle}>
+            <h3 
+              className={`${styles.columnTitle} ${styles.collapsibleTitle}`}
+              onClick={() => toggleSection('services')}
+            >
               <span className={styles.titleIcon}>⚙️</span>
               {t('sections.services.title')}
+              <span className={`${styles.chevron} ${openSections.services ? styles.chevronOpen : ''}`}>
+                ▼
+              </span>
             </h3>
-            <ul className={styles.linksList}>
-              {services.map((service, index) => (
-                <li key={index}>
-                  <button 
-                    className={styles.footerLink}
-                    onClick={() => scrollToSection(serviceIds[index])}
-                  >
-                    {service}
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <div className={`${styles.collapsibleContent} ${openSections.services ? styles.contentOpen : ''}`}>
+              <ul className={styles.linksList}>
+                {services.map((service, index) => (
+                  <li key={index}>
+                    <button 
+                      className={styles.footerLink}
+                      onClick={() => scrollToSection(serviceIds[index])}
+                    >
+                      {service}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Навигация */}
           <div className={styles.footerColumn}>
-            <h3 className={styles.columnTitle}>
+            <h3 
+              className={`${styles.columnTitle} ${styles.collapsibleTitle}`}
+              onClick={() => toggleSection('navigation')}
+            >
               <span className={styles.titleIcon}>🧭</span>
               {t('sections.navigation.title')}
+              <span className={`${styles.chevron} ${openSections.navigation ? styles.chevronOpen : ''}`}>
+                ▼
+              </span>
             </h3>
-            <ul className={styles.linksList}>
-              {navigation.map((item, index) => (
-                <li key={index}>
-                  <button 
-                    className={styles.footerLink}
-                    onClick={() => scrollToSection(navigationIds[index])}
-                  >
-                    {item}
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <div className={`${styles.collapsibleContent} ${openSections.navigation ? styles.contentOpen : ''}`}>
+              <ul className={styles.linksList}>
+                {navigation.map((item, index) => (
+                  <li key={index}>
+                    <button 
+                      className={styles.footerLink}
+                      onClick={() => scrollToSection(navigationIds[index])}
+                    >
+                      {item}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Контакты */}
           <div className={styles.footerColumn}>
-            <h3 className={styles.columnTitle}>
+            <h3 
+              className={`${styles.columnTitle} ${styles.collapsibleTitle}`}
+              onClick={() => toggleSection('contacts')}
+            >
               <span className={styles.titleIcon}>📞</span>
               {t('sections.contacts.title')}
+              <span className={`${styles.chevron} ${openSections.contacts ? styles.chevronOpen : ''}`}>
+                ▼
+              </span>
             </h3>
-            <div className={styles.contactsList}>
-              {contacts.map((contact, index) => (
-                <div key={index} className={styles.contactItem}>
-                  <span className={styles.contactIcon}>
-                    {index === 0 ? '📱' : index === 1 ? '📧' : '📞'}
-                  </span>
-                  <div className={styles.contactInfo}>
-                    <div className={styles.contactLabel}>{contact.label}</div>
-                    <a 
-                      href={contactLinks[index]} 
-                      className={styles.contactValue}
-                      target={contactLinks[index].startsWith('http') ? '_blank' : undefined}
-                      rel={contactLinks[index].startsWith('http') ? 'noopener noreferrer' : undefined}
-                    >
-                      {contact.value}
-                    </a>
+            <div className={`${styles.collapsibleContent} ${openSections.contacts ? styles.contentOpen : ''}`}>
+              <div className={styles.contactsList}>
+                {contacts.map((contact, index) => (
+                  <div key={index} className={styles.contactItem}>
+                    <span className={styles.contactIcon}>
+                      {index === 0 ? '📱' : index === 1 ? '📧' : '📞'}
+                    </span>
+                    <div className={styles.contactInfo}>
+                      <div className={styles.contactLabel}>{contact.label}</div>
+                      <a 
+                        href={contactLinks[index]} 
+                        className={styles.contactValue}
+                        target={contactLinks[index].startsWith('http') ? '_blank' : undefined}
+                        rel={contactLinks[index].startsWith('http') ? 'noopener noreferrer' : undefined}
+                      >
+                        {contact.value}
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

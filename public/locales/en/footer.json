@@ -31,7 +31,7 @@
         },
         {
           "label": "Email",
-          "value": "hello@webstudio.com"
+          "value": "hello@webvision.com"
         },
         {
           "label": "Phone",
@@ -41,7 +41,7 @@
     }
   },
   "bottom": {
-    "copyright": "WebStudio.",
+    "copyright": "WebVision.",
     "links": [
       "Privacy Policy",
       "Terms of Service"

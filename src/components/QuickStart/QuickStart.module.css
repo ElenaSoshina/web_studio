@@ -720,7 +720,24 @@
 
 @media (max-width: 768px) {
   .quickStartSection {
-    padding: 80px 0;
+    padding: 60px 0;
+  }
+  
+  .sectionHeader {
+    margin-bottom: 50px;
+  }
+  
+  .sectionTitle {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+  
+  .sectionSubtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+  
+  .subsectionTitle {
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    margin-bottom: 30px;
   }
   
   .tabs {
@@ -729,6 +746,27 @@
   
   .clientGrid {
     grid-template-columns: 1fr;
+  }
+  
+  .clientCard {
+    padding: 20px;
+  }
+  
+  .clientTitle {
+    font-size: 1.2rem;
+  }
+  
+  .packageCard {
+    padding: 30px 20px;
+    min-height: auto;
+  }
+  
+  .packageTitle {
+    font-size: 1.3rem;
+  }
+  
+  .packagePrice {
+    font-size: 2rem;
   }
   
   .processStep {
@@ -752,11 +790,117 @@
 }
 
 @media (max-width: 480px) {
+  .quickStartSection {
+    padding: 40px 0;
+  }
+  
   .sectionHeader {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+  }
+  
+  .sectionTitle {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  }
+  
+  .sectionSubtitle {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  }
+  
+  .subsectionTitle {
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    margin-bottom: 25px;
+  }
+  
+  .clientCard {
+    padding: 15px;
+    gap: 15px;
+  }
+  
+  .clientIcon {
+    font-size: 2rem;
+  }
+  
+  .clientTitle {
+    font-size: 1.1rem;
+  }
+  
+  .packageCard {
+    padding: 25px 15px;
+  }
+  
+  .packageTitle {
+    font-size: 1.2rem;
+  }
+  
+  .packagePrice {
+    font-size: 1.8rem;
   }
   
   .packagesContent {
-    gap: 60px;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 380px) {
+  .quickStartSection {
+    padding: 30px 0;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  .sectionHeader {
+    margin-bottom: 30px;
+  }
+  
+  .sectionTitle {
+    font-size: clamp(27px, 3vw, 2.2rem);
+  }
+  
+  .sectionSubtitle {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+  }
+  
+  .subsectionTitle {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    margin-bottom: 20px;
+  }
+  
+  .clientCard {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .clientIcon {
+    font-size: 1.8rem;
+  }
+  
+  .clientTitle {
+    font-size: 1rem;
+  }
+  
+  .clientDescription {
+    font-size: 0.9rem;
+  }
+  
+  .packageCard {
+    padding: 20px 12px;
+  }
+  
+  .packageTitle {
+    font-size: 1.1rem;
+  }
+  
+  .packagePrice {
+    font-size: 1.6rem;
+  }
+  
+  .featureText {
+    font-size: 0.9rem;
+  }
+  
+  .packagesContent {
+    gap: 30px;
   }
 } 

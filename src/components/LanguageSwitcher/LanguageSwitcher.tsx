@@ -6,8 +6,8 @@ const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
 
   const languages = [
-    { code: 'ru', name: 'RU', flag: '🇷🇺' },
-    { code: 'en', name: 'EN', flag: '🇺🇸' },
+    { code: 'ru', name: 'RU', flag: 'ru' },
+    { code: 'en', name: 'EN', flag: 'en' },
   ];
 
   const changeLanguage = (lng: string) => {
@@ -26,7 +26,6 @@ const LanguageSwitcher: React.FC = () => {
           title={`Switch to ${lang.name}`}
         >
           <span className={styles.flag}>{lang.flag}</span>
-          <span className={styles.code}>{lang.name}</span>
         </button>
       ))}
     </div>

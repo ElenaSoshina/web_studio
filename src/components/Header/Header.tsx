@@ -39,7 +39,7 @@ const Header: React.FC = () => {
           style={{ cursor: 'pointer' }}
         >
           <span className={styles.bracket}>{'<'}</span>
-          <span className={styles.logoText}>WebStudio</span>
+          <span className={styles.logoText}>WebVision</span>
           <span className={styles.bracket}>{'/>'}</span>
         </div>
 
@@ -71,7 +71,7 @@ const Header: React.FC = () => {
           </button>
         </nav>
 
-        {/* Контакты и CTA */}
+        {/* Контакты и CTA для десктопа */}
         <div className={styles.headerActions}>
           {/* Переключатель языка */}
           <LanguageSwitcher />
@@ -95,15 +95,23 @@ const Header: React.FC = () => {
           </button>
         </div>
 
-        {/* Мобильное меню */}
-        <button 
-          className={`${styles.mobileMenuBtn} ${isMobileMenuOpen ? styles.active : ''}`}
-          onClick={toggleMobileMenu}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        {/* Мобильные элементы справа */}
+        <div className={styles.mobileHeaderRight}>
+          {/* Переключатель языка для мобильной версии */}
+          <div className={styles.mobileLangSwitcher}>
+            <LanguageSwitcher />
+          </div>
+          
+          {/* Мобильное меню */}
+          <button 
+            className={`${styles.mobileMenuBtn} ${isMobileMenuOpen ? styles.active : ''}`}
+            onClick={toggleMobileMenu}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
       </div>
 
       {/* Мобильная навигация */}
@@ -134,9 +142,6 @@ const Header: React.FC = () => {
         </button>
         
         <div className={styles.mobileActions}>
-          {/* Переключатель языка для мобильной версии */}
-          <LanguageSwitcher />
-          
           <a 
             href="https://t.me/your_username" 
             target="_blank" 

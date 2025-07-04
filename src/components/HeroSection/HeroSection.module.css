@@ -616,6 +616,7 @@
     grid-template-columns: 1fr;
     gap: 60px;
     text-align: center;
+    margin-top: 130px;
   }
   
   .hologram {
@@ -1249,9 +1250,9 @@
 
 @media (max-width: 768px) {
   .animatedCards {
-    grid-template-columns: 1fr;
-    max-width: 300px;
-    gap: 15px;
+    grid-template-columns: 1fr 1fr;
+    max-width: 350px;
+    gap: 12px;
   }
   
   .statCard {
@@ -1269,10 +1270,27 @@
 
 @media (max-width: 480px) {
   .animatedCards {
-    max-width: 250px;
+    max-width: 280px;
+    gap: 10px;
   }
   
   .statCard {
     padding: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .animatedCards {
+    grid-template-columns: 1fr;
+    max-width: 240px;
+    gap: 8px;
+  }
+  
+  .statCard {
+    padding: 10px;
+  }
+  
+  .cardNumber {
+    font-size: 1.3rem;
   }
 }

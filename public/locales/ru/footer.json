@@ -31,7 +31,7 @@
         },
         {
           "label": "Email",
-          "value": "hello@webstudio.ru"
+          "value": "hello@webvision.ru"
         },
         {
           "label": "Телефон",
@@ -41,7 +41,7 @@
     }
   },
   "bottom": {
-    "copyright": "WebStudio.",
+    "copyright": "WebVision.",
     "links": [
       "Политика конфиденциальности",
       "Пользовательское соглашение"

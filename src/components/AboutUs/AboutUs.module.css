@@ -379,7 +379,7 @@
   backdrop-filter: blur(20px);
   transition: all 0.3s ease;
   text-align: center;
-  min-height: 280px;
+  min-height: 240px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -566,21 +566,110 @@
   
   .processFlow {
     grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  
+  .workStep {
+    min-height: 220px;
+    padding: 22px 18px;
+  }
+  
+  .stepHeader {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .workStep .stepNumber {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+  
+  .stepIcon {
+    font-size: 2.2rem;
+  }
+  
+  .stepTitle {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+  
+  .stepDescription {
+    font-size: 0.87rem;
   }
 }
 
 @media (max-width: 768px) {
   .aboutSection {
-    padding: 80px 0;
+    padding: 60px 0;
+  }
+  
+  .sectionHeader {
+    margin-bottom: 50px;
+  }
+  
+  .sectionTitle {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+  
+  .sectionSubtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+  
+  .subsectionTitle {
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
   }
   
   .serviceTabs {
     flex-direction: column;
     align-items: center;
+    gap: 15px;
+  }
+  
+  .serviceTab {
+    width: 100%;
+    max-width: 300px;
+    padding: 15px 25px;
+    font-size: 0.9rem;
+  }
+  
+  .serviceInfo,
+  .processSteps {
+    padding: 30px 25px;
   }
   
   .processFlow {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .workStep {
+    min-height: 200px;
+    padding: 20px 15px;
+  }
+  
+  .stepHeader {
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .workStep .stepNumber {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .stepIcon {
+    font-size: 2rem;
+  }
+  
+  .stepTitle {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  
+  .stepDescription {
+    font-size: 0.85rem;
   }
   
   .featuresList {
@@ -589,13 +678,42 @@
   
   .servicesSection,
   .processSection {
-    margin-bottom: 80px;
+    margin-bottom: 60px;
+  }
+  
+  .serviceDescription h4 {
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .aboutSection {
+    padding: 40px 0;
+  }
+  
   .sectionHeader {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+  }
+  
+  .sectionTitle {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  }
+  
+  .sectionSubtitle {
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  }
+  
+  .subsectionTitle {
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  }
+  
+  .serviceTabs {
+    gap: 12px;
+  }
+  
+  .serviceTab {
+    padding: 12px 20px;
+    font-size: 0.85rem;
   }
   
   .serviceInfo,
@@ -606,9 +724,138 @@
   
   .processFlow {
     grid-template-columns: 1fr;
+    gap: 15px;
   }
   
   .workStep {
-    min-height: 200px;
+    min-height: 160px;
+    padding: 18px 15px;
+  }
+  
+  .stepHeader {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .workStep .stepNumber {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+  
+  .stepIcon {
+    font-size: 1.8rem;
+  }
+  
+  .stepTitle {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+  
+  .stepDescription {
+    font-size: 0.8rem;
+  }
+  
+  .serviceDescription h4 {
+    font-size: 1rem;
+  }
+  
+  .feature {
+    font-size: 0.9rem;
+  }
+  
+  .servicesSection,
+  .processSection {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 360px) {
+  .aboutSection {
+    padding: 30px 0;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  .sectionHeader {
+    margin-bottom: 30px;
+  }
+  
+  .sectionTitle {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+  
+  .sectionSubtitle {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+  }
+  
+  .subsectionTitle {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+  }
+  
+  .serviceTabs {
+    gap: 10px;
+  }
+  
+  .serviceTab {
+    padding: 10px 15px;
+    font-size: 0.8rem;
+  }
+  
+  .serviceInfo,
+  .processSteps {
+    padding: 20px 15px;
+  }
+  
+  .processFlow {
+    gap: 12px;
+  }
+  
+  .workStep {
+    padding: 15px 12px;
+    min-height: 140px;
+  }
+  
+  .stepHeader {
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  
+  .workStep .stepNumber {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+  
+  .stepIcon {
+    font-size: 1.5rem;
+  }
+  
+  .stepTitle {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
+  
+  .stepDescription {
+    font-size: 0.75rem;
+  }
+  
+  .serviceDescription h4 {
+    font-size: 0.95rem;
+  }
+  
+  .serviceFeatures h5 {
+    font-size: 1rem;
+  }
+  
+  .feature {
+    font-size: 0.85rem;
+  }
+  
+  .servicesSection,
+  .processSection {
+    margin-bottom: 30px;
   }
 } 
