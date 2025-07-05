@@ -71,6 +71,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             BASE_PATH=/
+            EMAILJS_SERVICE_ID=${{ secrets.EMAILJS_SERVICE_ID }}
+            EMAILJS_TEMPLATE_ID=${{ secrets.EMAILJS_TEMPLATE_ID }}
+            EMAILJS_PUBLIC_KEY=${{ secrets.EMAILJS_PUBLIC_KEY }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -85,6 +88,9 @@ jobs:
           tags: elenasoshina/web_studio:github-pages
           build-args: |
             BASE_PATH=/web_studio/
+            EMAILJS_SERVICE_ID=${{ secrets.EMAILJS_SERVICE_ID }}
+            EMAILJS_TEMPLATE_ID=${{ secrets.EMAILJS_TEMPLATE_ID }}
+            EMAILJS_PUBLIC_KEY=${{ secrets.EMAILJS_PUBLIC_KEY }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -119,6 +125,9 @@ jobs:
         run: npm run build
         env:
           VITE_BASE_PATH: /web_studio/
+          VITE_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
+          VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
 
       - name: 📋 Setup Pages
         uses: actions/configure-pages@v4

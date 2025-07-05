@@ -3,9 +3,17 @@ FROM node:20-alpine AS builder
 
 # Принимаем build argument
 ARG BASE_PATH=/
+# Принимаем переменные окружения для EmailJS
+ARG EMAILJS_SERVICE_ID
+ARG EMAILJS_TEMPLATE_ID
+ARG EMAILJS_PUBLIC_KEY
 
 # Устанавливаем переменную окружения для Vite сразу
 ENV VITE_BASE_PATH=${BASE_PATH}
+# Устанавливаем переменные окружения для EmailJS
+ENV VITE_EMAILJS_SERVICE_ID=${EMAILJS_SERVICE_ID}
+ENV VITE_EMAILJS_TEMPLATE_ID=${EMAILJS_TEMPLATE_ID}
+ENV VITE_EMAILJS_PUBLIC_KEY=${EMAILJS_PUBLIC_KEY}
 
 # Устанавливаем рабочую директорию
 WORKDIR /app

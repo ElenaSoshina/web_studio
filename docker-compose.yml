@@ -13,6 +13,8 @@ services:
       - /app/node_modules
     environment:
       - VITE_BASE_PATH=/
+      # Для локальной разработки используем переменные из файла .env
+      # Если они не будут настроены, форма будет работать только локально с .env файлом
 
   # Production локально
   prod:
@@ -21,6 +23,10 @@ services:
       target: production
       args:
         BASE_PATH: /
+        # Для локальной сборки указываем эти значения в .env.local или передаем при запуске
+        EMAILJS_SERVICE_ID: ${EMAILJS_SERVICE_ID}
+        EMAILJS_TEMPLATE_ID: ${EMAILJS_TEMPLATE_ID}
+        EMAILJS_PUBLIC_KEY: ${EMAILJS_PUBLIC_KEY}
     ports:
       - "8080:80"
 
@@ -31,6 +37,10 @@ services:
       target: production
       args:
         BASE_PATH: /web_studio/
+        # Для локальной сборки указываем эти значения в .env.local или передаем при запуске
+        EMAILJS_SERVICE_ID: ${EMAILJS_SERVICE_ID}
+        EMAILJS_TEMPLATE_ID: ${EMAILJS_TEMPLATE_ID}
+        EMAILJS_PUBLIC_KEY: ${EMAILJS_PUBLIC_KEY}
     ports:
       - "8081:80"
 
@@ -42,6 +52,9 @@ services:
       target: production
       args:
         BASE_PATH: /
+        EMAILJS_SERVICE_ID: ${EMAILJS_SERVICE_ID}
+        EMAILJS_TEMPLATE_ID: ${EMAILJS_TEMPLATE_ID}
+        EMAILJS_PUBLIC_KEY: ${EMAILJS_PUBLIC_KEY}
     ports:
       - "80:80"
     restart: unless-stopped
