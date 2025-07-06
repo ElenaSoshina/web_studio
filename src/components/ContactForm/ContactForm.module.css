@@ -476,6 +476,95 @@
   }
 }
 
+/* Специальные стили для планшетов */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .contactSection {
+    padding: 80px 0;
+  }
+  
+  .container {
+    padding: 0 30px;
+    max-width: 900px;
+  }
+  
+  .sectionHeader {
+    margin-bottom: 50px;
+  }
+  
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+  
+  .sectionSubtitle {
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .formCard {
+    max-width: 650px;
+    padding: 40px;
+  }
+  
+  .formTitle {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .formRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
+  
+  .inputGroup {
+    gap: 10px;
+  }
+  
+  .inputLabel {
+    font-size: 0.85rem;
+  }
+  
+  .labelIcon {
+    font-size: 1.1rem;
+  }
+  
+  .formInput,
+  .formTextarea {
+    padding: 14px 18px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+  
+  .formTextarea {
+    min-height: 120px;
+  }
+  
+  .submitBtn {
+    padding: 14px 30px;
+    font-size: 0.95rem;
+    min-width: 200px;
+    margin-top: 15px;
+  }
+  
+  /* Стили для модального окна на планшетах */
+  .statusPopup {
+    max-width: 450px;
+    padding: 35px;
+  }
+  
+  .statusIcon {
+    font-size: 4rem;
+  }
+  
+  .statusTitle {
+    font-size: 1.6rem;
+  }
+  
+  .errorList {
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .contactSection {
     padding: 60px 0;
@@ -632,5 +721,296 @@
   .errorMessage {
     padding: 12px 16px;
     font-size: 0.85rem;
+  }
+}
+
+/* Стили для модального окна */
+.statusOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 20, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.statusPopup {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  animation: scaleIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: rgba(0, 20, 40, 0.8);
+  border: 2px solid rgba(0, 255, 255, 0.3);
+}
+
+/* Индикатор закрытия */
+.statusPopup::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  border-radius: 0 0 20px 20px;
+  width: 100%;
+  transform-origin: left;
+  animation: countdown 3s linear forwards;
+}
+
+.successPopup {
+  border: 2px solid rgba(0, 255, 255, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+}
+
+.successPopup::after {
+  background: linear-gradient(90deg, #00ffff, #0080ff);
+}
+
+.errorPopup {
+  border: 2px solid rgba(255, 0, 255, 0.4);
+  box-shadow: 0 20px 40px rgba(255, 0, 255, 0.2);
+}
+
+.errorPopup::after {
+  background: linear-gradient(90deg, #ff00ff, #cc0088);
+}
+
+.closePopupBtn {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.closePopupBtn:hover {
+  transform: scale(1.1);
+}
+
+.statusContent {
+  text-align: center;
+}
+
+.statusIcon {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  display: inline-block;
+  animation: bounce 0.6s ease-in-out;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.successPopup .statusIcon {
+  color: #00ffff;
+}
+
+.errorPopup .statusIcon {
+  color: #ff00ff;
+}
+
+.statusTitle {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.errorList {
+  list-style-type: none;
+  padding: 0;
+  margin: 15px 0 0;
+  text-align: left;
+  font-size: 0.95rem;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 0, 255, 0.3);
+}
+
+.errorList li {
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.errorList li::before {
+  content: '•';
+  position: absolute;
+  left: 5px;
+  color: #ff6b6b;
+}
+
+/* Анимации для модального окна */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes countdown {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* Медиа-запросы для модального окна */
+@media (max-width: 480px) {
+  .statusPopup {
+    max-width: 85%;
+    padding: 25px 20px;
+  }
+  
+  .statusTitle {
+    font-size: 1.3rem;
+  }
+  
+  .statusIcon {
+    font-size: 2.5rem;
+  }
+}
+
+/* Специальные стили для iPad Air */
+@media screen and (min-width: 810px) and (max-width: 834px) {
+  .contactSection {
+    padding: 90px 0 70px;
+  }
+  
+  .container {
+    padding: 0 35px;
+    max-width: 800px;
+  }
+  
+  .sectionHeader {
+    margin-bottom: 55px;
+  }
+  
+  .sectionTitle {
+    font-size: 2.7rem;
+  }
+  
+  .sectionSubtitle {
+    font-size: 1.18rem;
+    max-width: 650px;
+    margin: 0 auto 15px;
+  }
+  
+  .formCard {
+    max-width: 700px;
+    padding: 45px;
+    border-radius: 22px;
+  }
+  
+  .formTitle {
+    font-size: 1.6rem;
+    margin-bottom: 35px;
+  }
+  
+  .formRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  
+  .inputGroup {
+    gap: 12px;
+    margin-bottom: 5px;
+  }
+  
+  .inputLabel {
+    font-size: 0.9rem;
+  }
+  
+  .labelIcon {
+    font-size: 1.15rem;
+  }
+  
+  .formInput,
+  .formTextarea {
+    padding: 16px 20px;
+    font-size: 1rem;
+    border-radius: 12px;
+    border-width: 2px;
+  }
+  
+  .formTextarea {
+    min-height: 140px;
+  }
+  
+  .submitBtn {
+    padding: 16px 35px;
+    font-size: 1rem;
+    min-width: 220px;
+    margin-top: 20px;
+    border-radius: 12px;
+  }
+  
+  /* Стили для модального окна на iPad Air */
+  .statusPopup {
+    max-width: 480px;
+    padding: 40px;
+    border-radius: 24px;
+  }
+  
+  .statusIcon {
+    font-size: 4.2rem;
+  }
+  
+  .statusTitle {
+    font-size: 1.7rem;
+  }
+  
+  .errorList {
+    font-size: 1.05rem;
+    padding: 18px;
   }
 } 

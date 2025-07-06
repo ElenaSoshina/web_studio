@@ -614,20 +614,135 @@
 @media (max-width: 1024px) {
   .heroContent {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 40px;
+    padding: 40px 30px;
     text-align: center;
-    margin-top: 130px;
+  }
+
+  .hologram {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 auto 40px;
+    max-width: 600px;
+  }
+
+  .heroButtons {
+    justify-content: center;
+  }
+
+  .techIcons {
+    justify-content: center;
+  }
+
+  .orb1 {
+    width: 250px;
+    height: 250px;
+    top: 5%;
+    left: 5%;
+  }
+
+  .orb2 {
+    width: 180px;
+    height: 180px;
+    top: 40%;
+    right: 10%;
+  }
+
+  .orb3 {
+    width: 120px;
+    height: 120px;
+    bottom: 10%;
+    left: 50%;
+  }
+}
+
+/* Специальные стили для планшетов */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .heroSection {
+    min-height: auto;
+    padding: 120px 0 80px;
   }
   
-  .hologram {
-    width: 300px;
-    height: 400px;
-    padding: 30px;
+  .heroContent {
+    padding: 0 40px;
+    gap: 60px;
+  }
+  
+  .heroTitle {
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    margin-bottom: 25px;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.1rem;
+    margin: 0 auto 35px;
+    max-width: 500px;
   }
   
   .statsGrid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+    max-width: 650px;
+  }
+  
+  .stat {
+    padding: 18px;
+  }
+  
+  .statValue {
+    font-size: 2.2rem;
+  }
+  
+  .heroButtons {
+    flex-wrap: nowrap;
     gap: 20px;
+  }
+  
+  .btn {
+    padding: 14px 26px;
+    font-size: 0.95rem;
+    min-width: 180px;
+  }
+  
+  .hologram {
+    height: 360px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .codeBlock {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  
+  .techIcons {
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+  }
+  
+  .techIcon {
+    width: 60px;
+    height: 60px;
+    padding: 12px;
+  }
+  
+  .animatedCards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 30px auto 0;
+    max-width: 700px;
+  }
+  
+  .statCard {
+    min-height: 180px;
+    padding: 20px;
   }
 }
 
@@ -1292,5 +1407,97 @@
   
   .cardNumber {
     font-size: 1.3rem;
+  }
+}
+
+/* Специальные стили для iPad Air */
+@media screen and (min-width: 760px) and (max-width: 834px) {
+  .heroSection {
+    min-height: auto;
+    padding: 100px 0 70px;
+  }
+  
+  .heroContent {
+    padding: 0 40px;
+    gap: 50px;
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  /* Стили для заголовка */
+  .heroTitle {
+    font-size: 3.1rem;  /* Уменьшаем размер текста */
+    line-height: 1.15;  /* Уменьшаем межстрочный интервал */
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Разбиваем заголовок на отдельные строки */
+  .titleLine1,
+  .titleLine2,
+  .titleLine3 {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  /* Отдельная стилизация для слова "ЦИФРОВЫЕ" */
+  .neonText {
+    font-size: 3.1rem;  /* Соответствие размеру заголовка */
+    color: #00c1ff;
+    text-shadow: 
+      0 0 5px #ffffff,
+      0 0 10px #ffffff,
+      0 0 15px #ffffff;
+    padding: 0 5px;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin: 0 auto 35px;
+    max-width: 650px;
+  }
+  
+  /* Стили для блока карточек статистики */
+  .animatedCards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin: 40px auto 0;
+    max-width: 700px;
+  }
+  
+  .statCard {
+    min-height: 200px;
+    padding: 25px;
+    border-radius: 20px;
+  }
+  
+  .cardIcon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .cardNumber {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .cardLabel {
+    font-size: 1rem;
+  }
+  
+  /* Стили для кнопок */
+  .heroButtons {
+    justify-content: center;
+    gap: 25px;
+    margin-top: 40px;
+  }
+  
+  .btn {
+    padding: 16px 30px;
+    font-size: 1.05rem;
+    min-width: 220px;
   }
 }

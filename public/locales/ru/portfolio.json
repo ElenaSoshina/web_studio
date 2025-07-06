@@ -28,6 +28,9 @@
       ]
     }
   },
+  "hints": {
+    "tapToView": "Нажмите на проект для просмотра опций"
+  },
   "projects": {
     "celebrityStrike": {
       "title": "Celebrity Strike Shop",

@@ -22,6 +22,9 @@ const Portfolio: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const [deviceType, setDeviceType] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
+  const [activeCardId, setActiveCardId] = useState<number | null>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   const projects: Project[] = [
     {
@@ -82,19 +85,39 @@ const Portfolio: React.FC = () => {
     setSelectedProject(null);
   };
 
-  // Intersection Observer для отслеживания видимости секции
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setDeviceType('mobile');
+      } else if (width >= 768 && width <= 1024) {
+        setDeviceType('tablet');
+      } else {
+        setDeviceType('desktop');
+      }
+    };
+
+    const checkTouchDevice = () => {
+      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+
+    handleResize();
+    checkTouchDevice();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Отключаем observer после первого срабатывания
           observer.unobserve(entry.target);
         }
       },
       {
-        threshold: 0.1, // Анимация запустится когда 10% секции будет видно
-        rootMargin: '0px 0px -50px 0px' // Добавляем небольшой отступ снизу
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
       }
     );
 
@@ -109,6 +132,29 @@ const Portfolio: React.FC = () => {
     };
   }, []);
 
+  const handleCardClick = (project: Project, event: React.MouseEvent) => {
+    if (!isTouchDevice || deviceType === 'desktop') return;
+    
+    event.stopPropagation();
+    
+    if (activeCardId === project.id) {
+      setActiveCardId(null);
+    } else {
+      setActiveCardId(project.id);
+    }
+  };
+
+  useEffect(() => {
+    const handleDocumentClick = () => {
+      if (activeCardId !== null) {
+        setActiveCardId(null);
+      }
+    };
+
+    document.addEventListener('click', handleDocumentClick);
+    return () => document.removeEventListener('click', handleDocumentClick);
+  }, [activeCardId]);
+
   return (
     <section 
       ref={sectionRef}
@@ -116,7 +162,6 @@ const Portfolio: React.FC = () => {
       id="portfolio"
     >
       <div className={styles.container}>
-        {/* Заголовок секции */}
         <div className={`${styles.sectionHeader} ${isVisible ? styles.headerVisible : styles.headerHidden}`}>
           <h2 className={styles.sectionTitle}>
             <span className={styles.bracket}>{'<'}</span>
@@ -128,7 +173,6 @@ const Portfolio: React.FC = () => {
           </p>
         </div>
 
-        {/* Фильтры */}
         <div className={`${styles.filters} ${isVisible ? styles.filtersVisible : styles.filtersHidden}`}>
           <button 
             className={`${styles.filterBtn} ${activeFilter === 'all' ? styles.active : ''}`}
@@ -150,29 +194,38 @@ const Portfolio: React.FC = () => {
           </button>
         </div>
 
-        {/* Сетка проектов */}
         <div className={`${styles.projectsGrid} ${isVisible ? styles.gridVisible : styles.gridHidden}`}>
           {filteredProjects.map((project, index) => (
             <div 
               key={project.id} 
-              className={`${styles.projectCard} ${isVisible ? styles.cardVisible : styles.cardHidden}`}
+              className={`${styles.projectCard} ${isVisible ? styles.cardVisible : styles.cardHidden} ${activeCardId === project.id ? styles.activeCard : ''}`}
               data-category={project.category}
               style={{
                 animationDelay: isVisible ? `${0.2 + index * 0.1}s` : '0s'
               }}
+              onClick={(e) => handleCardClick(project, e)}
             >
               <div className={styles.projectImage}>
                 <img src={project.image} alt={project.title} />
-                <div className={styles.projectOverlay}>
+                <div className={`${styles.projectOverlay} ${activeCardId === project.id ? styles.activeOverlay : ''}`}>
                   <button 
                     className={styles.demoBtn}
-                    onClick={() => openDemo(project)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openDemo(project);
+                    }}
                   >
                     <span>🚀</span>
                     {t('buttons.demo')}
                   </button>
                   {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.liveBtn}>
+                    <a 
+                      href={project.liveUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className={styles.liveBtn}
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       <span>{project.category === 'telegram' ? '📱' : '🌐'}</span>
                       {project.category === 'telegram' ? t('buttons.openTelegram') : t('buttons.openWebsite')}
                     </a>
@@ -198,7 +251,6 @@ const Portfolio: React.FC = () => {
         </div>
       </div>
 
-      {/* Modal для демо */}
       {selectedProject && (
         <div className={styles.modal} onClick={closeDemo}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
@@ -210,7 +262,7 @@ const Portfolio: React.FC = () => {
             <div className={styles.modalBody}>
               {selectedProject.category === 'telegram' ? (
                 <div className={styles.telegramDemo}>
-                  <div className={styles.phoneFrame}>
+                  <div className={`${styles.phoneFrame} ${styles[`phoneFrame${deviceType === 'desktop' ? 'Desktop' : deviceType === 'tablet' ? 'Tablet' : 'Mobile'}`]}`}>
                     <div className={styles.phoneScreen}>
                       <iframe 
                         src={selectedProject.demoUrl} 
@@ -222,7 +274,7 @@ const Portfolio: React.FC = () => {
                   <div className={styles.demoInfo}>
                     <h4>{t('modal.howToTest')}</h4>
                     <ol>
-                      {t('modal.steps.telegram', { returnObjects: true }).map((step: string, index: number) => (
+                      {(t('modal.steps.telegram', { returnObjects: true }) as string[]).map((step: string, index: number) => (
                         <li key={index}>{step}</li>
                       ))}
                     </ol>
@@ -236,7 +288,7 @@ const Portfolio: React.FC = () => {
                   <iframe 
                     src={selectedProject.demoUrl} 
                     title={`${selectedProject.title} Demo`}
-                    className={styles.websiteDemoFrame}
+                    className={`${styles.websiteDemoFrame} ${styles[`demoFrame${deviceType === 'desktop' ? 'Desktop' : deviceType === 'tablet' ? 'Tablet' : 'Mobile'}`]}`}
                   ></iframe>
                 </div>
               )}

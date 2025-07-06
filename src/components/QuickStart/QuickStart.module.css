@@ -709,8 +709,8 @@
   }
   
   .packagesGrid {
-    grid-template-columns: 1fr;
-    max-width: 500px;
+    grid-template-columns: 1fr 1fr;
+    max-width: 775px;
   }
   
   .packageCard {

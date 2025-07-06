@@ -315,16 +315,6 @@
 
 /* Адаптивность */
 @media (max-width: 1024px) {
-  .nav {
-    gap: 20px;
-  }
-  
-  .navLink {
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 768px) {
   .nav,
   .headerActions {
     display: none;
@@ -334,21 +324,35 @@
     display: flex;
   }
 
-  .mobileLangSwitcher {
-    /* Делаем переключатель языка более компактным на мобильных */
-    margin-right: 5px;
-  }
-
   .mobileMenuBtn {
     display: flex;
   }
   
+  .container {
+    height: 65px;
+  }
+  
+  .logo {
+    font-size: 1.4rem;
+  }
+  
+  .mobileLangSwitcher {
+    /* Делаем переключатель языка более компактным */
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 768px) {
   .container {
     height: 60px;
   }
   
   .logo {
     font-size: 1.3rem;
+  }
+  
+  .mobileLangSwitcher {
+    margin-right: 5px;
   }
 }
 
@@ -385,5 +389,81 @@
   .mobileActions > * {
     width: 100%;
     text-align: center;
+  }
+}
+
+/* Специальные стили для iPad Air и других планшетов */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .header {
+    height: 70px;
+  }
+  
+  .container {
+    padding: 0 25px;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .mobileHeaderRight {
+    gap: 15px;
+  }
+  
+  .mobileMenu {
+    padding: 25px;
+  }
+  
+  .mobileNavLink {
+    font-size: 18px;
+    padding: 18px 0;
+  }
+  
+  .mobileActions {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 25px;
+    padding-top: 25px;
+  }
+  
+  .mobileTelegramBtn,
+  .mobileCtaBtn {
+    padding: 14px 20px;
+    font-size: 16px;
+  }
+}
+
+/* Специальные стили для iPad Air */
+@media screen and (min-width: 810px) and (max-width: 834px) {
+  .container {
+    padding: 0 30px;
+  }
+  
+  .logo {
+    font-size: 1.6rem;
+  }
+  
+  .mobileHeaderRight {
+    gap: 18px;
+  }
+  
+  .mobileMenuBtn {
+    width: 32px;
+    height: 26px;
+  }
+  
+  .mobileMenu {
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+  }
+  
+  .mobileNavLink {
+    font-size: 18px;
+    padding: 18px 0;
+  }
+  
+  .mobileTelegramBtn,
+  .mobileCtaBtn {
+    font-size: 16px;
   }
 }

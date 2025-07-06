@@ -89,6 +89,24 @@ const ContactForm: React.FC = () => {
     };
   }, []);
 
+  // Эффект для автоматического закрытия модального окна через 3 секунды
+  useEffect(() => {
+    let timer: number | undefined;
+    
+    if (submitStatus !== 'idle') {
+      timer = window.setTimeout(() => {
+        setSubmitStatus('idle');
+        setValidationErrors([]);
+      }, 3000);
+    }
+    
+    return () => {
+      if (timer) {
+        window.clearTimeout(timer);
+      }
+    };
+  }, [submitStatus]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -131,15 +149,57 @@ const ContactForm: React.FC = () => {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
-      setTimeout(() => {
-        setSubmitStatus('idle');
-        setValidationErrors([]);
-      }, 5000);
     }
+  };
+  
+  // Обработчик закрытия модального окна
+  const handleClosePopup = () => {
+    setSubmitStatus('idle');
+    setValidationErrors([]);
   };
 
   return (
     <section className={styles.contactSection} id="contacts">
+      {/* Модальное окно для отображения результата отправки */}
+      {submitStatus !== 'idle' && (
+        <div className={styles.statusOverlay}>
+          <div 
+            className={`${styles.statusPopup} ${
+              submitStatus === 'success' ? styles.successPopup : styles.errorPopup
+            }`}
+          >
+            <button 
+              className={styles.closePopupBtn} 
+              onClick={handleClosePopup}
+              aria-label="Закрыть"
+            >
+              ×
+            </button>
+            {submitStatus === 'success' && (
+              <div className={styles.statusContent}>
+                <div className={styles.statusIcon}>✅</div>
+                <div className={styles.statusTitle}>{t('form.messages.success')}</div>
+              </div>
+            )}
+            {submitStatus === 'error' && (
+              <div className={styles.statusContent}>
+                <div className={styles.statusIcon}>❌</div>
+                <div className={styles.statusTitle}>
+                  {validationErrors.length > 0 ? 'Ошибки валидации:' : t('form.messages.error')}
+                </div>
+                {validationErrors.length > 0 && (
+                  <ul className={styles.errorList}>
+                    {validationErrors.map((error, index) => (
+                      <li key={index}>{error}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Анимированный фон */}
       <div className={styles.futuristicBackground}>
         <div className={styles.gridPattern}></div>
@@ -264,31 +324,6 @@ const ContactForm: React.FC = () => {
                   </>
                 )}
               </button>
-
-              {submitStatus === 'success' && (
-                <div className={`${styles.successMessage} ${styles.messageVisible}`}>
-                  <span>✅</span>
-                  {t('form.messages.success')}
-                </div>
-              )}
-
-              {submitStatus === 'error' && (
-                <div className={`${styles.errorMessage} ${styles.messageVisible}`}>
-                  <span>❌</span>
-                  {validationErrors.length > 0 ? (
-                    <div>
-                      <div>Ошибки валидации:</div>
-                      {validationErrors.map((error, index) => (
-                        <div key={index} style={{ fontSize: '0.9em', marginTop: '5px' }}>
-                          • {error}
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    t('form.messages.error')
-                  )}
-                </div>
-              )}
             </form>
           </div>
         </div>

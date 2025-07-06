@@ -163,6 +163,7 @@
   overflow: hidden;
   backdrop-filter: blur(20px);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .cardHidden {
@@ -209,6 +210,7 @@
   transform: scale(1.05);
 }
 
+/* Проектные кнопки - улучшение для планшетов */
 .projectOverlay {
   position: absolute;
   top: 0;
@@ -224,10 +226,69 @@
   transition: all 0.3s ease;
   backdrop-filter: blur(2px);
   z-index: 3;
+  padding: 20px;
 }
 
 .projectCard:hover .projectOverlay {
   opacity: 1;
+}
+
+/* Улучшение для touch-устройств */
+@media (hover: none) and (pointer: coarse) {
+  .projectOverlay {
+    opacity: 0;
+    visibility: hidden;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .activeOverlay {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .demoBtn, 
+  .liveBtn {
+    width: 75%;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    transform: scale(1);
+  }
+  
+  /* Анимация появления кнопок */
+  .activeOverlay .demoBtn,
+  .activeOverlay .liveBtn {
+    animation: buttonAppear 0.3s ease forwards;
+  }
+  
+  .activeOverlay .demoBtn {
+    animation-delay: 0.1s;
+  }
+  
+  .activeOverlay .liveBtn {
+    animation-delay: 0.2s;
+  }
+  
+  @keyframes buttonAppear {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+/* Стили для десктопа (hover) */
+@media (hover: hover) and (pointer: fine) {
+  .projectCard:hover .projectOverlay {
+    opacity: 1;
+  }
 }
 
 .demoBtn,
@@ -470,15 +531,17 @@
 
 .projectLinks {
   display: flex;
-  gap: 20px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
 }
 
 .linkBtn {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 12px 24px;
+  padding: 14px 24px;
   background: rgba(0, 255, 255, 0.1);
   border: 1px solid rgba(0, 255, 255, 0.3);
   border-radius: 8px;
@@ -486,6 +549,8 @@
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
+  width: 80%;
+  max-width: 300px;
 }
 
 .linkBtn:hover {
@@ -580,6 +645,163 @@
   }
 }
 
+/* Специальные стили для планшетов */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .portfolioSection {
+    padding: 80px 0;
+  }
+  
+  .container {
+    padding: 0 30px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+  
+  .sectionSubtitle {
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .filters {
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+  
+  .filterBtn {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+  
+  .projectsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  .projectImage {
+    height: 260px;
+  }
+  
+  .projectCard[data-category="telegram"] .projectImage {
+    height: 300px;
+  }
+  
+  .projectContent {
+    padding: 20px;
+  }
+  
+  .projectTitle {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+  
+  .projectDescription {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+  
+  .phoneFrame {
+    width: 320px;
+    height: 550px;
+  }
+  
+  .demoInfo {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .modalContent {
+    width: 90%;
+    max-width: 700px;
+    overflow: auto;
+  }
+  
+  .modalBody {
+    height: auto;
+    max-height: 70vh;
+    padding: 25px;
+    overflow: auto;
+  }
+  
+  .telegramDemo {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    justify-items: center;
+  }
+  
+  .phoneFrame {
+    margin: 0 auto;
+  }
+  
+  .demoInfo {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .openTelegramBtn {
+    margin: 0 auto;
+    display: block;
+    width: 80%;
+    justify-content: center;
+  }
+  
+  .projectLinks {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .linkBtn {
+    width: 80%;
+    justify-content: center;
+    padding: 15px;
+    font-size: 16px;
+  }
+  
+  .websiteDemo {
+    height: auto;
+  }
+  
+  .websiteDemoFrame {
+    height: 550px;
+  }
+  
+  .projectOverlay {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  .demoBtn, 
+  .liveBtn {
+    width: 80%;
+    justify-content: center;
+    padding: 14px;
+    font-size: 15px;
+  }
+  
+  .demoBtn span, 
+  .liveBtn span {
+    font-size: 18px;
+  }
+  
+  .demoBtn {
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+  }
+  
+  .liveBtn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Специальные стили для мобильных устройств */
 @media (max-width: 768px) {
   .portfolioSection {
     padding: 60px 0;
@@ -638,6 +860,58 @@
   .projectLinks {
     flex-direction: column;
     align-items: center;
+  }
+  
+  /* Улучшение отображения активной карточки */
+  .activeCard {
+    z-index: 10;
+    position: relative;
+  }
+  
+  .activeOverlay {
+    background: rgba(0, 0, 16, 0.9);
+  }
+  
+  /* Увеличиваем размер кнопок */
+  .demoBtn, 
+  .liveBtn {
+    width: 85%;
+    padding: 18px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+  
+  /* Добавляем подсказку */
+  .activeOverlay::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 }
 
@@ -827,4 +1101,615 @@
   font-size: 1rem;
   line-height: 1.4;
   margin-bottom: 10px;
+}
+
+/* Специальные стили для iPad Air */
+@media screen and (min-width: 810px) and (max-width: 834px) {
+  .portfolioSection {
+    padding: 90px 0 70px;
+  }
+  
+  .container {
+    padding: 0 35px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .sectionTitle {
+    font-size: 2.7rem;
+  }
+  
+  .sectionSubtitle {
+    font-size: 1.18rem;
+    max-width: 650px;
+    margin: 0 auto 15px;
+  }
+  
+  .filters {
+    gap: 18px;
+    justify-content: center;
+    margin-bottom: 45px;
+    flex-wrap: wrap;
+  }
+  
+  .filterBtn {
+    padding: 14px 26px;
+    font-size: 1rem;
+  }
+  
+  .projectsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .projectCard {
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  
+  .projectImage {
+    height: 280px;
+  }
+  
+  .projectContent {
+    padding: 22px;
+  }
+  
+  .projectTitle {
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+  }
+  
+  .projectDescription {
+    font-size: 1rem;
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+  
+  .modalContent {
+    width: 90%;
+    max-width: 750px;
+    overflow: auto;
+  }
+  
+  .modalBody {
+    padding: 25px;
+    height: auto;
+    max-height: 65vh;
+    overflow: auto;
+  }
+  
+  .projectLinks {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  
+  .linkBtn {
+    width: 85%;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+  }
+  
+  /* Улучшение кнопок в карточках проектов */
+  .projectOverlay {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .demoBtn, 
+  .liveBtn {
+    width: 70%;
+    justify-content: center;
+    padding: 15px;
+    font-size: 16px;
+  }
+  
+  .telegramDemo {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    justify-items: center;
+  }
+  
+  .phoneFrame {
+    margin: 0 auto;
+  }
+  
+  .demoInfo {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .openTelegramBtn {
+    margin: 0 auto;
+    display: block;
+    width: 70%;
+    justify-content: center;
+    font-size: 16px;
+  }
+  
+  .websiteDemo {
+    height: auto;
+  }
+  
+  .websiteDemoFrame {
+    height: 550px;
+  }
+}
+
+/* Телефонные рамки для разных устройств */
+.phoneFrame {
+  width: 375px;
+  height: 620px;
+  background: #1e293b;
+  border-radius: 40px;
+  padding: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 2px solid #334155;
+}
+
+.phoneFrameDesktop {
+  width: 375px;
+  height: 620px;
+}
+
+.phoneFrameTablet {
+  width: 320px;
+  height: 550px;
+}
+
+.phoneFrameMobile {
+  width: 280px;
+  height: 500px;
+  padding: 15px;
+}
+
+/* Рамки для демо сайтов */
+.demoFrameDesktop {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.demoFrameTablet {
+  width: 100%;
+  height: 550px;
+}
+
+.demoFrameMobile {
+  width: 100%;
+  height: 450px;
+}
+
+/* Улучшение областей наведения на планшетах */
+@media (hover: none) and (pointer: coarse) {
+  .demoBtn, 
+  .liveBtn,
+  .linkBtn,
+  .openTelegramBtn,
+  .filterBtn,
+  .closeBtn {
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 255, 255, 0.2);
+    touch-action: manipulation;
+  }
+  
+  /* Увеличиваем размер кнопки закрытия для удобства нажатия */
+  .closeBtn {
+    font-size: 36px;
+    padding: 10px;
+    margin: -10px;
+  }
+  
+  /* Делаем кнопки более заметными при нажатии */
+  .demoBtn:active, 
+  .liveBtn:active,
+  .linkBtn:active,
+  .openTelegramBtn:active,
+  .filterBtn:active {
+    transform: scale(0.95);
+    opacity: 0.9;
+  }
+}
+
+/* Специальные стили для iPad Air */
+@media screen and (min-width: 810px) and (max-width: 834px) {
+  /* Улучшение областей наведения */
+  .demoBtn, 
+  .liveBtn {
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+  
+  .linkBtn {
+    padding: 16px;
+    font-size: 16px;
+    width: 85%;
+    max-width: 350px;
+    margin: 5px auto;
+  }
+  
+  .openTelegramBtn {
+    padding: 16px 30px;
+    font-size: 16px;
+    width: 85%;
+    max-width: 350px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .closeBtn {
+    font-size: 36px;
+    padding: 10px;
+    margin: -10px;
+  }
+  
+  /* Улучшение видимости кнопок в проектных карточках */
+  .projectOverlay {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .projectCard:hover .projectOverlay {
+    opacity: 1;
+  }
+  
+  /* Улучшение кнопок в карточках проектов */
+  .demoBtn, 
+  .liveBtn {
+    width: 75%;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+  }
+}
+
+/* Адаптивность модальных окон */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .modal {
+    padding: 20px;
+  }
+  
+  .modalContent {
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow: hidden;
+  }
+  
+  .modalHeader {
+    padding: 15px 20px;
+  }
+  
+  .modalBody {
+    height: auto;
+    max-height: 65vh;
+    padding: 20px;
+    overflow: auto;
+  }
+  
+  .modalFooter {
+    padding: 20px;
+  }
+  
+  /* Телеграм демо */
+  .telegramDemo {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    justify-items: center;
+  }
+  
+  .phoneFrame {
+    margin: 0 auto;
+    transform: scale(0.9);
+  }
+  
+  /* Веб-демо */
+  .websiteDemo {
+    height: auto;
+  }
+  
+  .websiteDemoFrame {
+    height: 550px;
+    border-radius: 8px;
+  }
+}
+
+/* Специальные стили для iPad Air */
+@media screen and (min-width: 810px) and (max-width: 834px) {
+  .modal {
+    padding: 15px;
+  }
+  
+  .modalContent {
+    width: 92%;
+    max-width: 750px;
+    max-height: 85vh;
+  }
+  
+  .modalHeader {
+    padding: 15px 25px;
+  }
+  
+  .modalBody {
+    padding: 20px;
+    height: auto;
+    max-height: 60vh;
+  }
+  
+  .modalFooter {
+    padding: 20px 25px;
+  }
+}
+
+/* Стили для активных карточек на мобильных устройствах */
+.projectCard {
+  background: rgba(0, 20, 40, 0.3);
+  border: 2px solid rgba(0, 255, 255, 0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Активная карточка */
+.activeCard {
+  transform: translateY(-5px) scale(1.01);
+  border-color: rgba(0, 255, 255, 0.6);
+  box-shadow: 0 15px 40px rgba(0, 255, 255, 0.2);
+}
+
+/* Оверлей проекта */
+.projectOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(2px);
+  z-index: 3;
+  padding: 20px;
+}
+
+/* Активный оверлей */
+.activeOverlay {
+  opacity: 1;
+  background: rgba(0, 0, 16, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+/* Стили для touch-устройств */
+@media (hover: none) and (pointer: coarse) {
+  .projectOverlay {
+    opacity: 0;
+    visibility: hidden;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .activeOverlay {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .demoBtn, 
+  .liveBtn {
+    width: 75%;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    transform: scale(1);
+  }
+  
+  /* Анимация появления кнопок */
+  .activeOverlay .demoBtn,
+  .activeOverlay .liveBtn {
+    animation: buttonAppear 0.3s ease forwards;
+  }
+  
+  .activeOverlay .demoBtn {
+    animation-delay: 0.1s;
+  }
+  
+  .activeOverlay .liveBtn {
+    animation-delay: 0.2s;
+  }
+  
+  @keyframes buttonAppear {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+/* Стили для десктопа (hover) */
+@media (hover: hover) and (pointer: fine) {
+  .projectCard:hover .projectOverlay {
+    opacity: 1;
+  }
+}
+
+/* Адаптивность подсказки */
+@media (max-width: 768px) {
+  /* Улучшение отображения активной карточки */
+  .activeCard {
+    z-index: 10;
+    position: relative;
+  }
+  
+  .activeOverlay {
+    background: rgba(0, 0, 16, 0.9);
+  }
+  
+  /* Увеличиваем размер кнопок */
+  .demoBtn, 
+  .liveBtn {
+    width: 85%;
+    padding: 18px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+  
+  /* Добавляем подсказку */
+  .activeOverlay::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+/* Специальные стили для планшетов */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .activeOverlay {
+    background: rgba(0, 0, 16, 0.85);
+  }
+  
+  .demoBtn, 
+  .liveBtn {
+    width: 80%;
+    padding: 16px;
+    margin: 5px 0;
+  }
+  
+  .demoBtn {
+    background: linear-gradient(45deg, #00ffff, #0080ff);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
+  }
+  
+  .liveBtn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Специальные стили для iPad Air */
+@media screen and (min-width: 810px) and (max-width: 834px) {
+  .activeOverlay {
+    background: rgba(0, 0, 16, 0.85);
+  }
+  
+  .demoBtn, 
+  .liveBtn {
+    width: 75%;
+    padding: 18px;
+    font-size: 16px;
+    margin: 6px 0;
+  }
+}
+
+/* Специальный медиазапрос для iPad Mini */
+@media only screen and (width: 768px) and (height: 1024px) {
+  /* Используем стили как для мобильных устройств */
+  .projectImage {
+    height: auto; /* Вместо фиксированной высоты */
+  }
+  
+  .projectImage img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Чтобы изображение не обрезалось */
+  }
+  
+  .projectCard[data-category="website"] .projectImage {
+    height: auto;
+    min-height: 280px;
+  }
+  
+  .projectCard[data-category="telegram"] .projectImage {
+    height: auto;
+    min-height: 320px;
+  }
+}
+
+/* Телефонные рамки для разных устройств */
+.phoneFrame {
+  width: 375px;
+  height: 620px;
+  background: #1e293b;
+  border-radius: 40px;
+  padding: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 2px solid #334155;
+}
+
+.phoneFrameDesktop {
+  width: 375px;
+  height: 620px;
+}
+
+.phoneFrameTablet {
+  width: 320px;
+  height: 550px;
+}
+
+.phoneFrameMobile {
+  width: 280px;
+  height: 500px;
+  padding: 15px;
+}
+
+/* Рамки для демо сайтов */
+.demoFrameDesktop {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.demoFrameTablet {
+  width: 100%;
+  height: 550px;
+}
+
+.demoFrameMobile {
+  width: 100%;
+  height: 450px;
 } 
