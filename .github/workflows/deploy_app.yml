@@ -9,7 +9,7 @@ env:
   BACKEND_NETWORK:  ${{ secrets.BACKEND_NETWORK }}
   VIRTUAL_HOST:     ${{ secrets.VIRTUAL_HOST }}
   LETSENCRYPT_HOST: ${{ secrets.LETSENCRYPT_HOST }}
-  LETSENCRYPT_EMAIL:${{ secrets.LETSENCRYPT_EMAIL }}
+  LETSENCRYPT_EMAIL: ${{ secrets.LETSENCRYPT_EMAIL }}
 
 jobs:
   deploy-app:
