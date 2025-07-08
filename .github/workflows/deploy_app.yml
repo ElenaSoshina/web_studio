@@ -1,0 +1,61 @@
+name: Deploy Frontend Container
+
+on:
+  push:
+    branches: [ main ]        # автоматический деплой
+  workflow_dispatch:          # запуск вручную
+
+env:
+  BACKEND_NETWORK:  ${{ secrets.BACKEND_NETWORK }}
+  VIRTUAL_HOST:     ${{ secrets.VIRTUAL_HOST }}
+  LETSENCRYPT_HOST: ${{ secrets.LETSENCRYPT_HOST }}
+  LETSENCRYPT_EMAIL:${{ secrets.LETSENCRYPT_EMAIL }}
+
+jobs:
+  deploy-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Copy compose file to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host:     ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key:      ${{ secrets.SERVER_SSH_KEY }}
+          port:     22
+          source:   docker/docker-compose-app.yml
+          target:   /docker
+          strip_components: 1
+
+      - name: Pull & (re)start frontend container
+        uses: appleboy/ssh-action@master
+        env:
+          BACKEND_NETWORK:  ${{ env.BACKEND_NETWORK }}
+          VIRTUAL_HOST:     ${{ env.VIRTUAL_HOST }}
+          LETSENCRYPT_HOST: ${{ env.LETSENCRYPT_HOST }}
+          LETSENCRYPT_EMAIL:${{ env.LETSENCRYPT_EMAIL }}
+        with:
+          host:     ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key:      ${{ secrets.SERVER_SSH_KEY }}
+          port:     22
+          envs: |
+            BACKEND_NETWORK,
+            VIRTUAL_HOST,
+            LETSENCRYPT_HOST,
+            LETSENCRYPT_EMAIL
+          script: |
+            set -euo pipefail
+            cd /docker
+
+            echo "--- Validating compose file ---"
+            docker compose -f docker-compose-app.yml config
+
+            echo "--- Pulling latest image ---"
+            docker compose -f docker-compose-app.yml pull || true
+
+            echo "--- Starting / updating webapp ---"
+            docker compose -f docker-compose-app.yml up -d --force-recreate

@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  webapp:
+    image: elenasoshina/web_studio:latest
+    container_name: webapp
+    restart: unless-stopped
+
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+
+    expose:
+      - "80"
+
+    networks:
+      - backend
+
+networks:
+  backend:
+    name: ${BACKEND_NETWORK}
+    external: true

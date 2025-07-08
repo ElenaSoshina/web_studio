@@ -39,7 +39,7 @@ const Header: React.FC = () => {
           style={{ cursor: 'pointer' }}
         >
           <span className={styles.bracket}>{'<'}</span>
-          <span className={styles.logoText}>WebVision</span>
+          <span className={styles.logoText}>WebAp.dev</span>
           <span className={styles.bracket}>{'/>'}</span>
         </div>
 
