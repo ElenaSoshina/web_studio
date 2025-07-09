@@ -20,10 +20,11 @@
 
 ## Деплой через GitHub Actions
 
-В проекте настроены два workflow файла для автоматического деплоя:
+В проекте настроен автоматический деплой через GitHub Actions workflow `Deploy Web Studio`:
 
-1. **deploy_nginx.yml**: запускается вручную для первоначальной настройки Nginx и SSL
-2. **deploy_app.yml**: запускается автоматически при push в main ветку или вручную
+- Запускается автоматически при push в main ветку
+- Или может быть запущен вручную через интерфейс GitHub Actions
+- Разворачивает все три контейнера (nginx, SSL, webapp) последовательно
 
 ### Последовательность деплоя
 
@@ -36,13 +37,10 @@
    - SERVER_IP, SERVER_USER, SERVER_SSH_KEY - данные для доступа к серверу
    - EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY - настройки EmailJS
 
-2. **Первоначальная настройка:**
-   - Запустите workflow `Deploy Nginx and SSL` вручную через интерфейс GitHub Actions
-   - Этот workflow создаст сеть Docker, настроит Nginx и ACME Companion
-
-3. **Деплой приложения:**
-   - Workflow `Deploy Frontend Container` запускается автоматически при push в main ветку
-   - Или его можно запустить вручную через интерфейс GitHub Actions
+2. **Автоматический деплой:**
+   - При пуше в main ветку запускается workflow `Deploy Web Studio`
+   - Workflow сначала настраивает инфраструктуру (Nginx и SSL)
+   - Затем собирает и разворачивает фронтенд-приложение
 
 ## Локальная разработка
 

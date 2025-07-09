@@ -1,4 +1,4 @@
-name: Deploy Frontend Container
+name: Deploy Web Studio
 
 on:
   push:
@@ -12,9 +12,66 @@ env:
   LETSENCRYPT_EMAIL: ${{ secrets.LETSENCRYPT_EMAIL }}
 
 jobs:
-  deploy-app:
+  deploy-infrastructure:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
+      # Копируем конфигурационные файлы на сервер
+      - name: Copy nginx configuration to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host:     ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key:      ${{ secrets.SERVER_SSH_KEY }}
+          port:     22
+          source:   docker/docker-compose-nginx.yml,nginx/
+          target:   /docker
+          strip_components: 0
+
+      # Устанавливаем Nginx и ACME Companion
+      - name: Setup Nginx and SSL
+        uses: appleboy/ssh-action@master
+        env:
+          BACKEND_NETWORK:  ${{ env.BACKEND_NETWORK }}
+          LETSENCRYPT_EMAIL: ${{ env.LETSENCRYPT_EMAIL }}
+        with:
+          host:     ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key:      ${{ secrets.SERVER_SSH_KEY }}
+          port:     22
+          envs: |
+            BACKEND_NETWORK,
+            LETSENCRYPT_EMAIL
+          script: |
+            set -euo pipefail
+            cd /docker
+            
+            # Проверяем существование сети безопасным способом
+            echo "--- Checking if network ${BACKEND_NETWORK} exists ---"
+            if ! docker network inspect "${BACKEND_NETWORK}" &>/dev/null; then
+              echo "--- Creating Docker network: ${BACKEND_NETWORK} ---"
+              docker network create "${BACKEND_NETWORK}" || true
+            else
+              echo "--- Network ${BACKEND_NETWORK} already exists ---"
+            fi
+            
+            # Создаем директории, если их еще нет
+            echo "--- Creating directory structure ---"
+            mkdir -p /docker/nginx/vhost.d
+            mkdir -p /docker/nginx/html
+            mkdir -p /docker/nginx/certs
+            
+            echo "--- Validating compose file ---"
+            docker compose -f docker-compose-nginx.yml config
+            
+            echo "--- Starting/updating Nginx and SSL containers ---"
+            docker compose -f docker-compose-nginx.yml up -d --force-recreate
+
+  deploy-webapp:
+    runs-on: ubuntu-latest
+    needs: deploy-infrastructure
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -49,7 +106,7 @@ jobs:
           target:   /docker
           strip_components: 1
 
-      - name: Check if Nginx is running and pull & (re)start frontend container
+      - name: Deploy and verify webapp
         uses: appleboy/ssh-action@master
         env:
           BACKEND_NETWORK:  ${{ env.BACKEND_NETWORK }}
@@ -70,20 +127,13 @@ jobs:
             set -euo pipefail
             cd /docker
             
-            # Проверяем, запущены ли контейнеры Nginx и ACME
-            if ! docker ps | grep -q "nginx-proxy"; then
-              echo "WARNING: nginx-proxy container is not running!"
-              echo "Please run the deploy_nginx workflow first"
-              echo "Continuing with webapp deployment anyway..."
-            fi
-
             echo "--- Validating compose file ---"
             docker compose -f docker-compose-app.yml config
-
+            
             echo "--- Pulling latest image ---"
             docker compose -f docker-compose-app.yml pull || true
-
-            echo "--- Starting / updating webapp ---"
+            
+            echo "--- Starting/updating webapp ---"
             docker compose -f docker-compose-app.yml up -d --force-recreate
             
             echo "--- All running containers ---"
