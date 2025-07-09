@@ -1,12 +1,60 @@
-# React + Vite
+# Web Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Это React-приложение с Docker-настройкой для развертывания в трех контейнерах: nginx, SSL-сертификат и фронтенд.
 
-Currently, two official plugins are available:
+## Технологии
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19
+- Vite
+- i18next для интернационализации
+- EmailJS для контактных форм
+- Docker и Docker Compose для контейнеризации
 
-## Expanding the ESLint configuration
+## Архитектура Docker
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Проект использует три контейнера:
+
+1. **nginx-proxy**: обратный прокси для обработки запросов
+2. **acme-companion**: автоматическое получение и обновление SSL-сертификатов
+3. **webapp**: фронтенд-приложение на React
+
+## Деплой через GitHub Actions
+
+В проекте настроены два workflow файла для автоматического деплоя:
+
+1. **deploy_nginx.yml**: запускается вручную для первоначальной настройки Nginx и SSL
+2. **deploy_app.yml**: запускается автоматически при push в main ветку или вручную
+
+### Последовательность деплоя
+
+1. **Настройка секретов репозитория:**
+   - BACKEND_NETWORK - имя сети Docker
+   - VIRTUAL_HOST - имя домена сайта
+   - LETSENCRYPT_HOST - имя домена для сертификата
+   - LETSENCRYPT_EMAIL - email для уведомлений Let's Encrypt
+   - DOCKER_USERNAME, DOCKER_PASSWORD - учетные данные Docker Hub
+   - SERVER_IP, SERVER_USER, SERVER_SSH_KEY - данные для доступа к серверу
+   - EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY - настройки EmailJS
+
+2. **Первоначальная настройка:**
+   - Запустите workflow `Deploy Nginx and SSL` вручную через интерфейс GitHub Actions
+   - Этот workflow создаст сеть Docker, настроит Nginx и ACME Companion
+
+3. **Деплой приложения:**
+   - Workflow `Deploy Frontend Container` запускается автоматически при push в main ветку
+   - Или его можно запустить вручную через интерфейс GitHub Actions
+
+## Локальная разработка
+
+Для локальной разработки:
+
+```bash
+npm install
+npm run dev
+```
+
+## Сборка для продакшн
+
+```bash
+npm run build
+```

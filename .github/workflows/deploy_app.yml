@@ -49,7 +49,7 @@ jobs:
           target:   /docker
           strip_components: 1
 
-      - name: Pull & (re)start frontend container
+      - name: Check if Nginx is running and pull & (re)start frontend container
         uses: appleboy/ssh-action@master
         env:
           BACKEND_NETWORK:  ${{ env.BACKEND_NETWORK }}
@@ -69,6 +69,13 @@ jobs:
           script: |
             set -euo pipefail
             cd /docker
+            
+            # Проверяем, запущены ли контейнеры Nginx и ACME
+            if ! docker ps | grep -q "nginx-proxy"; then
+              echo "WARNING: nginx-proxy container is not running!"
+              echo "Please run the deploy_nginx workflow first"
+              echo "Continuing with webapp deployment anyway..."
+            fi
 
             echo "--- Validating compose file ---"
             docker compose -f docker-compose-app.yml config
@@ -78,3 +85,6 @@ jobs:
 
             echo "--- Starting / updating webapp ---"
             docker compose -f docker-compose-app.yml up -d --force-recreate
+            
+            echo "--- All running containers ---"
+            docker ps

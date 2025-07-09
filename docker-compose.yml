@@ -1,60 +1,63 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  # Разработка
-  dev:
-    build:
-      context: .
-      target: development
-    ports:
-      - "5173:5173"
-    volumes:
-      - .:/app
-      - /app/node_modules
-    environment:
-      - VITE_BASE_PATH=/
-      # Для локальной разработки используем переменные из файла .env
-      # Если они не будут настроены, форма будет работать только локально с .env файлом
-
-  # Production локально
-  prod:
-    build:
-      context: .
-      target: production
-      args:
-        BASE_PATH: /
-        # Для локальной сборки указываем эти значения в .env.local или передаем при запуске
-        EMAILJS_SERVICE_ID: ${EMAILJS_SERVICE_ID}
-        EMAILJS_TEMPLATE_ID: ${EMAILJS_TEMPLATE_ID}
-        EMAILJS_PUBLIC_KEY: ${EMAILJS_PUBLIC_KEY}
-    ports:
-      - "8080:80"
-
-  # GitHub Pages симуляция
-  github:
-    build:
-      context: .
-      target: production
-      args:
-        BASE_PATH: /web_studio/
-        # Для локальной сборки указываем эти значения в .env.local или передаем при запуске
-        EMAILJS_SERVICE_ID: ${EMAILJS_SERVICE_ID}
-        EMAILJS_TEMPLATE_ID: ${EMAILJS_TEMPLATE_ID}
-        EMAILJS_PUBLIC_KEY: ${EMAILJS_PUBLIC_KEY}
-    ports:
-      - "8081:80"
-
-  # Production с вашим Docker Hub репозиторием
-  production:
-    image: elenasoshina/web_studio:latest
-    build:
-      context: .
-      target: production
-      args:
-        BASE_PATH: /
-        EMAILJS_SERVICE_ID: ${EMAILJS_SERVICE_ID}
-        EMAILJS_TEMPLATE_ID: ${EMAILJS_TEMPLATE_ID}
-        EMAILJS_PUBLIC_KEY: ${EMAILJS_PUBLIC_KEY}
+  # Обратный прокси
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    container_name: nginx-proxy
+    restart: always
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx/vhost.d:/etc/nginx/vhost.d
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/certs:/etc/nginx/certs:ro
+    networks:
+      - backend
+
+  # Companion – автоматический SSL
+  acme-companion:
+    image: nginxproxy/acme-companion:latest
+    container_name: acme-companion
+    restart: always
+    depends_on:
+      - nginx-proxy
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      - DEFAULT_EMAIL=${LETSENCRYPT_EMAIL}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./nginx/vhost.d:/etc/nginx/vhost.d
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/certs:/etc/nginx/certs
+    networks:
+      - backend
+
+  # Web Application
+  webapp:
+    image: elenasoshina/web_studio:latest
+    container_name: webapp
+    build:
+      context: .
+      target: production
+      args:
+        BASE_PATH: /
+        EMAILJS_SERVICE_ID: ${EMAILJS_SERVICE_ID}
+        EMAILJS_TEMPLATE_ID: ${EMAILJS_TEMPLATE_ID}
+        EMAILJS_PUBLIC_KEY: ${EMAILJS_PUBLIC_KEY}
     restart: unless-stopped
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+    expose:
+      - "80"
+    networks:
+      - backend
+
+networks:
+  backend:
+    name: ${BACKEND_NETWORK:-web_studio_network}
+    driver: bridge

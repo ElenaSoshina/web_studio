@@ -1,0 +1,71 @@
+name: Deploy Nginx and SSL
+
+on:
+  # Ручной запуск - это делается только один раз при настройке сервера
+  workflow_dispatch:
+
+env:
+  BACKEND_NETWORK:  ${{ secrets.BACKEND_NETWORK }}
+  LETSENCRYPT_EMAIL: ${{ secrets.LETSENCRYPT_EMAIL }}
+  NGINX_CONFIG: ${{ secrets.NGINX_CONFIG }}
+
+jobs:
+  deploy-nginx:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Копируем конфигурационные файлы на сервер
+      - name: Copy nginx configuration to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host:     ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key:      ${{ secrets.SERVER_SSH_KEY }}
+          port:     22
+          source:   docker/docker-compose-nginx.yml,nginx/
+          target:   /docker
+          strip_components: 0
+
+      # Устанавливаем Nginx и ACME Companion
+      - name: Setup Nginx and SSL
+        uses: appleboy/ssh-action@master
+        env:
+          BACKEND_NETWORK:  ${{ env.BACKEND_NETWORK }}
+          LETSENCRYPT_EMAIL: ${{ env.LETSENCRYPT_EMAIL }}
+        with:
+          host:     ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key:      ${{ secrets.SERVER_SSH_KEY }}
+          port:     22
+          envs: |
+            BACKEND_NETWORK,
+            LETSENCRYPT_EMAIL
+          script: |
+            set -euo pipefail
+            cd /docker
+            
+            # Создаем сеть Docker, если она еще не существует
+            if ! docker network ls | grep -q "${BACKEND_NETWORK}"; then
+              echo "--- Creating Docker network: ${BACKEND_NETWORK} ---"
+              docker network create "${BACKEND_NETWORK}"
+            else
+              echo "--- Network ${BACKEND_NETWORK} already exists ---"
+            fi
+            
+            # Создаем директории, если их еще нет
+            echo "--- Creating directory structure ---"
+            mkdir -p /docker/nginx/vhost.d
+            mkdir -p /docker/nginx/html
+            mkdir -p /docker/nginx/certs
+            
+            echo "--- Validating compose file ---"
+            docker compose -f docker-compose-nginx.yml config
+            
+            echo "--- Starting Nginx and SSL containers ---"
+            docker compose -f docker-compose-nginx.yml up -d --force-recreate
+            
+            echo "--- Containers status ---"
+            docker ps 
