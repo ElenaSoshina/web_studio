@@ -19,6 +19,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image (production)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: elenasoshina/web_studio:latest
+          target: production
+          build-args: |
+            BASE_PATH=/
+            EMAILJS_SERVICE_ID=${{ secrets.EMAILJS_SERVICE_ID }}
+            EMAILJS_TEMPLATE_ID=${{ secrets.EMAILJS_TEMPLATE_ID }}
+            EMAILJS_PUBLIC_KEY=${{ secrets.EMAILJS_PUBLIC_KEY }}
+
       - name: Copy compose file to server
         uses: appleboy/scp-action@v0.1.7
         with:
