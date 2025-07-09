@@ -39,6 +39,8 @@ RUN rm /etc/nginx/conf.d/default.conf
 # Копируем нашу конфигурацию nginx
 COPY nginx.conf /etc/nginx/nginx.conf
 
+COPY nginx/webapp.conf /etc/nginx/conf.d/default.conf
+
 # Копируем собранное приложение из этапа builder
 COPY --from=builder /app/dist /usr/share/nginx/html
 
