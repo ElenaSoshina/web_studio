@@ -1,169 +1,65 @@
-name: Full CI/CD Pipeline
+name: Deploy Frontend Container
 
 on:
   push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main ]
+    branches: [ main ]        # автоматический деплой
+  workflow_dispatch:          # запуск вручную
 
-# Добавляем разрешения для GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-  packages: write
+env:
+  BACKEND_NETWORK:  ${{ secrets.BACKEND_NETWORK }}
+  VIRTUAL_HOST:     ${{ secrets.VIRTUAL_HOST }}
+  LETSENCRYPT_HOST: ${{ secrets.LETSENCRYPT_HOST }}
+  LETSENCRYPT_EMAIL: ${{ secrets.LETSENCRYPT_EMAIL }}
 
 jobs:
-  # ========================================
-  # ВАШ СУЩЕСТВУЮЩИЙ JOB + НЕБОЛЬШИЕ УЛУЧШЕНИЯ
-  # ========================================
-  build-and-push:
+  deploy-app:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: 📥 Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🟢 Setup Node.js (для тестов)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.19.0'
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
-          push: true
-      - name: 📦 Install dependencies
-        run: npm ci
-
-      - name: 🧹 Run linter
-        run: npm run lint
-
-      - name: 🐳 Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      # Ваш существующий логин в Docker Hub
-      - name: 🔐 Login to Docker Hub
-        if: github.event_name == 'push'
+      - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      # Ваша существующая генерация тегов
-      - name: 🏷️ Extract metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: elenasoshina/web_studio
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=sha,prefix={{branch}}-
-            type=raw,value=latest,enable={{is_default_branch}}
-
-      # Ваша существующая сборка стандартной версии
-      - name: 🏗️ Build and push standard version
+      - name: Build and push Docker image (production)
         uses: docker/build-push-action@v5
         with:
           context: .
+          push: true
+          tags: elenasoshina/web_studio:latest
           target: production
-          push: ${{ github.event_name == 'push' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             BASE_PATH=/
             EMAILJS_SERVICE_ID=${{ secrets.EMAILJS_SERVICE_ID }}
             EMAILJS_TEMPLATE_ID=${{ secrets.EMAILJS_TEMPLATE_ID }}
             EMAILJS_PUBLIC_KEY=${{ secrets.EMAILJS_PUBLIC_KEY }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
-      # Ваша существующая сборка версии для GitHub Pages
-      - name: 🏗️ Build and push GitHub Pages version
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          target: production
-          push: true
-          tags: elenasoshina/web_studio:github-pages
-          build-args: |
-            BASE_PATH=/web_studio/
-            EMAILJS_SERVICE_ID=${{ secrets.EMAILJS_SERVICE_ID }}
-            EMAILJS_TEMPLATE_ID=${{ secrets.EMAILJS_TEMPLATE_ID }}
-            EMAILJS_PUBLIC_KEY=${{ secrets.EMAILJS_PUBLIC_KEY }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-  # ========================================
-  # НОВЫЙ JOB: GITHUB PAGES ДЕПЛОЙ
-  # ========================================
-  deploy-github-pages:
-    name: 🌐 Deploy to GitHub Pages
-    runs-on: ubuntu-latest
-    needs: build-and-push # Ждем завершения сборки
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    
-    steps:
-      - name: 📥 Checkout code
-        uses: actions/checkout@v4
-
-      - name: 🟢 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.19.0'
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
-
-      - name: 📦 Install dependencies
-        run: npm ci
-
-      - name: 🏗️ Build for GitHub Pages
-        run: npm run build
-          build-args: |
-          VITE_BASE_PATH: /web_studio/
-          VITE_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
-          VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
-          VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
-
-      - name: 📋 Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: 📤 Upload artifact
-        uses: actions/upload-pages-artifact@v3
       - name: Copy compose file to server
-          path: './dist'
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host:     ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key:      ${{ secrets.SERVER_SSH_KEY }}
+          port:     22
+          source:   docker/docker-compose-app.yml
+          target:   /docker
+          strip_components: 1
 
-      - name: 🚀 Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Pull & (re)start frontend container
+        uses: appleboy/ssh-action@master
         env:
-  # ========================================
-  # НОВЫЙ JOB: УВЕДОМЛЕНИЯ
-  # ========================================
-  notify:
-    name: 📢 Deployment Summary
-    runs-on: ubuntu-latest
-    needs: [build-and-push, deploy-github-pages]
-    if: always() && github.ref == 'refs/heads/main'
-    
-    steps:
-      - name: 📊 Create Summary
-        run: |
-          echo "## 🎯 CI/CD Results" >> $GITHUB_STEP_SUMMARY
-          echo "| Component | Status |" >> $GITHUB_STEP_SUMMARY
-          echo "|-----------|--------|" >> $GITHUB_STEP_SUMMARY
-          echo "| Docker Build | ${{ needs.build-and-push.result == 'success' && '✅ Success' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| GitHub Pages | ${{ needs.deploy-github-pages.result == 'success' && '✅ Success' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
-          
-          if [[ "${{ needs.deploy-github-pages.result }}" == "success" ]]; then
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "🌐 **Live Site**: https://elenasoshina.github.io/web_studio/" >> $GITHUB_STEP_SUMMARY
-            echo "🐳 **Docker Image**: \`elenasoshina/web_studio:latest\`" >> $GITHUB_STEP_SUMMARY
-          fi
+          BACKEND_NETWORK:  ${{ env.BACKEND_NETWORK }}
+          VIRTUAL_HOST:     ${{ env.VIRTUAL_HOST }}
+          LETSENCRYPT_HOST: ${{ env.LETSENCRYPT_HOST }}
+          LETSENCRYPT_EMAIL: ${{ env.LETSENCRYPT_EMAIL }}
+        with:
+          host:     ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key:      ${{ secrets.SERVER_SSH_KEY }}
           port:     22
           envs: |
             BACKEND_NETWORK,
