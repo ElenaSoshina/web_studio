@@ -36,8 +36,8 @@ FROM nginx:alpine AS production
 # Удаляем стандартную конфигурацию nginx
 RUN rm /etc/nginx/conf.d/default.conf
 
-# Копируем нашу конфигурацию nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+# # Копируем нашу конфигурацию nginx
+# COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY nginx/webapp.conf /etc/nginx/conf.d/default.conf
 
