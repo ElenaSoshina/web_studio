@@ -28,7 +28,7 @@ jobs:
           port:     22
           source:   docker/docker-compose-nginx.yml,nginx/
           target:   /docker
-          strip_components: 0
+          strip_components: 1
 
       # Устанавливаем Nginx и ACME Companion
       - name: Setup Nginx and SSL
