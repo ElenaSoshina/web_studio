@@ -799,7 +799,7 @@
   }
   
   .sectionTitle {
-    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-size: clamp(1.6rem, 3.5vw, 2.5rem);
   }
   
   .sectionSubtitle {
@@ -822,6 +822,13 @@
   
   .clientTitle {
     font-size: 1.1rem;
+  }
+  
+  /* Добавить этот стиль для packagesGrid */
+  .packagesGrid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 30px;
   }
   
   .packageCard {
@@ -903,4 +910,4 @@
   .packagesContent {
     gap: 30px;
   }
-} 
+}

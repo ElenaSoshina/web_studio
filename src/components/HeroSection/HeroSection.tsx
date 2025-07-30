@@ -109,11 +109,11 @@ const HeroSection: React.FC = () => {
       {/* Основной контент */}
       <div className={styles.heroContent}>
         <div className={styles.heroText}>
-          <div className={styles.tagline}>
+          {/* <div className={styles.tagline}>
             <span className={styles.bracket}>{'<'}</span>
             <span className={styles.tagText}>{t('tagline')}</span>
             <span className={styles.bracket}>{'/>'}</span>
-          </div>
+          </div> */}
           
           <h1 className={styles.heroTitle}>
             <span className={styles.titleLine1}>{t('title.line1')}</span>

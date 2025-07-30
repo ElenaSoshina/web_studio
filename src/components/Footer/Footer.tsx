@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
           <div className={styles.companySection}>
             <div className={styles.logo}>
               <span className={styles.bracket}>{'<'}</span>
-              <span className={styles.logoText}>WebVision</span>
+              <span className={styles.logoText}>WebAp.dev</span>
               <span className={styles.bracket}>{'/>'}</span>
             </div>
             <p className={styles.companyDescription}>

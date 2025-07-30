@@ -398,8 +398,10 @@
   border-radius: 20px;
   width: 95%;
   max-width: 1400px;
-  max-height: 98vh;
-  overflow: hidden;
+  max-height: none;
+  height: auto;
+  min-height: 80vh;
+  overflow: visible;
   backdrop-filter: blur(20px);
   transform: scale(0.8);
   animation: modalScale 0.3s ease-out forwards;
@@ -718,6 +720,8 @@
   .modalContent {
     width: 90%;
     max-width: 700px;
+    max-height: 85vh;
+    min-height: 75vh;
     overflow: auto;
   }
   
@@ -849,12 +853,16 @@
   
   .modalContent {
     width: 95%;
-    margin: 20px;
+    margin: 10px;
+    max-height: none;
+    min-height: 70vh;
+    overflow: visible;
   }
   
   .modalBody {
     padding: 20px;
-    height: 60vh;
+    height: auto;
+    overflow: visible;
   }
   
   .projectLinks {
@@ -973,6 +981,12 @@
 }
 
 @media (max-width: 375px) {
+  .modalContent {
+    min-height: 90vh;
+
+  }
+
+
   .portfolioSection {
     padding: 40px 0;
   }
@@ -1285,6 +1299,340 @@
   height: 450px;
 }
 
+/* Дополнительные медиа запросы для видео секции */
+
+/* Для очень маленьких экранов (iPhone SE и подобные) */
+@media (max-width: 375px) {
+  .videoContainer {
+    padding: 10px;
+  }
+  
+  .videoPhoneFrame {
+    width: 220px;
+    height: 500px;
+    padding: 10px;
+    border-radius: 20px;
+  }
+  
+  .videoPhoneFrame::before {
+    width: 40px;
+    height: 4px;
+    top: 6px;
+  }
+  
+  .videoPhoneFrame::after {
+    width: 100px;
+    height: 3px;
+    bottom: 6px;
+  }
+  
+  .videoScreen {
+    border-radius: 15px;
+  }
+  
+  .demoVideo {
+    border-radius: 15px;
+  }
+  
+  .modalBodyVideo {
+    padding: 15px;
+    min-height: 300px;
+  }
+}
+
+/* Для планшетов в портретной ориентации */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .videoContainer {
+    padding: 25px;
+  }
+  
+  .videoPhoneFrame {
+    width: 350px;
+    height: 750px;
+    padding: 20px;
+  }
+  
+  .modalBodyVideo {
+    padding: 40px;
+    min-height: 500px;
+  }
+}
+
+/* Для планшетов в альбомной ориентации */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .videoContainer {
+    padding: 20px;
+  }
+  
+  .videoPhoneFrame {
+    width: 300px;
+    height: 600px;
+    padding: 16px;
+  }
+  
+  .modalBodyVideo {
+    padding: 25px;
+    min-height: 400px;
+  }
+}
+
+/* Для больших экранов (десктоп) */
+@media (min-width: 1400px) {
+  .videoContainer {
+    padding: 40px;
+  }
+  
+  .videoPhoneFrame {
+    width: 400px;
+    height: 850px;
+    padding: 25px;
+  }
+  
+  .modalBodyVideo {
+    padding: 50px;
+    min-height: 600px;
+  }
+  
+  .videoWrapper {
+    max-width: 1200px;
+  }
+}
+
+/* Специальные стили для устройств с высоким DPI */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .videoPhoneFrame {
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(0, 255, 255, 0.4),
+      0 0 25px rgba(0, 255, 255, 0.3);
+  }
+  
+  .videoPhoneFrame:hover {
+    box-shadow: 
+      0 30px 100px rgba(0, 0, 0, 0.7),
+      0 0 0 2px rgba(0, 255, 255, 0.6),
+      0 0 40px rgba(0, 255, 255, 0.5);
+  }
+}
+
+/* Стили для устройств с поддержкой hover */
+@media (hover: hover) and (pointer: fine) {
+  .videoPhoneFrame {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .videoPhoneFrame:hover {
+    transform: translateY(-8px) scale(1.02);
+  }
+}
+
+/* Стили для устройств без поддержки hover (тач-устройства) */
+@media (hover: none) and (pointer: coarse) {
+  .videoPhoneFrame:hover {
+    transform: none;
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      0 0 0 2px rgba(0, 255, 255, 0.3),
+      0 0 20px rgba(0, 255, 255, 0.2);
+  }
+  
+  .videoPhoneFrame:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Стили для уменьшения анимаций (accessibility) */
+@media (prefers-reduced-motion: reduce) {
+  .videoPhoneFrame,
+  .videoWrapper::before {
+    animation: none;
+    transition: none;
+  }
+  
+  .videoPhoneFrame:hover {
+    transform: none;
+  }
+}
+
+/* Video Container в стиле телефонного экрана */
+.videoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+  position: relative;
+  z-index: 1001; /* Добавлен z-index выше модального окна */
+}
+
+.videoPhoneFrame {
+  width: 375px;
+  height: 800px;
+  background: #1e293b;
+  border-radius: 40px;
+  padding: 20px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 2px rgba(0, 255, 255, 0.3),
+    0 0 20px rgba(0, 255, 255, 0.2);
+  border: 2px solid #334155;
+  position: relative;
+  z-index: 1002; /* Добавлен z-index для видео фрейма */
+}
+
+/* Декоративные элементы телефона */
+.videoPhoneFrame::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 6px;
+  background: #64748b;
+  border-radius: 3px;
+}
+
+.videoPhoneFrame::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 4px;
+  background: #64748b;
+  border-radius: 2px;
+}
+
+.videoScreen {
+  width: 100%;
+  height: 100%;
+  background: #0f172a;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1003; /* Добавлен z-index для экрана */
+}
+
+.demoVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+  background: #000;
+  position: relative;
+  z-index: 1004; /* Добавлен z-index для видео */
+}
+
+/* Анимация при наведении */
+.videoPhoneFrame:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 25px 80px rgba(0, 0, 0, 0.6),
+    0 0 0 2px rgba(0, 255, 255, 0.5),
+    0 0 30px rgba(0, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+/* Специальные стили для видео модального окна */
+.modalBodyVideo {
+  padding: 30px;
+  height: auto;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0a0a2e 0%, #000010 50%, #0a0a2e 100%);
+  position: relative;
+  z-index: 1001; /* Добавлен z-index для видео модального тела */
+  overflow: visible;
+}
+
+/* Контейнер для видео с декоративными элементами */
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  z-index: 1002; /* Добавлен z-index для обертки видео */
+}
+
+.videoWrapper::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, #00ffff, #ff00ff, #00ffff);
+  border-radius: 25px;
+  z-index: -1;
+  opacity: 0.3;
+  animation: borderGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes borderGlow {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1.02);
+  }
+}
+
+/* Адаптивные размеры для разных экранов */
+@media (max-width: 1200px) {
+  .videoPhoneFrame {
+    width: 320px;
+    height: 700px;
+    padding: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .videoContainer {
+    padding: 15px;
+  }
+  
+  .videoPhoneFrame {
+    width: 280px;
+    height: 620px;
+    padding: 15px;
+    border-radius: 30px;
+  }
+  
+  .videoScreen {
+    border-radius: 20px;
+  }
+  
+  .demoVideo {
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalHeader {
+    padding: 5px 15px;
+  }
+  .videoPhoneFrame {
+    width: 300px;
+    height: 600px;
+    padding: 12px;
+    border-radius: 25px;
+  }
+  
+  .videoScreen {
+    border-radius: 18px;
+  }
+  
+  .demoVideo {
+    border-radius: 18px;
+  }
+}
+
 /* Улучшение областей наведения на планшетах */
 @media (hover: none) and (pointer: coarse) {
   .demoBtn, 
@@ -1379,8 +1727,9 @@
   .modalContent {
     width: 90%;
     max-width: 700px;
-    max-height: 90vh;
-    overflow: hidden;
+    max-height: none;
+    min-height: 75vh;
+    overflow: visible;
   }
   
   .modalHeader {
@@ -1389,9 +1738,8 @@
   
   .modalBody {
     height: auto;
-    max-height: 65vh;
     padding: 20px;
-    overflow: auto;
+    overflow: visible;
   }
   
   .modalFooter {
@@ -1430,7 +1778,9 @@
   .modalContent {
     width: 92%;
     max-width: 750px;
-    max-height: 85vh;
+    max-height: 90vh;
+    min-height: 80vh;
+    overflow: auto;
   }
   
   .modalHeader {
@@ -1712,4 +2062,4 @@
 .demoFrameMobile {
   width: 100%;
   height: 450px;
-} 
+}

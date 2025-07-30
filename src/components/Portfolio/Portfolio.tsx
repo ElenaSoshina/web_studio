@@ -34,8 +34,7 @@ const Portfolio: React.FC = () => {
       description: t('projects.celebrityStrike.description'),
       technologies: ['Java Spring Boot', 'Telegram WebApp', 'PostgreSQL', 'React'],
       image: `${import.meta.env.BASE_URL}images/group-3.png`,
-      demoUrl: 'https://frontend.celebrity-miniapp.duckdns.org/',
-      liveUrl: 'https://t.me/CelebrityStrike_bot',
+      videoDemo: `${import.meta.env.BASE_URL}videos/celebrity_strike.mov`, 
       isDemo: true
     },
     {
@@ -218,7 +217,7 @@ const Portfolio: React.FC = () => {
                     <span>🚀</span>
                     {t('buttons.demo')}
                   </button>
-                  {project.liveUrl && (
+                  {project.liveUrl && project.id !== 1 && (
                     <a 
                       href={project.liveUrl} 
                       target="_blank" 
@@ -260,7 +259,28 @@ const Portfolio: React.FC = () => {
             </div>
             
             <div className={styles.modalBody}>
-              {selectedProject.category === 'telegram' ? (
+              {selectedProject.id === 1 && selectedProject.videoDemo ? (
+                // ТОЛЬКО для Celebrity Strike Shop - показываем видео в телефонном фрейме
+                <div className={styles.videoContainer}>
+                  <div className={styles.videoPhoneFrame}>
+                    <div className={styles.videoScreen}>
+                      <video 
+                        className={styles.demoVideo}
+                        controls
+                        autoPlay
+                        muted
+                        loop
+                        preload="metadata"
+                      >
+                        <source src={selectedProject.videoDemo} type="video/quicktime" />
+                        <source src={selectedProject.videoDemo} type="video/mp4" />
+                        Ваш браузер не поддерживает воспроизведение видео.
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              ) : selectedProject.category === 'telegram' ? (
+                // ДЛЯ ВСЕХ ОСТАЛЬНЫХ Telegram проектов - оригинальная логика
                 <div className={styles.telegramDemo}>
                   <div className={`${styles.phoneFrame} ${styles[`phoneFrame${deviceType === 'desktop' ? 'Desktop' : deviceType === 'tablet' ? 'Tablet' : 'Mobile'}`]}`}>
                     <div className={styles.phoneScreen}>
@@ -284,6 +304,7 @@ const Portfolio: React.FC = () => {
                   </div>
                 </div>
               ) : (
+                // ДЛЯ website проектов - оригинальная логика
                 <div className={styles.websiteDemo}>
                   <iframe 
                     src={selectedProject.demoUrl} 
@@ -296,7 +317,7 @@ const Portfolio: React.FC = () => {
             
             <div className={styles.modalFooter}>
               <div className={styles.projectLinks}>
-                {selectedProject.liveUrl && (
+                {selectedProject.id !== 1 && selectedProject.liveUrl && (
                   <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.linkBtn}>
                     {selectedProject.category === 'telegram' ? `📱 ${t('buttons.openTelegram')}` : `🌐 ${t('buttons.openWebsite')}`}
                   </a>
@@ -315,4 +336,4 @@ const Portfolio: React.FC = () => {
   );
 };
 
-export default Portfolio; 
+export default Portfolio;

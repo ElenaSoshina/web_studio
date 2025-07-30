@@ -197,10 +197,10 @@ const QuickStart: React.FC = () => {
           <p className={styles.sectionSubtitle}>
             {t('subtitle')}
           </p>
-          <div className={styles.highlightBadge}>
+          {/* <div className={styles.highlightBadge}>
             <span className={styles.badgeText}>{t('badge.text')}</span>
             <span className={styles.badgePrice}>{t('badge.price')}</span>
-          </div>
+          </div> */}
         </div>
 
         {/* Табы */}
@@ -273,7 +273,7 @@ const QuickStart: React.FC = () => {
                     
                     <div className={styles.packageHeader}>
                       <h3 className={styles.packageTitle}>{pkg.title}</h3>
-                      <div className={styles.packagePrice}>{pkg.price}</div>
+                      {/* <div className={styles.packagePrice}>{pkg.price}</div> */}
                     </div>
                     
                     <div className={styles.packageFeatures}>

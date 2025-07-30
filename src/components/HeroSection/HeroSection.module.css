@@ -747,8 +747,12 @@
 }
 
 @media (max-width: 768px) {
+  .heroSection {
+    padding-top: 60px; /* Добавляем базовый отступ для всех мобильных */
+  }
+  
   .heroContent {
-    padding: 0 20px;
+    padding: 30px 20px 0; /* Обновляем отступы */
   }
   
   .statsGrid {
@@ -778,8 +782,12 @@
 }
 
 @media (max-width: 480px) {
+  .heroSection {
+    padding-top: 70px; /* Увеличиваем отступ для маленьких экранов */
+  }
+  
   .heroContent {
-    padding: 0 16px;
+    padding: 35px 16px 0;
   }
   
   .gridPattern {
@@ -788,6 +796,56 @@
   
   .scanLines {
     opacity: 0.5;
+  }
+}
+
+/* Специальный медиа запрос для iPhone SE и подобных устройств */
+@media (max-width: 414px) and (max-height: 736px) {
+  .heroSection {
+    padding-top: 80px; /* Добавляем отступ сверху */
+    min-height: calc(100vh - 80px);
+  }
+  
+  .heroContent {
+    padding: 40px 20px 0; /* Увеличиваем верхний отступ контента */
+  }
+  
+  .heroTitle {
+    margin-top: 20px; /* Дополнительный отступ для заголовка */
+    font-size: clamp(3rem, 8vw, 3rem);
+    line-height: 1.1;
+  }
+  
+  .tagline {
+    margin-bottom: 25px;
+    margin-top: 10px;
+  }
+}
+
+/* Специально для iPhone SE (375px) */
+@media (max-width: 375px) {
+  .heroSection {
+    padding-top: 30px; /* Увеличиваем отступ для очень маленьких экранов */
+    min-height: calc(100vh - 100px);
+  }
+  
+  .heroContent {
+    padding: 50px 16px 0; /* Еще больше отступ сверху */
+  }
+  
+  .heroTitle {
+    margin-top: 30px;
+    font-size: clamp(3rem, 7vw, 2.8rem);
+  }
+  
+  .tagline {
+    margin-top: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .heroSubtitle {
+    margin-bottom: 30px;
+    font-size: 0.95rem;
   }
 }
 
