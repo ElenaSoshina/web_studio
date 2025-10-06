@@ -176,6 +176,13 @@ const QuickStart: React.FC = () => {
     }
   ];
 
+  const scrollToContacts = () => {
+    const el = document.getElementById('contacts');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className={styles.quickStartSection} id="quick-start">
       {/* Анимированный фон как в других секциях */}
@@ -291,7 +298,7 @@ const QuickStart: React.FC = () => {
                       ))}
                     </div>
                     
-                    <button className={styles.packageBtn}>
+                    <button className={styles.packageBtn} onClick={scrollToContacts}>
                       <span>🚀</span>
                       {t('packages.orderButton')}
                     </button>

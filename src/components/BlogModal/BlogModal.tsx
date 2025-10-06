@@ -117,7 +117,16 @@ const BlogModal: React.FC<BlogModalProps> = ({ post, isOpen, onClose }) => {
         </div>
 
         <div className={`${styles.modalFooter} ${isAnimating ? styles.footerVisible : styles.footerHidden}`}>
-          <button className={styles.contactBtn} onClick={onClose}>
+          <button
+            className={styles.contactBtn}
+            onClick={() => {
+              const el = document.getElementById('contacts');
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+              }
+              onClose();
+            }}
+          >
             <span>💬</span>
             {t('discussProject')}
           </button>
