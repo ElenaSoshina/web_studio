@@ -143,7 +143,7 @@ const Header: React.FC = () => {
         
         <div className={styles.mobileActions}>
           <a 
-            href="https://t.me/your_username" 
+            href="https://t.me/soshina_elena" 
             target="_blank" 
             rel="noopener noreferrer"
             className={styles.mobileTelegramBtn}
