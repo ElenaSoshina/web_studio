@@ -258,7 +258,7 @@ const Portfolio: React.FC = () => {
               <button className={styles.closeBtn} onClick={closeDemo}>{t('modal.close')}</button>
             </div>
             
-            <div className={styles.modalBody}>
+            <div className={selectedProject.id === 1 ? styles.modalBodyVideo : styles.modalBody}>
               {selectedProject.id === 1 && selectedProject.videoDemo ? (
                 // ТОЛЬКО для Celebrity Strike Shop - показываем видео в телефонном фрейме
                 <div className={styles.videoContainer}>

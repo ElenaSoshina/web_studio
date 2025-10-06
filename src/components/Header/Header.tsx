@@ -77,7 +77,7 @@ const Header: React.FC = () => {
           <LanguageSwitcher />
           
           <a 
-            href="https://t.me/your_username" 
+            href="https://t.me/soshina_elena" 
             target="_blank" 
             rel="noopener noreferrer"
             className={styles.telegramBtn}

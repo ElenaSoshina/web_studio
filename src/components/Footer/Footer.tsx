@@ -33,9 +33,9 @@ const Footer: React.FC = () => {
   const serviceIds = ['about', 'about', 'quick-start', 'about'];
   const navigationIds = ['home', 'portfolio', 'about', 'blog', 'contacts'];
   const contactLinks = [
-    'https://t.me/your_username',
+    'https://t.me/soshina_elena',
     'mailto:hello@webvision.ru', 
-    'tel:+79991234567'
+    'tel:+79099846415'
   ];
 
   return (
@@ -59,15 +59,15 @@ const Footer: React.FC = () => {
               {t('company.description')}
             </p>
             <div className={styles.socialLinks}>
-              <a href="https://t.me/your_username" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+              <a href="https://t.me/soshina_elena" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
                 <span>📱</span>
               </a>
-              <a href="mailto:hello@webvision.ru" className={styles.socialLink}>
+              {/* <a href="mailto:hello@webvision.ru" className={styles.socialLink}>
                 <span>📧</span>
-              </a>
-              <a href="https://github.com/your_username" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+              </a> */}
+              {/* <a href="https://github.com/your_username" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
                 <span>💻</span>
-              </a>
+              </a> */}
             </div>
           </div>
 

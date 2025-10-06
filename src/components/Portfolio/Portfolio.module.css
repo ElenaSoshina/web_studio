@@ -1519,7 +1519,8 @@
 .demoVideo {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* Только для Celebrity Strike Shop видео-демо показываем полностью без обрезания */
+  object-fit: contain;
   border-radius: 30px;
   background: #000;
   position: relative;
