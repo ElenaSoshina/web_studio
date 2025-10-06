@@ -32,7 +32,7 @@
 
 ### Содержимое письма:
 ```html
-<h2>Новая заявка с сайта WebVision</h2>
+<h2>Новая заявка с сайта WebAp.dev</h2>
 
 <p><strong>Дата:</strong> {{date}}</p>
 <p><strong>Имя:</strong> {{from_name}}</p>

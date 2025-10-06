@@ -67,7 +67,7 @@ class EmailService {
         from_phone: formData.phone,
         from_telegram: formData.telegram || 'Не указан',
         message: formData.message,
-        to_name: 'Команда WebVision', // Ваше имя/название компании
+        to_name: 'Команда WebAp.dev', // Ваше имя/название компании
         reply_to: formData.phone, // На случай если нужен обратный контакт
         // Текущая дата и время
         date: new Date().toLocaleString('ru-RU', {
