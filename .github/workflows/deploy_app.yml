@@ -47,16 +47,6 @@ jobs:
           script: |
             set -euo pipefail
             cd /docker
-
-            # Определяем доступную команду Docker Compose (v2 или v1)
-            if docker compose version >/dev/null 2>&1; then
-              COMPOSE_CMD="docker compose"
-            elif command -v docker-compose >/dev/null 2>&1; then
-              COMPOSE_CMD="docker-compose"
-            else
-              echo "ERROR: Docker Compose не установлен. Установите docker compose plugin (v2) или docker-compose (v1)."
-              exit 1
-            fi
             
             # Проверяем существование сети безопасным способом
             echo "--- Checking if network ${BACKEND_NETWORK} exists ---"
@@ -74,10 +64,10 @@ jobs:
             mkdir -p /docker/nginx/certs
             
             echo "--- Validating compose file ---"
-            $COMPOSE_CMD -f docker-compose-nginx.yml config
+            docker compose -f docker-compose-nginx.yml config
             
             echo "--- Starting/updating Nginx and SSL containers ---"
-            $COMPOSE_CMD -f docker-compose-nginx.yml up -d --force-recreate
+            docker compose -f docker-compose-nginx.yml up -d --force-recreate
 
   deploy-webapp:
     runs-on: ubuntu-latest
@@ -136,26 +126,15 @@ jobs:
           script: |
             set -euo pipefail
             cd /docker
-
-            # Определяем доступную команду Docker Compose (v2 или v1)
-            if docker compose version >/dev/null 2>&1; then
-              COMPOSE_CMD="docker compose"
-            elif command -v docker-compose >/dev/null 2>&1; then
-              COMPOSE_CMD="docker-compose"
-            else
-              echo "ERROR: Docker Compose не установлен. Установите docker compose plugin (v2) или docker-compose (v1)."
-              exit 1
-            
-            fi
             
             echo "--- Validating compose file ---"
-            $COMPOSE_CMD -f docker-compose-app.yml config
+            docker compose -f docker-compose-app.yml config
             
             echo "--- Pulling latest image ---"
-            $COMPOSE_CMD -f docker-compose-app.yml pull || true
+            docker compose -f docker-compose-app.yml pull || true
             
             echo "--- Starting/updating webapp ---"
-            $COMPOSE_CMD -f docker-compose-app.yml up -d --force-recreate
+            docker compose -f docker-compose-app.yml up -d --force-recreate
             
             echo "--- All running containers ---"
             docker ps
