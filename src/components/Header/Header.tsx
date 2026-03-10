@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import styles from './Header.module.css';
+import { useTenantBranding } from '../../context/TenantBrandingContext';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
+  const { branding } = useTenantBranding();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -33,15 +36,12 @@ const Header: React.FC = () => {
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
         {/* Логотип */}
-        <div 
-          className={styles.logo}
-          onClick={() => scrollToSection('home')}
-          style={{ cursor: 'pointer' }}
-        >
+        <Link to="/" className={styles.logo}>
+          {branding?.logoUrl ? <img src={branding.logoUrl} alt="Tenant logo" className={styles.logoImage} /> : null}
           <span className={styles.bracket}>{'<'}</span>
-          <span className={styles.logoText}>WebAp.dev</span>
+          <span className={styles.logoText}>{branding?.name || 'WebAp.dev'}</span>
           <span className={styles.bracket}>{'/>'}</span>
-        </div>
+        </Link>
 
         {/* Навигация для десктопа */}
         <nav className={styles.nav}>
@@ -69,6 +69,9 @@ const Header: React.FC = () => {
           >
             {t('navigation.contacts')}
           </button>
+          <Link className={styles.navLink} to="/create-site">
+            {t('navigation.createSite')}
+          </Link>
         </nav>
 
         {/* Контакты и CTA для десктопа */}

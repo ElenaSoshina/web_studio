@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './Footer.module.css';
+import { useTenantBranding } from '../../context/TenantBrandingContext';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation('footer');
+  const { branding } = useTenantBranding();
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
     services: false,
     navigation: false,
@@ -51,8 +53,9 @@ const Footer: React.FC = () => {
           {/* Информация о компании */}
           <div className={styles.companySection}>
             <div className={styles.logo}>
+              {branding?.logoUrl ? <img src={branding.logoUrl} alt="Tenant logo" className={styles.logoImage} /> : null}
               <span className={styles.bracket}>{'<'}</span>
-              <span className={styles.logoText}>WebAp.dev</span>
+              <span className={styles.logoText}>{branding?.name || 'WebAp.dev'}</span>
               <span className={styles.bracket}>{'/>'}</span>
             </div>
             <p className={styles.companyDescription}>

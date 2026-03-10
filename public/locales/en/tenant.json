@@ -1,0 +1,44 @@
+{
+  "section": {
+    "heading": "Create Your Website",
+    "subtitle": "Register your company tenant and get personalized branding by your domain.",
+    "badge": "Tenant onboarding",
+    "cardTitle": "What you need to register",
+    "requirements": [
+      "Company name",
+      "Owner email and password",
+      "Custom domain (or leave empty)"
+    ],
+    "actionHint": "Registration takes 1-2 minutes.",
+    "actionButton": "Create your website"
+  },
+  "page": {
+    "badge": "Tenant registration",
+    "title": "Create company website",
+    "subtitle": "Fill in the form to register a tenant and owner in the system.",
+    "fields": {
+      "name": "Company name",
+      "ownerEmail": "Owner email",
+      "ownerPassword": "Owner password",
+      "customDomain": "Custom domain"
+    },
+    "errors": {
+      "nameRequired": "Please enter company name.",
+      "ownerEmailRequired": "Please enter owner email.",
+      "ownerEmailInvalid": "Email format is invalid.",
+      "ownerPasswordRequired": "Please enter owner password.",
+      "ownerPasswordInvalid": "Password must be 8-32 chars with at least one letter and one digit."
+    },
+    "server": {
+      "success": "Tenant created successfully. Next step: verify owner email and complete initial setup.",
+      "conflict": "Custom domain is already taken. Try another value.",
+      "genericError": "Failed to register tenant. Please try again later."
+    },
+    "buttons": {
+      "submitting": "Creating tenant...",
+      "success": "Tenant created",
+      "submit": "Register tenant"
+    },
+    "backToHome": "Back to home"
+  }
+}

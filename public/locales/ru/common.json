@@ -3,7 +3,8 @@
     "portfolio": "Портфолио",
     "about": "О нас",
     "blog": "Блог",
-    "contacts": "Контакты"
+    "contacts": "Контакты",
+    "createSite": "Создать сайт"
   },
   "buttons": {
     "orderProject": "Заказать проект",

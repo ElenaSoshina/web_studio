@@ -25,7 +25,7 @@ i18n
     },
     
     defaultNS: 'common',
-    ns: ['common', 'hero', 'portfolio', 'about', 'quickstart', 'blog', 'contact', 'footer'],
+    ns: ['common', 'hero', 'portfolio', 'about', 'quickstart', 'blog', 'contact', 'footer', 'tenant'],
   });
 
 export default i18n;

@@ -69,6 +69,9 @@
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 1.8rem;
   font-weight: 900;
   color: #fff;
@@ -83,6 +86,13 @@
 .logoText {
   color: #00ffff;
   margin: 0 8px;
+}
+
+.logoImage {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  border-radius: 4px;
 }
 
 .companyDescription {

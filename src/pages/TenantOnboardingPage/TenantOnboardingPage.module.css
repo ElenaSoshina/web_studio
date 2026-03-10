@@ -1,0 +1,112 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(0, 255, 255, 0.12), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(0, 128, 255, 0.18), transparent 45%),
+    #07071a;
+}
+
+.card {
+  width: 100%;
+  max-width: 720px;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 255, 255, 0.25);
+  background: rgba(1, 18, 38, 0.78);
+  backdrop-filter: blur(12px);
+  padding: 28px;
+  color: #fff;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  margin: 6px 0 8px;
+}
+
+.header p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.badge {
+  margin: 0;
+  color: #88ffff;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form {
+  display: grid;
+  gap: 14px;
+}
+
+.form label {
+  display: grid;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.92rem;
+}
+
+.form input {
+  height: 42px;
+  border: 1px solid rgba(0, 255, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(4, 26, 50, 0.8);
+  color: #fff;
+  padding: 0 12px;
+}
+
+.form input:focus {
+  outline: 2px solid rgba(0, 255, 255, 0.35);
+  border-color: transparent;
+}
+
+.submit {
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  height: 46px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #001522;
+  background: linear-gradient(90deg, var(--tenant-primary, #00ffff), var(--tenant-secondary, #0080ff));
+  cursor: pointer;
+}
+
+.submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.errorBlock,
+.successBlock {
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.92rem;
+}
+
+.errorBlock {
+  border: 1px solid rgba(255, 94, 94, 0.4);
+  background: rgba(120, 10, 10, 0.35);
+}
+
+.successBlock {
+  border: 1px solid rgba(81, 255, 171, 0.4);
+  background: rgba(7, 95, 57, 0.35);
+}
+
+.actions {
+  margin-top: 16px;
+}
+
+.backLink {
+  color: #8ce6ff;
+}
