@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './Footer.module.css';
-import { useTenantBranding } from '../../context/TenantBrandingContext';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation('footer');
-  const { branding } = useTenantBranding();
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
     services: false,
     navigation: false,
@@ -18,7 +16,7 @@ const Footer: React.FC = () => {
       [section]: !prev[section]
     }));
   };
-  
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -36,26 +34,22 @@ const Footer: React.FC = () => {
   const navigationIds = ['home', 'portfolio', 'about', 'blog', 'contacts'];
   const contactLinks = [
     'https://t.me/soshina_elena',
-    'mailto:hello@webvision.ru', 
+    'mailto:hello@webvision.ru',
     'tel:+79099846415'
   ];
 
   return (
     <footer className={styles.footer}>
-      {/* Анимированный фон */}
       <div className={styles.futuristicBackground}>
         <div className={styles.gridPattern}></div>
       </div>
 
       <div className={styles.container}>
-        {/* Основное содержимое футера */}
         <div className={styles.footerContent}>
-          {/* Информация о компании */}
           <div className={styles.companySection}>
             <div className={styles.logo}>
-              {branding?.logoUrl ? <img src={branding.logoUrl} alt="Tenant logo" className={styles.logoImage} /> : null}
               <span className={styles.bracket}>{'<'}</span>
-              <span className={styles.logoText}>{branding?.name || 'WebAp.dev'}</span>
+              <span className={styles.logoText}>WebAp.dev</span>
               <span className={styles.bracket}>{'/>'}</span>
             </div>
             <p className={styles.companyDescription}>
@@ -65,18 +59,11 @@ const Footer: React.FC = () => {
               <a href="https://t.me/soshina_elena" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
                 <span>📱</span>
               </a>
-              {/* <a href="mailto:hello@webvision.ru" className={styles.socialLink}>
-                <span>📧</span>
-              </a> */}
-              {/* <a href="https://github.com/your_username" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-                <span>💻</span>
-              </a> */}
             </div>
           </div>
 
-          {/* Услуги */}
           <div className={styles.footerColumn}>
-            <h3 
+            <h3
               className={`${styles.columnTitle} ${styles.collapsibleTitle}`}
               onClick={() => toggleSection('services')}
             >
@@ -90,7 +77,7 @@ const Footer: React.FC = () => {
               <ul className={styles.linksList}>
                 {services.map((service, index) => (
                   <li key={index}>
-                    <button 
+                    <button
                       className={styles.footerLink}
                       onClick={() => scrollToSection(serviceIds[index])}
                     >
@@ -102,9 +89,8 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Навигация */}
           <div className={styles.footerColumn}>
-            <h3 
+            <h3
               className={`${styles.columnTitle} ${styles.collapsibleTitle}`}
               onClick={() => toggleSection('navigation')}
             >
@@ -118,7 +104,7 @@ const Footer: React.FC = () => {
               <ul className={styles.linksList}>
                 {navigation.map((item, index) => (
                   <li key={index}>
-                    <button 
+                    <button
                       className={styles.footerLink}
                       onClick={() => scrollToSection(navigationIds[index])}
                     >
@@ -130,9 +116,8 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Контакты */}
           <div className={styles.footerColumn}>
-            <h3 
+            <h3
               className={`${styles.columnTitle} ${styles.collapsibleTitle}`}
               onClick={() => toggleSection('contacts')}
             >
@@ -151,8 +136,8 @@ const Footer: React.FC = () => {
                     </span>
                     <div className={styles.contactInfo}>
                       <div className={styles.contactLabel}>{contact.label}</div>
-                      <a 
-                        href={contactLinks[index]} 
+                      <a
+                        href={contactLinks[index]}
                         className={styles.contactValue}
                         target={contactLinks[index].startsWith('http') ? '_blank' : undefined}
                         rel={contactLinks[index].startsWith('http') ? 'noopener noreferrer' : undefined}
@@ -167,19 +152,17 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Разделительная линия */}
         <div className={styles.footerDivider}></div>
 
-        {/* Нижняя часть футера */}
         <div className={styles.footerBottom}>
           <div className={styles.copyright}>
             <span>© {currentYear} {t('bottom.copyright')}</span>
           </div>
           <div className={styles.bottomLinks}>
             {(t('bottom.links', { returnObjects: true }) as string[]).map((link, index) => (
-              <button 
+              <button
                 key={index}
-                className={styles.bottomLink} 
+                className={styles.bottomLink}
                 onClick={() => scrollToSection('contacts')}
               >
                 {link}
@@ -192,4 +175,4 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer; 
+export default Footer;

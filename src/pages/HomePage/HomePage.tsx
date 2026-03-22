@@ -6,7 +6,6 @@ import QuickStart from '../../components/QuickStart/QuickStart';
 import ContactForm from '../../components/ContactForm/ContactForm';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Blog from '../../components/Blog/Blog';
-import CreateSiteSection from '../../components/CreateSiteSection/CreateSiteSection';
 
 const HomePage: React.FC = () => {
     return (
@@ -15,7 +14,6 @@ const HomePage: React.FC = () => {
            <Portfolio />
            <AboutUs />
            <QuickStart />
-           <CreateSiteSection />
            <Blog />
            <ContactForm />
         </div>

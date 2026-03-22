@@ -3,8 +3,7 @@
     "portfolio": "Portfolio",
     "about": "About",
     "blog": "Blog",
-    "contacts": "Contacts",
-    "createSite": "Create Site"
+    "contacts": "Contacts"
   },
   "buttons": {
     "orderProject": "Order Project",
