@@ -34,8 +34,8 @@ const Footer: React.FC = () => {
   const navigationIds = ['home', 'portfolio', 'about', 'blog', 'contacts'];
   const contactLinks = [
     'https://t.me/soshina_elena',
-    'mailto:hello@webvision.ru',
-    'tel:+79099846415'
+    // 'mailto:hello@webvision.ru',
+    // 'tel:+79099846415'
   ];
 
   return (
@@ -129,24 +129,40 @@ const Footer: React.FC = () => {
             </h3>
             <div className={`${styles.collapsibleContent} ${openSections.contacts ? styles.contentOpen : ''}`}>
               <div className={styles.contactsList}>
-                {contacts.map((contact, index) => (
-                  <div key={index} className={styles.contactItem}>
-                    <span className={styles.contactIcon}>
-                      {index === 0 ? '📱' : index === 1 ? '📧' : '📞'}
-                    </span>
-                    <div className={styles.contactInfo}>
-                      <div className={styles.contactLabel}>{contact.label}</div>
-                      <a
-                        href={contactLinks[index]}
-                        className={styles.contactValue}
-                        target={contactLinks[index].startsWith('http') ? '_blank' : undefined}
-                        rel={contactLinks[index].startsWith('http') ? 'noopener noreferrer' : undefined}
-                      >
-                        {contact.value}
-                      </a>
-                    </div>
+                <div className={styles.contactItem}>
+                  <span className={styles.contactIcon}>📱</span>
+                  <div className={styles.contactInfo}>
+                    <div className={styles.contactLabel}>{contacts[0].label}</div>
+                    <a
+                      href={contactLinks[0]}
+                      className={styles.contactValue}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {contacts[0].value}
+                    </a>
                   </div>
-                ))}
+                </div>
+                {/* Почта и телефон — временно скрыты
+                <div className={styles.contactItem}>
+                  <span className={styles.contactIcon}>📧</span>
+                  <div className={styles.contactInfo}>
+                    <div className={styles.contactLabel}>{contacts[1].label}</div>
+                    <a href={contactLinks[1]} className={styles.contactValue}>
+                      {contacts[1].value}
+                    </a>
+                  </div>
+                </div>
+                <div className={styles.contactItem}>
+                  <span className={styles.contactIcon}>📞</span>
+                  <div className={styles.contactInfo}>
+                    <div className={styles.contactLabel}>{contacts[2].label}</div>
+                    <a href={contactLinks[2]} className={styles.contactValue}>
+                      {contacts[2].value}
+                    </a>
+                  </div>
+                </div>
+                */}
               </div>
             </div>
           </div>
