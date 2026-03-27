@@ -6,8 +6,8 @@ const Footer: React.FC = () => {
   const { t } = useTranslation('footer');
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
     services: false,
-    navigation: false,
-    contacts: false
+    navigation: false
+    // contacts: false
   });
 
   const toggleSection = (section: string) => {
@@ -28,15 +28,15 @@ const Footer: React.FC = () => {
 
   const services = t('sections.services.items', { returnObjects: true }) as string[];
   const navigation = t('sections.navigation.items', { returnObjects: true }) as string[];
-  const contacts = t('sections.contacts.items', { returnObjects: true }) as Array<{label: string, value: string}>;
+  // const contacts = t('sections.contacts.items', { returnObjects: true }) as Array<{label: string, value: string}>;
 
   const serviceIds = ['about', 'about', 'quick-start', 'about'];
   const navigationIds = ['home', 'portfolio', 'about', 'blog', 'contacts'];
-  const contactLinks = [
-    'https://t.me/soshina_elena',
-    // 'mailto:hello@webvision.ru',
-    // 'tel:+79099846415'
-  ];
+  // const contactLinks = [
+  //   'https://t.me/soshina_elena',
+  //   'mailto:hello@webvision.ru',
+  //   'tel:+79099846415'
+  // ];
 
   return (
     <footer className={styles.footer}>
@@ -116,6 +116,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
+          {/* Секция «Контакты» в футере — временно отключена
           <div className={styles.footerColumn}>
             <h3
               className={`${styles.columnTitle} ${styles.collapsibleTitle}`}
@@ -143,7 +144,6 @@ const Footer: React.FC = () => {
                     </a>
                   </div>
                 </div>
-                {/* Почта и телефон — временно скрыты
                 <div className={styles.contactItem}>
                   <span className={styles.contactIcon}>📧</span>
                   <div className={styles.contactInfo}>
@@ -162,10 +162,10 @@ const Footer: React.FC = () => {
                     </a>
                   </div>
                 </div>
-                */}
               </div>
             </div>
           </div>
+          */}
         </div>
 
         <div className={styles.footerDivider}></div>
